@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>prometheus on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/</link><description>Recent content in prometheus on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/prometheus/index.xml" rel="self" type="application/rss+xml"/><item><title>Prometheus Bad Config</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusbadconfig/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusbadconfig/</guid><description>&lt;h1 id="prometheusbadconfig">
+ PrometheusBadConfig
+ 
+ &lt;a class="anchor" href="#prometheusbadconfig">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Alert fires when Prometheus cannot successfully reload the configuration file
+due to the file having incorrect content.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Configuration cannot be reloaded and prometheus operates with last known good
+configuration.
+Configuration changes in any of Prometheus, Probe, PodMonitor,
+or ServiceMonitor objects may not be picked up by prometheus server.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check prometheus container logs for an explanation of which part of the
+configuration is problematic.&lt;/p></description></item><item><title>Prometheus Duplicate Timestamps</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusduplicatetimestamps/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusduplicatetimestamps/</guid><description>&lt;h1 id="prometheusduplicatetimestamps">
+ PrometheusDuplicateTimestamps
+ 
+ &lt;a class="anchor" href="#prometheusduplicatetimestamps">#&lt;/a>
+ 
+&lt;/h1>
+&lt;p>Find the Prometheus Pod that concerns this.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ kubectl -n &amp;lt;namespace&amp;gt; get pod
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>prometheus-k8s-0 2/2 Running &lt;span style="color:#ae81ff">1&lt;/span> 122m
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>prometheus-k8s-1 2/2 Running &lt;span style="color:#ae81ff">1&lt;/span> 122m
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Look at the logs of each of them, there should be a log line such as:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ kubectl -n &amp;lt;namespace&amp;gt; logs prometheus-k8s-0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>level&lt;span style="color:#f92672">=&lt;/span>warn ts&lt;span style="color:#f92672">=&lt;/span>2021-01-04T15:08:55.613Z caller&lt;span style="color:#f92672">=&lt;/span>scrape.go:1372 component&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;scrape manager&amp;#34;&lt;/span> scrape_pool&lt;span style="color:#f92672">=&lt;/span>default/main-ingress-nginx-controller/0 target&lt;span style="color:#f92672">=&lt;/span>http://10.0.7.3:10254/metrics msg&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Error on ingesting samples with different value but same timestamp&amp;#34;&lt;/span> num_dropped&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now there is a judgement call to make, this could be the result of:&lt;/p></description></item><item><title>Prometheus Error Sending Alerts To Any Alertmanager</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheuserrorsendingalertstoanyalertmanager/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheuserrorsendingalertstoanyalertmanager/</guid><description>&lt;h1 id="prometheuserrorsendingalertstoanyalertmanager">
+ PrometheusErrorSendingAlertsToAnyAlertmanager
+ 
+ &lt;a class="anchor" href="#prometheuserrorsendingalertstoanyalertmanager">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus has encountered errors sending alerts to a any Alertmanager.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>All alerts may be lost.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check connectivity issues between Prometheus and AlertManager cluster.
+Check NetworkPolicies, network saturation.
+Check if AlertManager is not overloaded or has not enough resources.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Set multiple AlertManager instances, spread them across nodes.&lt;/p></description></item><item><title>Prometheus Error Sending Alerts To Some Alertmanagers</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheuserrorsendingalertstosomealertmanagers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheuserrorsendingalertstosomealertmanagers/</guid><description>&lt;h1 id="prometheuserrorsendingalertstosomealertmanagers">
+ PrometheusErrorSendingAlertsToSomeAlertmanagers
+ 
+ &lt;a class="anchor" href="#prometheuserrorsendingalertstosomealertmanagers">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus has encountered more than 1% errors sending alerts to a specific Alertmanager.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Some alerts may be lost.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check connectivity issues between Prometheus and AlertManager.
+Check NetworkPolicies, network saturation.
+Check if AlertManager is not overloaded or has not enough resources.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Set multiple AlertManager instances, spread them across nodes.&lt;/p></description></item><item><title>Prometheus Federation - Detailed Implementation Guide</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusfederation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusfederation/</guid><description>&lt;h1 id="prometheus-federation---detailed-implementation-guide">
+ Prometheus Federation - Detailed Implementation Guide
+ 
+ &lt;a class="anchor" href="#prometheus-federation---detailed-implementation-guide">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="1-introduction">
+ 1. Introduction
+ 
+ &lt;a class="anchor" href="#1-introduction">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>&lt;strong>Prometheus Federation&lt;/strong> is a technique that allows one Prometheus server (&lt;strong>global/federated Prometheus&lt;/strong>) to scrape metrics from one or more other Prometheus instances (&lt;strong>child Prometheus&lt;/strong>) via their &lt;code>/federate&lt;/code> endpoint.&lt;/p>
+&lt;h3 id="key-goals">
+ Key Goals
+ 
+ &lt;a class="anchor" href="#key-goals">#&lt;/a>
+ 
+&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Centralize metrics&lt;/strong> from multiple sources (multi-cluster, multi-datacenter).&lt;/li>
+&lt;li>&lt;strong>Aggregate precomputed metrics&lt;/strong> (recording rules) to reduce query load.&lt;/li>
+&lt;li>Maintain &lt;strong>local alerting&lt;/strong> at each cluster to avoid dependency on network connectivity to the central server.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="2-architecture-overview">
+ 2. Architecture Overview
+ 
+ &lt;a class="anchor" href="#2-architecture-overview">#&lt;/a>
+ 
+&lt;/h2>
+&lt;figure>&lt;img src="https://runbooks.prometheus-operator.dev/promfederation.png" width="500" height="800">&lt;figcaption>
+ &lt;h4>Architecture Overview&lt;/h4>
+ &lt;/figcaption>
+&lt;/figure>
+
+&lt;hr>
+&lt;h2 id="3-federation-concepts">
+ 3. Federation Concepts
+ 
+ &lt;a class="anchor" href="#3-federation-concepts">#&lt;/a>
+ 
+&lt;/h2>
+&lt;h3 id="31-child-prometheus">
+ 3.1. Child Prometheus
+ 
+ &lt;a class="anchor" href="#31-child-prometheus">#&lt;/a>
+ 
+&lt;/h3>
+&lt;ul>
+&lt;li>Scrapes metrics locally from exporters, Kubernetes services, etc.&lt;/li>
+&lt;li>Can run &lt;strong>alerting rules&lt;/strong> locally to ensure cluster-level alerts are not dependent on the central instance.&lt;/li>
+&lt;li>Publishes selected metrics through the &lt;code>/federate&lt;/code> endpoint.&lt;/li>
+&lt;/ul>
+&lt;h3 id="32-globalfederated-prometheus">
+ 3.2. Global/Federated Prometheus
+ 
+ &lt;a class="anchor" href="#32-globalfederated-prometheus">#&lt;/a>
+ 
+&lt;/h3>
+&lt;ul>
+&lt;li>Does &lt;strong>not&lt;/strong> scrape individual exporters directly.&lt;/li>
+&lt;li>Pulls &lt;strong>aggregated or selected metrics&lt;/strong> from child Prometheus instances.&lt;/li>
+&lt;li>Ideal for &lt;strong>global dashboards&lt;/strong> and &lt;strong>cross-cluster SLO/SLA monitoring&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="4-federation-use-cases">
+ 4. Federation Use Cases
+ 
+ &lt;a class="anchor" href="#4-federation-use-cases">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Multi-Cluster Kubernetes Monitoring&lt;/strong>&lt;/p></description></item><item><title>Prometheus Label LimitHit</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheuslabellimithit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheuslabellimithit/</guid><description>&lt;h1 id="prometheuslabellimithit">
+ PrometheusLabelLimitHit
+ 
+ &lt;a class="anchor" href="#prometheuslabellimithit">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus has dropped targets because some scrape configs have exceeded the labels limit.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Metrics and alerts may be missing or inaccurate.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Start thinking about sharding prometheus.
+Increase scrape times to perform it less frequently.&lt;/p></description></item><item><title>Prometheus Missing Rule Evaluations</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusmissingruleevaluations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusmissingruleevaluations/</guid><description>&lt;h1 id="prometheusmissingruleevaluations">
+ PrometheusMissingRuleEvaluations
+ 
+ &lt;a class="anchor" href="#prometheusmissingruleevaluations">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus is missing rule evaluations due to slow rule group evaluation.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Metrics and alerts may be missing or inaccurate.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check which rules fail, try to calcuate them differently.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Sometimes giving more CPU is the only way to fix it.&lt;/p></description></item><item><title>Prometheus Not Connected To Alertmanagers</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusnotconnectedtoalertmanagers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusnotconnectedtoalertmanagers/</guid><description>&lt;h1 id="prometheusnotconnectedtoalertmanagers">
+ PrometheusNotConnectedToAlertmanagers
+ 
+ &lt;a class="anchor" href="#prometheusnotconnectedtoalertmanagers">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus is not connected to any Alertmanagers.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Sending alerts is not possible.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check connectivity issues between Prometheus and AlertManager.
+Check NetworkPolicies, network saturation.
+Check if AlertManager is not overloaded or has not enough resources.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Set multiple AlertManager instances, spread them across nodes.&lt;/p></description></item><item><title>Prometheus Not Ingesting Samples</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusnotingestingsamples/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusnotingestingsamples/</guid><description>&lt;h1 id="prometheusnotingestingsamples">
+ PrometheusNotIngestingSamples
+ 
+ &lt;a class="anchor" href="#prometheusnotingestingsamples">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus is not ingesting samples.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Missing metrics.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>TODO&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>TODO&lt;/p></description></item><item><title>Prometheus Notification Queue Running Full</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusnotificationqueuerunningfull/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusnotificationqueuerunningfull/</guid><description>&lt;h1 id="prometheusnotificationqueuerunningfull">
+ PrometheusNotificationQueueRunningFull
+ 
+ &lt;a class="anchor" href="#prometheusnotificationqueuerunningfull">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus alert notification queue predicted to run full in less than 30m.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Fail to send alerts.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check prometheus container logs for an explanation of which part of the
+configuration is problematic.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Remove conflicting configuration option.&lt;/p>
+&lt;p>Check if there is an option to decrease number of alerts firing,
+for example by sharding prometheus.&lt;/p></description></item><item><title>Prometheus Out Of Order Timestamps</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusoutofordertimestamps/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusoutofordertimestamps/</guid><description>&lt;h1 id="prometheusoutofordertimestamps">
+ PrometheusOutOfOrderTimestamps
+ 
+ &lt;a class="anchor" href="#prometheusoutofordertimestamps">#&lt;/a>
+ 
+&lt;/h1>
+&lt;p>More information in &lt;a href="https://www.robustperception.io/debugging-out-of-order-samples">blog&lt;/a>&lt;/p></description></item><item><title>Prometheus Remote Storage Failures</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusremotestoragefailures/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusremotestoragefailures/</guid><description>&lt;h1 id="prometheusremotestoragefailures">
+ PrometheusRemoteStorageFailures
+ 
+ &lt;a class="anchor" href="#prometheusremotestoragefailures">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus fails to send samples to remote storage.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Metrics and alerts may be missing or inaccurate.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check prometheus logs and remote storage logs.
+Investigate network issues.
+Check configs and credentials.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>TODO&lt;/p></description></item><item><title>Prometheus Remote Write Behind</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusremotewritebehind/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusremotewritebehind/</guid><description>&lt;h1 id="prometheusremotestoragefailures">
+ PrometheusRemoteStorageFailures
+ 
+ &lt;a class="anchor" href="#prometheusremotestoragefailures">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus remote write is behind.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Metrics and alerts may be missing or inaccurate.
+Increased data lag between locations.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check prometheus logs and remote storage logs.
+Investigate network issues.
+Check configs and credentials.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Probbaly amout of data sent to remote system is too high
+for given network connectivity speed.
+You may need to limit which metrics to send to minimize transfers.&lt;/p></description></item><item><title>Prometheus Rule Failures</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusrulefailures/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusrulefailures/</guid><description>&lt;h1 id="prometheusrulefailures">
+ PrometheusRuleFailures
+ 
+ &lt;a class="anchor" href="#prometheusrulefailures">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus is failing rule evaluations.
+Prometheus rules are incorrect or failed to calculate.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Metrics and alerts may be missing or inaccurate.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Your best starting point is the rules page of the Prometheus UI (:9090/rules).
+It will show the error.&lt;/p>
+&lt;p>You can also evaluate the rule expression yourself, using the UI, or maybe
+using PromLens to help debug expression issues.&lt;/p></description></item><item><title>Prometheus Target Limit Hit</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustargetlimithit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustargetlimithit/</guid><description>&lt;h1 id="prometheustargetlimithit">
+ PrometheusTargetLimitHit
+ 
+ &lt;a class="anchor" href="#prometheustargetlimithit">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus has dropped targets because some scrape configs have exceeded the targets limit.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Metrics and alerts may be missing or inaccurate.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Start thinking about sharding prometheus.
+Increase scrape times to perform it less frequently.&lt;/p></description></item><item><title>Prometheus Target Sync Failure</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustargetsyncfailure/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustargetsyncfailure/</guid><description>&lt;h1 id="prometheustargetsyncfailure">
+ PrometheusTargetSyncFailure
+ 
+ &lt;a class="anchor" href="#prometheustargetsyncfailure">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This alert is triggered when at least one of the Prometheus instances has
+consistently failed to sync its configuration.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Metrics and alerts may be missing or inaccurate.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Determine whether the alert is for the cluster or user workload Prometheus by
+inspecting the alert&amp;rsquo;s &lt;code>namespace&lt;/code> label.&lt;/p>
+&lt;p>Check the logs for the appropriate Prometheus instance:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ NAMESPACE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&amp;lt;value of namespace label from alert&amp;gt;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ oc -n $NAMESPACE logs -l &lt;span style="color:#e6db74">&amp;#39;app=prometheus&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>level&lt;span style="color:#f92672">=&lt;/span>error ... msg&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Creating target failed&amp;#34;&lt;/span> ...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>If the logs indicate a syntax or other configuration error, correct the
+corresponding &lt;code>ServiceMonitor&lt;/code>, &lt;code>PodMonitor&lt;/code>, or other configuration
+resource. In most all cases, the operator should prevent this from happening.&lt;/p></description></item><item><title>Prometheus TSDB Compactions Failing</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustsdbcompactionsfailing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustsdbcompactionsfailing/</guid><description>&lt;h1 id="prometheustsdbcompactionsfailing">
+ PrometheusTSDBCompactionsFailing
+ 
+ &lt;a class="anchor" href="#prometheustsdbcompactionsfailing">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus has issues compacting blocks.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Metrics and alerts may be missing or inaccurate.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check storage used by the pod.
+This can happen if there is a lot of going on in the cluster and
+prometheus did not manage to compact data.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>At first just wait, it may fix itself after some time.&lt;/p>
+&lt;p>Increase Prometheus pod memory so that it caches more from disk.
+Try expanding volumes if they are too small or too slow.
+Change PVC storageClass to a more performant one.&lt;/p></description></item><item><title>Prometheus TSDB Reloads Failing</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustsdbreloadsfailing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustsdbreloadsfailing/</guid><description>&lt;h1 id="prometheustsdbreloadsfailing">
+ PrometheusTSDBReloadsFailing
+ 
+ &lt;a class="anchor" href="#prometheustsdbreloadsfailing">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus has issues reloading blocks from disk.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Metrics and alerts may be missing or inaccurate.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check storage used by the pod.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Increase Prometheus pod memory so that it caches more from disk.
+Try expanding volumes if they are too small or too slow.
+Change PVC storageClass to a more performant one.&lt;/p></description></item><item><title>PrometheusRemoteWriteDesiredShards</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusremotewritedesiredshards/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusremotewritedesiredshards/</guid><description>&lt;h1 id="prometheusremotewritedesiredshards">
+ PrometheusRemoteWriteDesiredShards
+ 
+ &lt;a class="anchor" href="#prometheusremotewritedesiredshards">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus remote write desired shards calculation wants to run
+more than configured max shards.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Metrics and alerts may be missing or inaccurate.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check metrics cardinality.&lt;/p>
+&lt;p>Check prometheus logs and remote storage logs.
+Investigate network issues.
+Check configs and credentials.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Probbaly amout of data sent to remote system is too high
+for given network connectivity speed.
+You may need to limit which metrics to send to minimize transfers.&lt;/p></description></item></channel></rss>

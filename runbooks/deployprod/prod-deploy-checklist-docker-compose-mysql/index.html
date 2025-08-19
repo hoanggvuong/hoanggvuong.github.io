@@ -1,0 +1,2429 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Production Deployment Readiness Checklist
+  
+  #
+  
+
+Stack: Docker Compose (User FE/BE, Admin FE/BE, Batch), MySQL, Jenkins CI/CD, Nginx (domain/LB/IP TBD)
+
+
+  Purpose: High‑level checklist to prep and execute a production deployment. Fill all TBD fields before go‑live.
+
+
+  0) Quick Header — fill these first
+  
+  #
+  
+
+
+ Environment name: &lt;TBD&gt; (e.g., prod-ap-southeast-1)
+ Change window (UTC&#43;7): &lt;TBD date/time&gt;
+ Release tag / commit: &lt;TBD&gt;
+ Owners / On‑call: &lt;TBD&gt;
+ RTO / RPO targets: &lt;TBD&gt; (e.g., RTO 30m / RPO 5m)
+
+
+
+  1) Scope &amp; Ownership
+  
+  #
+  
+
+
+ Services confirmed in scope: User FE, User BE, Admin FE, Admin BE, Batch jobs.
+ Service owners &#43; escalation contacts listed.
+ Release scope frozen; artifacts tagged and immutable.
+ Change ticket(s) created and approved (if required).
+
+
+
+  2) Infrastructure (WBS — details TBD)
+  
+  #
+  
+
+
+ Compute hosts sized and reserved (CPU/RAM/Storage headroom).
+ OS hardened (updates, NTP, timezone, locales); baseline image pinned.
+ Networking: VLAN/VPC, subnets, firewall rules (ingress/egress) TBD.
+ Storage volumes for data, logs, backups planned and provisioned.
+ Time synchronization verified across all hosts and containers.
+
+
+
+  3) Access &amp; Governance
+  
+  #
+  
+
+
+ IAM: least‑privilege accounts for Jenkins, deployers, and ops.
+ Break‑glass procedure documented and tested.
+ Secrets management defined (e.g., env files &#43; Vault/KMS); no secrets in Git.
+ Audit logging and access logs retention policy documented.
+
+
+
+  4) CI/CD — Jenkins
+  
+  #
+  
+
+
+ Pipelines per component: User FE, User BE, Admin FE, Admin BE, Batch.
+ Stages: build → unit tests → SAST/deps scan → package → push image/artifact → deploy to staging → E2E → manual/auto promote to prod.
+ Artifact/Image registry configured (Nexus/Artifactory/ECR/GCR) with retention.
+ Versioning strategy: semver or date&#43;build; tags are immutable.
+ Rollback job ready (redeploy previous tag).
+ Jenkins credentials stored securely (no plaintext in Jenkinsfiles).
+ Build reproducibility verified (locked base images, package locks).
+
+
+
+  5) Docker Compose — Structure &amp; Conventions
+  
+  #
+  
+
+
+ Files organized:
+
+docker-compose.yml (base), docker-compose.prod.yml (prod overrides)
+.env, .env.prod (non‑secret vars), secrets via external store or docker secrets
+.dockerignore for each build context
+
+
+ Image sources decided: build locally or pull from registry (TBD).
+ Networks separated: frontend, backend, db (isolate MySQL).
+ Volumes declared for persistent data: MySQL data, app logs/cache as needed.
+ Healthchecks for each service; depends_on uses healthcheck condition, not just start order.
+ Resource limits set (cpus, mem_limit, ulimits) for each service.
+ Restart policies set (unless-stopped or on-failure for jobs).
+ Log drivers configured (json-file/syslog/fluentd) with rotation to avoid disk fill.
+ Config per environment externalized; no hard‑coded prod values in images.
+
+
+
+  6) Application Readiness (Java BE/FE)
+  
+  #
+  
+
+
+ Java: JDK version pinned; JVM flags (heap/GC) documented.
+ Health endpoints implemented (/healthz, /readyz); graceful shutdown on SIGTERM.
+ FE: production build (minified, hashed assets); env injection at runtime if needed.
+ Config: DB URLs, API base URLs, feature flags set via env/secret.
+ Idempotent DB migrations (e.g., Flyway/Liquibase) wired into deploy step.
+ Static assets served efficiently (Nginx or dedicated FE container).
+
+
+
+  7) MySQL (Production)
+  
+  #
+  
+
+
+ Version pinned (e.g., 8.0.x); image digest locked.
+ Charset/collation set (utf8mb4 / utf8mb4_0900_ai_ci) and timezone configured.
+ Users/roles and least‑privilege grants created.
+ Connection pool sizing reviewed; max connections tuned.
+ Backups:
+
+Schedule defined (full &#43; incremental if applicable)
+Test restore performed and documented
+Backup encryption and off‑host storage verified
+
+
+ Slow query log enabled; performance schema sizing reviewed.
+ Optional HA/replication decision documented (TBD).
+ Initial data import / migration plan validated.
+
+
+
+  8) Nginx / Edge (Domain/LB/IP TBD)
+  
+  #
+  
+
+
+ Public entry decided: direct Nginx on host vs behind LB (L4/L7) TBD.
+ DNS records planned (A/AAAA/CNAME); cert strategy (ACME/issued) TBD.
+ TLS configured (redirect HTTP→HTTPS, HSTS, modern ciphers).
+ Upstreams defined for User BE / Admin BE; timeouts, buffers, gzip/brotli tuned.
+ Path routing &amp; headers: CORS/CSRF rules, security headers, body size limits.
+ Access/error logs rotated and shipped to central logging.
+ Optional WAF/CDN/DDoS protection decision TBD.
+
+
+
+  9) Security
+  
+  #
+  
+
+
+ SAST/Dependency scan gates in CI; criticals addressed or waived with approval.
+ Container hardening: non‑root users, read‑only FS when possible, drop capabilities.
+ Secrets not logged; PII masking; sample logs validated.
+ SBOM generated and stored with artifacts (optional but recommended).
+
+
+
+  10) Observability
+  
+  #
+  
+
+
+ Metrics for BE/FE/MySQL/Nginx collected (RPS, latency, errors, JVM, DB QPS).
+ Logs are structured (JSON) with correlation IDs across FE↔BE; retention set.
+ Tracing headers propagated (W3C traceparent or similar).
+ Dashboards per service &#43; Nginx created.
+ Alerts: availability/SLO, error spikes, saturation; on‑call paging tested.
+
+
+
+  11) Performance &amp; Capacity
+  
+  #
+  
+
+
+ Load test targets defined (p95/p99 latency, throughput) and executed on staging.
+ Bottlenecks identified; scaling plan or headroom documented.
+ Caching strategy (client/server/CDN) documented.
+
+
+
+  12) Release Strategy
+  
+  #
+  
+
+
+ Strategy chosen: blue‑green or canary (document how with Compose).
+ Pre‑prod parity confirmed (configs, feature flags, secrets).
+ Manual approval gates &#43; sign‑offs complete.
+
+
+
+  13) Pre‑Go‑Live Tests
+  
+  #
+  
+
+
+ Smoke tests pass in staging with prod‑like config.
+ DR/rollback drill: re‑deploy previous tag via Compose  (verified).
+ Failure simulation for one dependency (optional).
+
+
+
+  14) Go‑Live Day Runbook
+  
+  #
+  
+
+
+ Change freeze window confirmed; stakeholders notified.
+ Fresh DB backup/snapshot taken and verified.
+ Deploy order: DB migrations → Backends → Frontends → Nginx reload.
+ Post‑deploy smoke tests (synthetic &#43; manual) all green.
+ Monitor golden signals for &lt;X&gt; minutes; hold change before closing.
+
+
+
+  15) Post‑Deploy
+  
+  #
+  
+
+
+ Announce success; unfreeze.
+ Compare metrics vs baseline; note regressions.
+ Tag release artifacts; write release notes.
+ Schedule retro if any incidents.
+
+
+
+  16) Batch Jobs (Jenkins‑Driven)
+  
+  #
+  
+
+
+ Jobs list with owners and SLAs (start/end windows).
+ Idempotent design; retries with backoff; concurrency controls.
+ Configs/env externalized; secrets in credentials store.
+ Metrics/logs/alerts per job (success/fail, duration, processed counts).
+ Failure policies defined (auto‑retry, notify, rollback/data fix).
+ Schedules version‑controlled (Jenkinsfile/crontab in repo).
+ Pre‑run health checks for dependencies (DB/APIs/storage).
+
+
+
+  17) Inventory (fill before go‑live)
+  
+  #
+  
+
+
+ Service URLs: User FE: &lt;TBD&gt; • User BE: &lt;TBD&gt; • Admin FE: &lt;TBD&gt; • Admin BE: &lt;TBD&gt;
+ Nginx public endpoint(s): &lt;TBD&gt;
+ DNS records (hostnames): &lt;TBD&gt;
+ Certificates (issuer, expiry): &lt;TBD&gt;
+ MySQL host/port/database(s): &lt;TBD&gt;
+ Registry image tags (FE/BE/Batch): &lt;TBD&gt;
+
+
+
+  Notes
+  
+  #
+  
+
+Keep this checklist in the repo (e.g., /docs/prod-deploy-checklist.md) and update per release. Treat TBD items as blockers until filled.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/runbooks/deployprod/prod-deploy-checklist-docker-compose-mysql/">
+  <meta property="og:site_name" content="kube-prometheus runbooks">
+  <meta property="og:title" content="kube-prometheus runbooks">
+  <meta property="og:description" content="Production Deployment Readiness Checklist#Stack: Docker Compose (User FE/BE, Admin FE/BE, Batch), MySQL, Jenkins CI/CD, Nginx (domain/LB/IP TBD)
+Purpose: High‑level checklist to prep and execute a production deployment. Fill all TBD fields before go‑live.
+0) Quick Header — fill these first#Environment name: &lt;TBD&gt; (e.g., prod-ap-southeast-1) Change window (UTC&#43;7): &lt;TBD date/time&gt; Release tag / commit: &lt;TBD&gt; Owners / On‑call: &lt;TBD&gt; RTO / RPO targets: &lt;TBD&gt; (e.g., RTO 30m / RPO 5m) 1) Scope &amp; Ownership#Services confirmed in scope: User FE, User BE, Admin FE, Admin BE, Batch jobs. Service owners &#43; escalation contacts listed. Release scope frozen; artifacts tagged and immutable. Change ticket(s) created and approved (if required). 2) Infrastructure (WBS — details TBD)#Compute hosts sized and reserved (CPU/RAM/Storage headroom). OS hardened (updates, NTP, timezone, locales); baseline image pinned. Networking: VLAN/VPC, subnets, firewall rules (ingress/egress) TBD. Storage volumes for data, logs, backups planned and provisioned. Time synchronization verified across all hosts and containers. 3) Access &amp; Governance#IAM: least‑privilege accounts for Jenkins, deployers, and ops. Break‑glass procedure documented and tested. Secrets management defined (e.g., env files &#43; Vault/KMS); no secrets in Git. Audit logging and access logs retention policy documented. 4) CI/CD — Jenkins#Pipelines per component: User FE, User BE, Admin FE, Admin BE, Batch. Stages: build → unit tests → SAST/deps scan → package → push image/artifact → deploy to staging → E2E → manual/auto promote to prod. Artifact/Image registry configured (Nexus/Artifactory/ECR/GCR) with retention. Versioning strategy: semver or date&#43;build; tags are immutable. Rollback job ready (redeploy previous tag). Jenkins credentials stored securely (no plaintext in Jenkinsfiles). Build reproducibility verified (locked base images, package locks). 5) Docker Compose — Structure &amp; Conventions#Files organized: docker-compose.yml (base), docker-compose.prod.yml (prod overrides) .env, .env.prod (non‑secret vars), secrets via external store or docker secrets .dockerignore for each build context Image sources decided: build locally or pull from registry (TBD). Networks separated: frontend, backend, db (isolate MySQL). Volumes declared for persistent data: MySQL data, app logs/cache as needed. Healthchecks for each service; depends_on uses healthcheck condition, not just start order. Resource limits set (cpus, mem_limit, ulimits) for each service. Restart policies set (unless-stopped or on-failure for jobs). Log drivers configured (json-file/syslog/fluentd) with rotation to avoid disk fill. Config per environment externalized; no hard‑coded prod values in images. 6) Application Readiness (Java BE/FE)#Java: JDK version pinned; JVM flags (heap/GC) documented. Health endpoints implemented (/healthz, /readyz); graceful shutdown on SIGTERM. FE: production build (minified, hashed assets); env injection at runtime if needed. Config: DB URLs, API base URLs, feature flags set via env/secret. Idempotent DB migrations (e.g., Flyway/Liquibase) wired into deploy step. Static assets served efficiently (Nginx or dedicated FE container). 7) MySQL (Production)#Version pinned (e.g., 8.0.x); image digest locked. Charset/collation set (utf8mb4 / utf8mb4_0900_ai_ci) and timezone configured. Users/roles and least‑privilege grants created. Connection pool sizing reviewed; max connections tuned. Backups: Schedule defined (full &#43; incremental if applicable) Test restore performed and documented Backup encryption and off‑host storage verified Slow query log enabled; performance schema sizing reviewed. Optional HA/replication decision documented (TBD). Initial data import / migration plan validated. 8) Nginx / Edge (Domain/LB/IP TBD)#Public entry decided: direct Nginx on host vs behind LB (L4/L7) TBD. DNS records planned (A/AAAA/CNAME); cert strategy (ACME/issued) TBD. TLS configured (redirect HTTP→HTTPS, HSTS, modern ciphers). Upstreams defined for User BE / Admin BE; timeouts, buffers, gzip/brotli tuned. Path routing &amp; headers: CORS/CSRF rules, security headers, body size limits. Access/error logs rotated and shipped to central logging. Optional WAF/CDN/DDoS protection decision TBD. 9) Security#SAST/Dependency scan gates in CI; criticals addressed or waived with approval. Container hardening: non‑root users, read‑only FS when possible, drop capabilities. Secrets not logged; PII masking; sample logs validated. SBOM generated and stored with artifacts (optional but recommended). 10) Observability#Metrics for BE/FE/MySQL/Nginx collected (RPS, latency, errors, JVM, DB QPS). Logs are structured (JSON) with correlation IDs across FE↔BE; retention set. Tracing headers propagated (W3C traceparent or similar). Dashboards per service &#43; Nginx created. Alerts: availability/SLO, error spikes, saturation; on‑call paging tested. 11) Performance &amp; Capacity#Load test targets defined (p95/p99 latency, throughput) and executed on staging. Bottlenecks identified; scaling plan or headroom documented. Caching strategy (client/server/CDN) documented. 12) Release Strategy#Strategy chosen: blue‑green or canary (document how with Compose). Pre‑prod parity confirmed (configs, feature flags, secrets). Manual approval gates &#43; sign‑offs complete. 13) Pre‑Go‑Live Tests#Smoke tests pass in staging with prod‑like config. DR/rollback drill: re‑deploy previous tag via Compose (verified). Failure simulation for one dependency (optional). 14) Go‑Live Day Runbook#Change freeze window confirmed; stakeholders notified. Fresh DB backup/snapshot taken and verified. Deploy order: DB migrations → Backends → Frontends → Nginx reload. Post‑deploy smoke tests (synthetic &#43; manual) all green. Monitor golden signals for &lt;X&gt; minutes; hold change before closing. 15) Post‑Deploy#Announce success; unfreeze. Compare metrics vs baseline; note regressions. Tag release artifacts; write release notes. Schedule retro if any incidents. 16) Batch Jobs (Jenkins‑Driven)#Jobs list with owners and SLAs (start/end windows). Idempotent design; retries with backoff; concurrency controls. Configs/env externalized; secrets in credentials store. Metrics/logs/alerts per job (success/fail, duration, processed counts). Failure policies defined (auto‑retry, notify, rollback/data fix). Schedules version‑controlled (Jenkinsfile/crontab in repo). Pre‑run health checks for dependencies (DB/APIs/storage). 17) Inventory (fill before go‑live)#Service URLs: User FE: &lt;TBD&gt; • User BE: &lt;TBD&gt; • Admin FE: &lt;TBD&gt; • Admin BE: &lt;TBD&gt; Nginx public endpoint(s): &lt;TBD&gt; DNS records (hostnames): &lt;TBD&gt; Certificates (issuer, expiry): &lt;TBD&gt; MySQL host/port/database(s): &lt;TBD&gt; Registry image tags (FE/BE/Batch): &lt;TBD&gt; Notes#Keep this checklist in the repo (e.g., /docs/prod-deploy-checklist.md) and update per release. Treat TBD items as blockers until filled.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="runbooks">
+<title>Prod Deploy Checklist Docker Compose Mysql | kube-prometheus runbooks</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/runbooks/deployprod/prod-deploy-checklist-docker-compose-mysql/">
+<link rel="stylesheet" href="/book.min.ce742184041b67827be505801d71b6b40c09608dfb292033ea54dbbc1d71a174.css" integrity="sha256-znQhhAQbZ4J75QWAHXG2tAwJYI37KSAz6lTbvB1xoXQ=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.d724e9b6620f29b3725c9090bec9befd2d78ed2fe96aacc6982e29a3f6ebac6e.js" integrity="sha256-1yTptmIPKbNyXJCQvsm&#43;/S147S/paqzGmC4po/brrG4=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-runbooks">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>kube-prometheus runbooks</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-febcc99bf5ed6ad22f0c18af55312b96" class="toggle"  />
+    <label for="section-febcc99bf5ed6ad22f0c18af55312b96" class="flex">
+      <a role="button" class="flex-auto ">general</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/general/infoinhibitor/" class="">Info Inhibitor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/general/nodenetworkinterfaceflapping/" class="">Node Network Interface Flapping</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/general/watchdog/" class="">Watchdog</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/general/targetdown/" class="">Target Down</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-db3e163ffd356e392b64d749c66d9c07" class="toggle"  />
+    <label for="section-db3e163ffd356e392b64d749c66d9c07" class="flex">
+      <a role="button" class="flex-auto ">alertmanager</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagerclustercrashlooping/" class="">Alertmanager Cluster Crashlooping</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagerclusterdown/" class="">Alertmanager Cluster Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagerclusterfailedtosendalerts/" class="">Alertmanager Cluster Failed To Send Alerts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagerconfiginconsistent/" class="">Alertmanager ConfigInconsistent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagerfailedreload/" class="">Alertmanager Failed Reload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagerfailedtosendalerts/" class="">Alertmanager Failed To Send Alerts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagermembersinconsistent/" class="">Alertmanager Members Inconsistent</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c5b7e8c48710cba798c1fa32906f20a3" class="toggle"  />
+    <label for="section-c5b7e8c48710cba798c1fa32906f20a3" class="flex">
+      <a role="button" class="flex-auto ">etcd</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdbackendquotalowspace/" class="">Etcd Backend Quota Low Space</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdgrpcrequestsslow/" class="">Etcd Grpcrequests Slow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdhighfsyncdurations/" class="">Etcd High Fsync Durations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/" class="">Etcd High Number of Failed Grpcrequests</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdinsufficientmembers/" class="">Etcd Insufficient Members</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdmembersdown/" class="">Etcd Members Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdnoleader/" class="">Etcd No Leader</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-260bf675a64908500d1b381d3fe43f5f" class="toggle"  />
+    <label for="section-260bf675a64908500d1b381d3fe43f5f" class="flex">
+      <a role="button" class="flex-auto ">kube-state-metrics</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kube-state-metrics/kubestatemetricswatcherrors/" class="">Kube State Metric sWatch Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kube-state-metrics/kubestatemetricslisterrors/" class="">Kube State Metrics List Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kube-state-metrics/kubestatemetricsshardingmismatch/" class="">Kube State Metrics Sharding Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kube-state-metrics/kubestatemetricsshardsmissing/" class="">Kube State Metrics Shards Missing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-daf652c035f1499b3f30b4eaaadaf2c7" class="toggle"  />
+    <label for="section-daf652c035f1499b3f30b4eaaadaf2c7" class="flex">
+      <a role="button" class="flex-auto ">kubernetes</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/cputhrottlinghigh/" class="">CPU Throttling High</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeaggregatedapidown/" class="">Kube Aggregated API Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeaggregatedapierrors/" class="">Kube Aggregated API Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeapidown/" class="">Kube API Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeapierrorbudgetburn/" class="">Kube API Error Budget Burn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeapiterminatedrequests/" class="">Kube API Terminated Requests</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeclientcertificateexpiration/" class="">Kube Client Certificate Expiration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeclienterrors/" class="">Kube Client Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubecontainerwaiting/" class="">Kube Container Waiting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubecontrollermanagerdown/" class="">Kube Controller Manager Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubecpuovercommit/" class="">Kube CPU Overcommit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubecpuquotaovercommit/" class="">Kube CPU Quota Overcommit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubedaemonsetmisscheduled/" class="">Kube DaemonSet MisScheduled</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubedaemonsetnotscheduled/" class="">Kube DaemonSet Not Scheduled</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubedaemonsetrolloutstuck/" class="">Kube DaemonSet Rollout Stuck</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubedeploymentgenerationmismatch/" class="">Kube Deployment Generation Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubedeploymentreplicasmismatch/" class="">Kube Deployment Replicas Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubehpareplicasmismatch/" class="">Kube HPA  Replicas Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubehpamaxedout/" class="">Kube HPA Maxed Out</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubejobcompletion/" class="">Kube Job Completion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubejobfailed/" class="">Kube Job Failed</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubememoryovercommit/" class="">Kube Memory Overcommit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubememoryquotaovercommit/" class="">Kube Memory Quota Overcommit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubenodenotready/" class="">Kube Node Not Ready</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubenodereadinessflapping/" class="">Kube Node Readiness Flapping</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubenodeunreachable/" class="">Kube Node Unreachable</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubepersistentvolumeerrors/" class="">Kube Persistent Volume Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubepersistentvolumefillingup/" class="">Kube Persistent Volume Filling Up</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubepodcrashlooping/" class="">Kube Pod Crash Looping</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubepodnotready/" class="">Kube Pod Not Ready</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubequotaalmostfull/" class="">Kube Quota Almost Full</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubequotaexceeded/" class="">Kube Quota Exceeded</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubequotafullyused/" class="">Kube Quota Fully Used</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeschedulerdown/" class="">Kube Scheduler Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubestatefulsetgenerationmismatch/" class="">Kube StatefulSet Generation Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubestatefulsetreplicasmismatch/" class="">Kube StatefulSet Replicas Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubestatefulsetupdatenotrolledout/" class="">Kube StatefulSet Update Not RolledOut</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeversionmismatch/" class="">Kube Version Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletclientcertificateexpiration/" class="">Kubelet Client Certificate Expiration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletclientcertificaterenewalerrors/" class="">Kubelet Client Certificate Renewal Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletdown/" class="">Kubelet Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletplegdurationhigh/" class="">Kubelet Pod Lifecycle Event Generator Duration High</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletpodstartuplatencyhigh/" class="">Kubelet Pod Start Up Latency High</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletservercertificateexpiration/" class="">Kubelet Server Certificate Expiration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletservercertificaterenewalerrors/" class="">Kubelet Server Certificate Renewal Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubelettoomanypods/" class="">Kubelet Too Many Pods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeproxydown/" class="">KubeProxy Down</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-fd4a0b0fd48654cddf3d9df1df6f1b3a" class="toggle"  />
+    <label for="section-fd4a0b0fd48654cddf3d9df1df6f1b3a" class="flex">
+      <a role="button" class="flex-auto ">node</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodeclocknotsynchronising/" class="">Node Clock Not Synchronising</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodeclockskewdetected/" class="">Node Clock Skew Detected</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodefiledescriptorlimit/" class="">Node File Descriptor Limit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodefilesystemalmostoutoffiles/" class="">Node Filesystem Almost Out Of Files</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodefilesystemalmostoutofspace/" class="">Node Filesystem Almost Out Of Space</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodefilesystemfilesfillingup/" class="">Node Filesystem Files Filling Up</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodefilesystemspacefillingup/" class="">Node Filesystem Space Filling Up</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodehighnumberconntrackentriesused/" class="">Node High Number Conntrack Entries Used</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodenetworkreceiveerrs/" class="">Node Network Receive Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodenetworktransmiterrs/" class="">Node Network Transmit Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/noderaiddegraded/" class="">Node RAID Degraded</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/noderaiddiskfailure/" class="">Node RAID Disk Failure</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodetextfilecollectorscrapeerror/" class="">Node Text File Collector Scrape Error</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a4be051134543e2634dd470d64290df4" class="toggle"  />
+    <label for="section-a4be051134543e2634dd470d64290df4" class="flex">
+      <a role="button" class="flex-auto ">prometheus</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusbadconfig/" class="">Prometheus Bad Config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusduplicatetimestamps/" class="">Prometheus Duplicate Timestamps</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheuserrorsendingalertstoanyalertmanager/" class="">Prometheus Error Sending Alerts To Any Alertmanager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheuserrorsendingalertstosomealertmanagers/" class="">Prometheus Error Sending Alerts To Some Alertmanagers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheuslabellimithit/" class="">Prometheus Label LimitHit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusmissingruleevaluations/" class="">Prometheus Missing Rule Evaluations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusnotconnectedtoalertmanagers/" class="">Prometheus Not Connected To Alertmanagers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusnotingestingsamples/" class="">Prometheus Not Ingesting Samples</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusnotificationqueuerunningfull/" class="">Prometheus Notification Queue Running Full</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusoutofordertimestamps/" class="">Prometheus Out Of Order Timestamps</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusremotestoragefailures/" class="">Prometheus Remote Storage Failures</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusremotewritebehind/" class="">Prometheus Remote Write Behind</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusrulefailures/" class="">Prometheus Rule Failures</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheustargetlimithit/" class="">Prometheus Target Limit Hit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheustargetsyncfailure/" class="">Prometheus Target Sync Failure</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheustsdbcompactionsfailing/" class="">Prometheus TSDB Compactions Failing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheustsdbreloadsfailing/" class="">Prometheus TSDB Reloads Failing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusremotewritedesiredshards/" class="">PrometheusRemoteWriteDesiredShards</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bdb1b659825ae46d3ea0f27214f356f6" class="toggle"  />
+    <label for="section-bdb1b659825ae46d3ea0f27214f356f6" class="flex">
+      <a role="button" class="flex-auto ">prometheus-operator</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/configreloadersidecarerrors/" class="">Config Reloader Sidecar Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatorlisterrors/" class="">Prometheus Operator List Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/" class="">Prometheus Operator Node Lookup Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatornotready/" class="">Prometheus Operator NotReady</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/" class="">Prometheus Operator Reconcile Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatorrejectedresources/" class="">Prometheus Operator Rejected Resources</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatorsyncfailed/" class="">Prometheus Operator Sync Failed</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatorwatcherrors/" class="">Prometheus Operator Watch Errors</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/deployprod/prod-deploy-checklist-docker-compose-mysql/" class="active">Prod Deploy Checklist Docker Compose Mysql</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Prod Deploy Checklist Docker Compose Mysql</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-quick-header--fill-these-first">0) Quick Header — fill these first</a></li>
+    <li><a href="#1-scope--ownership">1) Scope &amp; Ownership</a></li>
+    <li><a href="#2-infrastructure-wbs--details-tbd">2) Infrastructure (WBS — details TBD)</a></li>
+    <li><a href="#3-access--governance">3) Access &amp; Governance</a></li>
+    <li><a href="#4-cicd--jenkins">4) CI/CD — Jenkins</a></li>
+    <li><a href="#5-docker-compose--structure--conventions">5) Docker Compose — Structure &amp; Conventions</a></li>
+    <li><a href="#6-application-readiness-java-befe">6) Application Readiness (Java BE/FE)</a></li>
+    <li><a href="#7-mysql-production">7) MySQL (Production)</a></li>
+    <li><a href="#8-nginx--edge-domainlbip-tbd">8) Nginx / Edge (Domain/LB/IP TBD)</a></li>
+    <li><a href="#9-security">9) Security</a></li>
+    <li><a href="#10-observability">10) Observability</a></li>
+    <li><a href="#11-performance--capacity">11) Performance &amp; Capacity</a></li>
+    <li><a href="#12-release-strategy">12) Release Strategy</a></li>
+    <li><a href="#13-pregolive-tests">13) Pre‑Go‑Live Tests</a></li>
+    <li><a href="#14-golive-day-runbook">14) Go‑Live Day Runbook</a></li>
+    <li><a href="#15-postdeploy">15) Post‑Deploy</a></li>
+    <li><a href="#16-batch-jobs-jenkinsdriven">16) Batch Jobs (Jenkins‑Driven)</a></li>
+    <li><a href="#17-inventory-fill-before-golive">17) Inventory (fill before go‑live)</a>
+      <ul>
+        <li><a href="#notes">Notes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="production-deployment-readiness-checklist">
+  Production Deployment Readiness Checklist
+  
+  <a class="anchor" href="#production-deployment-readiness-checklist">#</a>
+  
+</h1>
+<p><strong>Stack:</strong> Docker Compose (User FE/BE, Admin FE/BE, Batch), MySQL, Jenkins CI/CD, Nginx (domain/LB/IP TBD)</p>
+
+<blockquote class='book-hint '>
+  <p>Purpose: High‑level checklist to prep and execute a production deployment. Fill all <strong>TBD</strong> fields before go‑live.</p>
+</blockquote><hr>
+<h2 id="0-quick-header--fill-these-first">
+  0) Quick Header — fill these first
+  
+  <a class="anchor" href="#0-quick-header--fill-these-first">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Environment name:</strong> <code>&lt;TBD&gt;</code> (e.g., prod-ap-southeast-1)</li>
+<li><input disabled="" type="checkbox"> <strong>Change window (UTC+7):</strong> <code>&lt;TBD date/time&gt;</code></li>
+<li><input disabled="" type="checkbox"> <strong>Release tag / commit:</strong> <code>&lt;TBD&gt;</code></li>
+<li><input disabled="" type="checkbox"> <strong>Owners / On‑call:</strong> <code>&lt;TBD&gt;</code></li>
+<li><input disabled="" type="checkbox"> <strong>RTO / RPO targets:</strong> <code>&lt;TBD&gt;</code> (e.g., RTO 30m / RPO 5m)</li>
+</ul>
+<hr>
+<h2 id="1-scope--ownership">
+  1) Scope &amp; Ownership
+  
+  <a class="anchor" href="#1-scope--ownership">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Services confirmed in scope: <strong>User FE</strong>, <strong>User BE</strong>, <strong>Admin FE</strong>, <strong>Admin BE</strong>, <strong>Batch jobs</strong>.</li>
+<li><input disabled="" type="checkbox"> Service owners + escalation contacts listed.</li>
+<li><input disabled="" type="checkbox"> Release scope frozen; artifacts tagged and immutable.</li>
+<li><input disabled="" type="checkbox"> Change ticket(s) created and approved (if required).</li>
+</ul>
+<hr>
+<h2 id="2-infrastructure-wbs--details-tbd">
+  2) Infrastructure (WBS — details TBD)
+  
+  <a class="anchor" href="#2-infrastructure-wbs--details-tbd">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Compute hosts sized and reserved (CPU/RAM/Storage headroom).</li>
+<li><input disabled="" type="checkbox"> OS hardened (updates, NTP, timezone, locales); baseline image pinned.</li>
+<li><input disabled="" type="checkbox"> Networking: VLAN/VPC, subnets, firewall rules (ingress/egress) <strong>TBD</strong>.</li>
+<li><input disabled="" type="checkbox"> Storage volumes for data, logs, backups planned and provisioned.</li>
+<li><input disabled="" type="checkbox"> Time synchronization verified across all hosts and containers.</li>
+</ul>
+<hr>
+<h2 id="3-access--governance">
+  3) Access &amp; Governance
+  
+  <a class="anchor" href="#3-access--governance">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> IAM: least‑privilege accounts for Jenkins, deployers, and ops.</li>
+<li><input disabled="" type="checkbox"> Break‑glass procedure documented and tested.</li>
+<li><input disabled="" type="checkbox"> Secrets management defined (e.g., env files + Vault/KMS); no secrets in Git.</li>
+<li><input disabled="" type="checkbox"> Audit logging and access logs retention policy documented.</li>
+</ul>
+<hr>
+<h2 id="4-cicd--jenkins">
+  4) CI/CD — Jenkins
+  
+  <a class="anchor" href="#4-cicd--jenkins">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Pipelines per component: <strong>User FE</strong>, <strong>User BE</strong>, <strong>Admin FE</strong>, <strong>Admin BE</strong>, <strong>Batch</strong>.</li>
+<li><input disabled="" type="checkbox"> Stages: build → unit tests → SAST/deps scan → package → push image/artifact → deploy to staging → E2E → <strong>manual/auto</strong> promote to prod.</li>
+<li><input disabled="" type="checkbox"> Artifact/Image registry configured (Nexus/Artifactory/ECR/GCR) with retention.</li>
+<li><input disabled="" type="checkbox"> Versioning strategy: semver or date+build; tags are immutable.</li>
+<li><input disabled="" type="checkbox"> Rollback job ready (redeploy previous tag).</li>
+<li><input disabled="" type="checkbox"> Jenkins credentials stored securely (no plaintext in Jenkinsfiles).</li>
+<li><input disabled="" type="checkbox"> Build reproducibility verified (locked base images, package locks).</li>
+</ul>
+<hr>
+<h2 id="5-docker-compose--structure--conventions">
+  5) Docker Compose — Structure &amp; Conventions
+  
+  <a class="anchor" href="#5-docker-compose--structure--conventions">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Files organized:
+<ul>
+<li><code>docker-compose.yml</code> (base), <code>docker-compose.prod.yml</code> (prod overrides)</li>
+<li><code>.env</code>, <code>.env.prod</code> (non‑secret vars), secrets via external store or docker secrets</li>
+<li><code>.dockerignore</code> for each build context</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> Image sources decided: <strong>build locally</strong> <em>or</em> <strong>pull from registry</strong> (TBD).</li>
+<li><input disabled="" type="checkbox"> Networks separated: <code>frontend</code>, <code>backend</code>, <code>db</code> (isolate MySQL).</li>
+<li><input disabled="" type="checkbox"> Volumes declared for persistent data: MySQL data, app logs/cache as needed.</li>
+<li><input disabled="" type="checkbox"> Healthchecks for each service; <code>depends_on</code> uses <strong>healthcheck condition</strong>, not just start order.</li>
+<li><input disabled="" type="checkbox"> Resource limits set (<code>cpus</code>, <code>mem_limit</code>, <code>ulimits</code>) for each service.</li>
+<li><input disabled="" type="checkbox"> Restart policies set (<code>unless-stopped</code> or <code>on-failure</code> for jobs).</li>
+<li><input disabled="" type="checkbox"> Log drivers configured (json-file/syslog/fluentd) with rotation to avoid disk fill.</li>
+<li><input disabled="" type="checkbox"> Config per environment externalized; no hard‑coded prod values in images.</li>
+</ul>
+<hr>
+<h2 id="6-application-readiness-java-befe">
+  6) Application Readiness (Java BE/FE)
+  
+  <a class="anchor" href="#6-application-readiness-java-befe">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Java: JDK version pinned; JVM flags (heap/GC) documented.</li>
+<li><input disabled="" type="checkbox"> Health endpoints implemented (<code>/healthz</code>, <code>/readyz</code>); graceful shutdown on SIGTERM.</li>
+<li><input disabled="" type="checkbox"> FE: production build (minified, hashed assets); env injection at runtime if needed.</li>
+<li><input disabled="" type="checkbox"> Config: DB URLs, API base URLs, feature flags set via env/secret.</li>
+<li><input disabled="" type="checkbox"> Idempotent DB migrations (e.g., Flyway/Liquibase) wired into deploy step.</li>
+<li><input disabled="" type="checkbox"> Static assets served efficiently (Nginx or dedicated FE container).</li>
+</ul>
+<hr>
+<h2 id="7-mysql-production">
+  7) MySQL (Production)
+  
+  <a class="anchor" href="#7-mysql-production">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Version pinned (e.g., 8.0.x); image digest locked.</li>
+<li><input disabled="" type="checkbox"> Charset/collation set (utf8mb4 / utf8mb4_0900_ai_ci) and timezone configured.</li>
+<li><input disabled="" type="checkbox"> Users/roles and least‑privilege grants created.</li>
+<li><input disabled="" type="checkbox"> Connection pool sizing reviewed; max connections tuned.</li>
+<li><input disabled="" type="checkbox"> Backups:
+<ul>
+<li>Schedule defined (full + incremental if applicable)</li>
+<li>Test <strong>restore</strong> performed and documented</li>
+<li>Backup encryption and off‑host storage verified</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> Slow query log enabled; performance schema sizing reviewed.</li>
+<li><input disabled="" type="checkbox"> Optional HA/replication decision documented (<strong>TBD</strong>).</li>
+<li><input disabled="" type="checkbox"> Initial data import / migration plan validated.</li>
+</ul>
+<hr>
+<h2 id="8-nginx--edge-domainlbip-tbd">
+  8) Nginx / Edge (Domain/LB/IP TBD)
+  
+  <a class="anchor" href="#8-nginx--edge-domainlbip-tbd">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Public entry decided: direct Nginx on host vs behind LB (L4/L7) <strong>TBD</strong>.</li>
+<li><input disabled="" type="checkbox"> DNS records planned (A/AAAA/CNAME); cert strategy (ACME/issued) <strong>TBD</strong>.</li>
+<li><input disabled="" type="checkbox"> TLS configured (redirect HTTP→HTTPS, HSTS, modern ciphers).</li>
+<li><input disabled="" type="checkbox"> Upstreams defined for User BE / Admin BE; timeouts, buffers, gzip/brotli tuned.</li>
+<li><input disabled="" type="checkbox"> Path routing &amp; headers: CORS/CSRF rules, security headers, body size limits.</li>
+<li><input disabled="" type="checkbox"> Access/error logs rotated and shipped to central logging.</li>
+<li><input disabled="" type="checkbox"> Optional WAF/CDN/DDoS protection decision <strong>TBD</strong>.</li>
+</ul>
+<hr>
+<h2 id="9-security">
+  9) Security
+  
+  <a class="anchor" href="#9-security">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> SAST/Dependency scan gates in CI; criticals addressed or waived with approval.</li>
+<li><input disabled="" type="checkbox"> Container hardening: non‑root users, read‑only FS when possible, drop capabilities.</li>
+<li><input disabled="" type="checkbox"> Secrets not logged; PII masking; sample logs validated.</li>
+<li><input disabled="" type="checkbox"> SBOM generated and stored with artifacts (optional but recommended).</li>
+</ul>
+<hr>
+<h2 id="10-observability">
+  10) Observability
+  
+  <a class="anchor" href="#10-observability">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Metrics for BE/FE/MySQL/Nginx collected (RPS, latency, errors, JVM, DB QPS).</li>
+<li><input disabled="" type="checkbox"> Logs are structured (JSON) with correlation IDs across FE↔BE; retention set.</li>
+<li><input disabled="" type="checkbox"> Tracing headers propagated (W3C <code>traceparent</code> or similar).</li>
+<li><input disabled="" type="checkbox"> Dashboards per service + Nginx created.</li>
+<li><input disabled="" type="checkbox"> Alerts: availability/SLO, error spikes, saturation; on‑call paging tested.</li>
+</ul>
+<hr>
+<h2 id="11-performance--capacity">
+  11) Performance &amp; Capacity
+  
+  <a class="anchor" href="#11-performance--capacity">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Load test targets defined (p95/p99 latency, throughput) and executed on staging.</li>
+<li><input disabled="" type="checkbox"> Bottlenecks identified; scaling plan or headroom documented.</li>
+<li><input disabled="" type="checkbox"> Caching strategy (client/server/CDN) documented.</li>
+</ul>
+<hr>
+<h2 id="12-release-strategy">
+  12) Release Strategy
+  
+  <a class="anchor" href="#12-release-strategy">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Strategy chosen: <strong>blue‑green</strong> or <strong>canary</strong> (document how with Compose).</li>
+<li><input disabled="" type="checkbox"> Pre‑prod parity confirmed (configs, feature flags, secrets).</li>
+<li><input disabled="" type="checkbox"> Manual approval gates + sign‑offs complete.</li>
+</ul>
+<hr>
+<h2 id="13-pregolive-tests">
+  13) Pre‑Go‑Live Tests
+  
+  <a class="anchor" href="#13-pregolive-tests">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Smoke tests pass in staging with prod‑like config.</li>
+<li><input disabled="" type="checkbox"> DR/rollback drill: re‑deploy previous tag via Compose  (verified).</li>
+<li><input disabled="" type="checkbox"> Failure simulation for one dependency (optional).</li>
+</ul>
+<hr>
+<h2 id="14-golive-day-runbook">
+  14) Go‑Live Day Runbook
+  
+  <a class="anchor" href="#14-golive-day-runbook">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Change freeze window confirmed; stakeholders notified.</li>
+<li><input disabled="" type="checkbox"> Fresh DB backup/snapshot taken and verified.</li>
+<li><input disabled="" type="checkbox"> Deploy order: DB migrations → Backends → Frontends → Nginx reload.</li>
+<li><input disabled="" type="checkbox"> Post‑deploy smoke tests (synthetic + manual) all green.</li>
+<li><input disabled="" type="checkbox"> Monitor golden signals for <code>&lt;X&gt;</code> minutes; hold change before closing.</li>
+</ul>
+<hr>
+<h2 id="15-postdeploy">
+  15) Post‑Deploy
+  
+  <a class="anchor" href="#15-postdeploy">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Announce success; unfreeze.</li>
+<li><input disabled="" type="checkbox"> Compare metrics vs baseline; note regressions.</li>
+<li><input disabled="" type="checkbox"> Tag release artifacts; write release notes.</li>
+<li><input disabled="" type="checkbox"> Schedule retro if any incidents.</li>
+</ul>
+<hr>
+<h2 id="16-batch-jobs-jenkinsdriven">
+  16) Batch Jobs (Jenkins‑Driven)
+  
+  <a class="anchor" href="#16-batch-jobs-jenkinsdriven">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Jobs list with owners and SLAs (start/end windows).</li>
+<li><input disabled="" type="checkbox"> Idempotent design; retries with backoff; concurrency controls.</li>
+<li><input disabled="" type="checkbox"> Configs/env externalized; secrets in credentials store.</li>
+<li><input disabled="" type="checkbox"> Metrics/logs/alerts per job (success/fail, duration, processed counts).</li>
+<li><input disabled="" type="checkbox"> Failure policies defined (auto‑retry, notify, rollback/data fix).</li>
+<li><input disabled="" type="checkbox"> Schedules version‑controlled (Jenkinsfile/crontab in repo).</li>
+<li><input disabled="" type="checkbox"> Pre‑run health checks for dependencies (DB/APIs/storage).</li>
+</ul>
+<hr>
+<h2 id="17-inventory-fill-before-golive">
+  17) Inventory (fill before go‑live)
+  
+  <a class="anchor" href="#17-inventory-fill-before-golive">#</a>
+  
+</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Service URLs: <strong>User FE:</strong> <code>&lt;TBD&gt;</code> • <strong>User BE:</strong> <code>&lt;TBD&gt;</code> • <strong>Admin FE:</strong> <code>&lt;TBD&gt;</code> • <strong>Admin BE:</strong> <code>&lt;TBD&gt;</code></li>
+<li><input disabled="" type="checkbox"> Nginx public endpoint(s): <code>&lt;TBD&gt;</code></li>
+<li><input disabled="" type="checkbox"> DNS records (hostnames): <code>&lt;TBD&gt;</code></li>
+<li><input disabled="" type="checkbox"> Certificates (issuer, expiry): <code>&lt;TBD&gt;</code></li>
+<li><input disabled="" type="checkbox"> MySQL host/port/database(s): <code>&lt;TBD&gt;</code></li>
+<li><input disabled="" type="checkbox"> Registry image tags (FE/BE/Batch): <code>&lt;TBD&gt;</code></li>
+</ul>
+<hr>
+<h3 id="notes">
+  Notes
+  
+  <a class="anchor" href="#notes">#</a>
+  
+</h3>
+<p>Keep this checklist in the repo (e.g., <code>/docs/prod-deploy-checklist.md</code>) and update per release. Treat <strong>TBD</strong> items as blockers until filled.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/runbooks/prometheus-operator/prometheusoperatorwatcherrors/" class="flex align-center book-icon">
+        <img src="/svg/backward.svg" class="book-icon" alt="Previous" title="Prometheus Operator Watch Errors" />
+        <span>Prometheus Operator Watch Errors</span>
+      </a>
+    
+    </span>
+    <span>
+    
+    </span>
+  </div>
+  
+
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+
+<aside class="book-toc">
+  <div class="book-toc-content">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#0-quick-header--fill-these-first">0) Quick Header — fill these first</a></li>
+    <li><a href="#1-scope--ownership">1) Scope &amp; Ownership</a></li>
+    <li><a href="#2-infrastructure-wbs--details-tbd">2) Infrastructure (WBS — details TBD)</a></li>
+    <li><a href="#3-access--governance">3) Access &amp; Governance</a></li>
+    <li><a href="#4-cicd--jenkins">4) CI/CD — Jenkins</a></li>
+    <li><a href="#5-docker-compose--structure--conventions">5) Docker Compose — Structure &amp; Conventions</a></li>
+    <li><a href="#6-application-readiness-java-befe">6) Application Readiness (Java BE/FE)</a></li>
+    <li><a href="#7-mysql-production">7) MySQL (Production)</a></li>
+    <li><a href="#8-nginx--edge-domainlbip-tbd">8) Nginx / Edge (Domain/LB/IP TBD)</a></li>
+    <li><a href="#9-security">9) Security</a></li>
+    <li><a href="#10-observability">10) Observability</a></li>
+    <li><a href="#11-performance--capacity">11) Performance &amp; Capacity</a></li>
+    <li><a href="#12-release-strategy">12) Release Strategy</a></li>
+    <li><a href="#13-pregolive-tests">13) Pre‑Go‑Live Tests</a></li>
+    <li><a href="#14-golive-day-runbook">14) Go‑Live Day Runbook</a></li>
+    <li><a href="#15-postdeploy">15) Post‑Deploy</a></li>
+    <li><a href="#16-batch-jobs-jenkinsdriven">16) Batch Jobs (Jenkins‑Driven)</a></li>
+    <li><a href="#17-inventory-fill-before-golive">17) Inventory (fill before go‑live)</a>
+      <ul>
+        <li><a href="#notes">Notes</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </div>
+</aside>
+
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

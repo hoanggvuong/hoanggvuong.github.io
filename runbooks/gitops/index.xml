@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GitOps on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/gitops/</link><description>Recent content in GitOps on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/gitops/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/gitops/argocd-application-bootstrap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/gitops/argocd-application-bootstrap/</guid><description>&lt;h3 id="objective">
+ Objective
+ 
+ &lt;a class="anchor" href="#objective">#&lt;/a>
+ 
+&lt;/h3>
+&lt;p>To provide a standardized procedure for deploying a new application into a Kubernetes cluster using Argo CD, following GitOps principles. This ensures that all application deployments are version-controlled, auditable, and consistently managed.&lt;/p>
+&lt;h3 id="prerequisites">
+ Prerequisites
+ 
+ &lt;a class="anchor" href="#prerequisites">#&lt;/a>
+ 
+&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Access:&lt;/strong>
+&lt;ul>
+&lt;li>Read/write access to the Git repository that will store the application&amp;rsquo;s Kubernetes manifests (the &amp;ldquo;config repo&amp;rdquo;).&lt;/li>
+&lt;li>&lt;code>kubectl&lt;/code> access to the target Kubernetes cluster with permissions to manage Argo CD resources.&lt;/li>
+&lt;li>Access to the Argo CD UI/CLI.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Tools:&lt;/strong> &lt;code>git&lt;/code>, &lt;code>kubectl&lt;/code>, and the &lt;code>argocd&lt;/code> CLI installed and configured.&lt;/li>
+&lt;li>&lt;strong>Knowledge:&lt;/strong> Understanding of Kubernetes manifests (Deployments, Services, Ingress, etc.) and basic Git operations.&lt;/li>
+&lt;/ul>
+&lt;h3 id="steps-for-bootstrapping">
+ Steps for Bootstrapping
+ 
+ &lt;a class="anchor" href="#steps-for-bootstrapping">#&lt;/a>
+ 
+&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Prepare Application Manifests:&lt;/strong>&lt;/p></description></item></channel></rss>

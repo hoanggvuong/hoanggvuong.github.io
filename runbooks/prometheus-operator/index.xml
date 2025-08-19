@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>prometheus-operator on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/</link><description>Recent content in prometheus-operator on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/index.xml" rel="self" type="application/rss+xml"/><item><title>Config Reloader Sidecar Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/configreloadersidecarerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/configreloadersidecarerrors/</guid><description>&lt;h1 id="configreloadersidecarerrors">
+ ConfigReloaderSidecarErrors
+ 
+ &lt;a class="anchor" href="#configreloadersidecarerrors">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Errors encountered while the config-reloader sidecar attempts to sync
+configuration in a given namespace.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>As a result, configuration for services such as prometheus or alertmanager maybe
+stale and cannot be automatically updated.'&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check config-reloader logs and the configuration which it tries to reload.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Usually means new config was rejected by the controlled app because it contains
+errors such as unknown configuration sections or bad resource definitions.&lt;/p></description></item><item><title>Prometheus Operator List Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorlisterrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorlisterrors/</guid><description>&lt;h1 id="prometheusoperatorlisterrors">
+ PrometheusOperatorListErrors
+ 
+ &lt;a class="anchor" href="#prometheusoperatorlisterrors">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Errors while performing list operations in controller.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus Operator has troubles in managing its operands and Custom Resources.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check logs of Prometheus Operator pod.&lt;/li>
+&lt;li>Check service account tokens.&lt;/li>
+&lt;li>Check Prometheus Operator RBAC configuration.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2></description></item><item><title>Prometheus Operator Node Lookup Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/</guid><description>&lt;h1 id="prometheusoperatornodelookuperrors">
+ PrometheusOperatorNodeLookupErrors
+ 
+ &lt;a class="anchor" href="#prometheusoperatornodelookuperrors">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Errors while reconciling information about kubernetes nodes.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus Operator is not able to configure Prometheus scrape configuration.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check logs of Prometheus Operator pod.&lt;/li>
+&lt;li>Check kubelet Service managed by Prometheus Operator&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ kubelet describe Service -n kube-system -l app.kubernetes.io/managed-by&lt;span style="color:#f92672">=&lt;/span>prometheus-operator
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Mitigation&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TODO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Prometheus Operator NotReady</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatornotready/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatornotready/</guid><description>&lt;h1 id="prometheusoperatornotready">
+ PrometheusOperatorNotReady
+ 
+ &lt;a class="anchor" href="#prometheusoperatornotready">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus operator is not ready.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus Operator is not able to perform any operation.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check Prometheus Operator Deployment configuration.&lt;/li>
+&lt;li>Check logs of Prometheus Operator pod.&lt;/li>
+&lt;li>Check service account tokens.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>TODO&lt;/p></description></item><item><title>Prometheus Operator Reconcile Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/</guid><description>&lt;h1 id="prometheusoperatorreconcileerrors">
+ PrometheusOperatorReconcileErrors
+ 
+ &lt;a class="anchor" href="#prometheusoperatorreconcileerrors">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Errors while reconciling controller.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus Operator will not be able to manage Prometheuses/Alertmanagers.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check logs of Prometheus Operator pod.
+Check service account tokens.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2></description></item><item><title>Prometheus Operator Rejected Resources</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorrejectedresources/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorrejectedresources/</guid><description>&lt;h1 id="prometheusoperatorrejectedresources">
+ PrometheusOperatorRejectedResources
+ 
+ &lt;a class="anchor" href="#prometheusoperatorrejectedresources">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Custom Resources managed by Prometheus Operator were rejected and not propagated to operands (prometheus, alertmanager).&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Custom Resource won&amp;rsquo;t be used by prometheus-operator and thus configuration it carries won&amp;rsquo;t be translated to prometheus or alertmanager configuration.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check newly created Custom Resources like Prometheus, Alertmanager, Rules, Probes, ServiceMonitors, and others that have a CRD used by Prometheus Operator.&lt;/li>
+&lt;li>Check logs of Prometheus Operator pod.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Fix newly created Custom Resource to conform to the schema defined in a CRD and reapply it to the cluster.&lt;/p></description></item><item><title>Prometheus Operator Sync Failed</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorsyncfailed/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorsyncfailed/</guid><description>&lt;h1 id="prometheusoperatorsyncfailed">
+ PrometheusOperatorSyncFailed
+ 
+ &lt;a class="anchor" href="#prometheusoperatorsyncfailed">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Last controller reconciliation failed&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus Operator will not be able to manage Prometheuses/Alertmanagers.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check logs of Prometheus Operator pod.
+Check service account tokens.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2></description></item><item><title>Prometheus Operator Watch Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorwatcherrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorwatcherrors/</guid><description>&lt;h1 id="prometheusoperatorwatcherrors">
+ PrometheusOperatorWatchErrors
+ 
+ &lt;a class="anchor" href="#prometheusoperatorwatcherrors">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Errors while performing watch operations in controller.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Prometheus Operator will not be able to manage Prometheuses/Alertmanagers.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check logs of Prometheus Operator pod.
+Check service account tokens.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2></description></item></channel></rss>

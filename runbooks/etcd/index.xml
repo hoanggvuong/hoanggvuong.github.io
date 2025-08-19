@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>etcd on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/</link><description>Recent content in etcd on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/etcd/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdbackendquotalowspace/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdbackendquotalowspace/</guid><description>&lt;h1 id="etcdbackendquotalowspace">
+ etcdBackendQuotaLowSpace
+ 
+ &lt;a class="anchor" href="#etcdbackendquotalowspace">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This alert fires when the total existing DB size exceeds 95% of the maximum
+DB quota. The consumed space is in Prometheus represented by the metric
+&lt;code>etcd_mvcc_db_total_size_in_bytes&lt;/code>, and the DB quota size is defined by
+&lt;code>etcd_server_quota_backend_bytes&lt;/code>.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>In case the DB size exceeds the DB quota, no writes can be performed anymore on
+the etcd cluster. This further prevents any updates in the cluster, such as the
+creation of pods.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdgrpcrequestsslow/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdgrpcrequestsslow/</guid><description>&lt;h1 id="etcdgrpcrequestsslow">
+ etcdGRPCRequestsSlow
+ 
+ &lt;a class="anchor" href="#etcdgrpcrequestsslow">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This alert fires when the 99th percentile of etcd gRPC requests are too slow.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>When requests are too slow, they can lead to various scenarios like leader
+election failure, slow reads and writes.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This could be result of slow disk (due to fragmented state) or CPU contention.&lt;/p>
+&lt;h3 id="slow-disk">
+ Slow disk
+ 
+ &lt;a class="anchor" href="#slow-disk">#&lt;/a>
+ 
+&lt;/h3>
+&lt;p>One of the most common reasons for slow gRPC requests is disk. Checking disk
+related metrics and dashboards should provide a more clear picture.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdhighfsyncdurations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdhighfsyncdurations/</guid><description>&lt;h1 id="etcdhighfsyncdurations">
+ etcdHighFsyncDurations
+ 
+ &lt;a class="anchor" href="#etcdhighfsyncdurations">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This alert fires when the 99th percentile of etcd disk fsync duration is too
+high for 10 minutes.&lt;/p>
+&lt;details>
+&lt;summary>Full context&lt;/summary>
+&lt;p>Every write request sent to etcd has to be [fsync&amp;rsquo;d][fsync] to disk by the leader node, transmitted to its peers, and fsync&amp;rsquo;d to those disks as well before etcd can tell the client that the write request succeeded (as part of the [Raft consensus algorithm][raft]). As a result of all those fsync&amp;rsquo;s, etcd cares a LOT about disk latency, which this alert picks up on.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/</guid><description>&lt;h1 id="etcdhighnumberoffailedgrpcrequests">
+ etcdHighNumberOfFailedGRPCRequests
+ 
+ &lt;a class="anchor" href="#etcdhighnumberoffailedgrpcrequests">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This alert fires when at least 5% of etcd gRPC requests failed in the past 10
+minutes.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>First establish which gRPC method is failing, this will be visible in the alert.
+If it&amp;rsquo;s not part of the alert, the following query will display method and etcd
+instance that has failing requests:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-promql" data-lang="promql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">100&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#66d9ef">sum&lt;/span> &lt;span style="color:#66d9ef">without&lt;/span>&lt;span style="color:#f92672">(&lt;/span>grpc_type, grpc_code&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#66d9ef">rate&lt;/span>&lt;span style="color:#f92672">(&lt;/span>grpc_server_handled_total{grpc_code&lt;span style="color:#f92672">=~&lt;/span>&amp;#34;&lt;span style="color:#e6db74">Unknown|FailedPrecondition|ResourceExhausted|Internal|Unavailable|DataLoss|DeadlineExceeded&lt;/span>&amp;#34;,job&lt;span style="color:#f92672">=&lt;/span>&amp;#34;&lt;span style="color:#e6db74">etcd&lt;/span>&amp;#34;}[&lt;span style="color:#e6db74">5m&lt;/span>]&lt;span style="color:#f92672">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#66d9ef">sum&lt;/span> &lt;span style="color:#66d9ef">without&lt;/span>&lt;span style="color:#f92672">(&lt;/span>grpc_type, grpc_code&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#66d9ef">rate&lt;/span>&lt;span style="color:#f92672">(&lt;/span>grpc_server_handled_total{job&lt;span style="color:#f92672">=&lt;/span>&amp;#34;&lt;span style="color:#e6db74">etcd&lt;/span>&amp;#34;}[&lt;span style="color:#e6db74">5m&lt;/span>]&lt;span style="color:#f92672">))&lt;/span> &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#ae81ff">5&lt;/span> &lt;span style="color:#f92672">and&lt;/span> &lt;span style="color:#66d9ef">on&lt;/span>&lt;span style="color:#f92672">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#66d9ef">sum&lt;/span>&lt;span style="color:#f92672">(&lt;/span>cluster_infrastructure_provider{type&lt;span style="color:#f92672">!~&lt;/span>&amp;#34;&lt;span style="color:#e6db74">ipi|BareMetal&lt;/span>&amp;#34;} &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#66d9ef">bool&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>&lt;span style="color:#f92672">))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>All the gRPC errors should also be logged in each respective etcd instance logs.
+You can get the instance name from the alert that is firing or by running the
+query detailed above. Those etcd instance logs should serve as further insight
+into what is wrong.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdinsufficientmembers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdinsufficientmembers/</guid><description>&lt;h1 id="etcdinsufficientmembers">
+ etcdInsufficientMembers
+ 
+ &lt;a class="anchor" href="#etcdinsufficientmembers">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This alert fires when there are fewer instances available than are needed by
+etcd to be healthy.
+This means that etcd cluster has not enough members in the cluster to create quorum.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>When etcd does not have a majority of instances available the Kubernetes and
+OpenShift APIs will reject read and write requests and operations that preserve
+the health of workloads cannot be performed.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdmembersdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdmembersdown/</guid><description>&lt;h1 id="etcdmembersdown">
+ etcdMembersDown
+ 
+ &lt;a class="anchor" href="#etcdmembersdown">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This alert fires when one or more etcd member goes down and evaluates the
+number of etcd members that are currently down. Often, this alert was observed
+as part of a cluster upgrade when a master node is being upgraded and requires a
+reboot.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>In etcd a majority of (n/2)+1 has to agree on membership changes or key-value
+upgrade proposals. With this approach, a split-brain inconsistency can be
+avoided. In the case that only one member is down in a 3-member cluster, it
+still can make forward progress. Due to the fact that the quorum is 2 and 2
+members are still alive. However, when more members are down, the cluster
+becomes unrecoverable.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdnoleader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdnoleader/</guid><description>&lt;h1 id="etcdnoleader">
+ etcdNoLeader
+ 
+ &lt;a class="anchor" href="#etcdnoleader">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This alert is triggered when etcd cluster does not have a leader for more than 1
+minute.
+This can happen if nodes from the cluster are orphaned - they were part of the cluster
+but now they are in minority and thus can not form a cluster,
+for example due to network partition.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>When there is no leader, Kubernetes API will not be able to work
+as expected and cluster cannot process any writes or reads, and any write
+requests are queued for processing until a new leader is elected. Operations
+that preserve the health of the workloads cannot be performed.&lt;/p></description></item></channel></rss>

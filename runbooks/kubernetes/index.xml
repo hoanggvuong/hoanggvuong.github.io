@@ -1,0 +1,1734 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>kubernetes on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/</link><description>Recent content in kubernetes on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>CPU Throttling High</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/cputhrottlinghigh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/cputhrottlinghigh/</guid><description>&lt;h1 id="cpu-throttling-high">
+ CPU Throttling High
+ 
+ &lt;a class="anchor" href="#cpu-throttling-high">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Processes experience elevated CPU throttling.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The alert is purely informative and unless there is some other issue with
+the application, it can be skipped.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check if application is performing normally&lt;/li>
+&lt;li>Check if CPU resource requests are adjusted accordingly to the app usage&lt;/li>
+&lt;li>Check kernel version in the node&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>&lt;strong>Notice&lt;/strong>:
+User shouldn&amp;rsquo;t increase CPU limits unless the application is behaving
+erratically (another alert firing).&lt;/p></description></item><item><title>Kube Aggregated API Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeaggregatedapidown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeaggregatedapidown/</guid><description>&lt;h1 id="kubeaggregatedapidown">
+ KubeAggregatedAPIDown
+ 
+ &lt;a class="anchor" href="#kubeaggregatedapidown">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Kubernetes aggregated API has reported errors.
+It has appeared unavailable X times averaged over the past 10m.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>From minor such as inability to see cluster metrics to more severe such as
+unable to use custom metrics to scale or even unable to use cluster.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check networking on the node.&lt;/li>
+&lt;li>Check firewall on the node.&lt;/li>
+&lt;li>Investigate additional API logs.&lt;/li>
+&lt;li>Investigate NetworkPolicies if kubeApi - additional API was not filtered out.&lt;/li>
+&lt;li>Investigate NetworkPolicies if prometheus/additional api was not filtered out.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>TODO&lt;/p></description></item><item><title>Kube Aggregated API Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeaggregatedapierrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeaggregatedapierrors/</guid><description>&lt;h1 id="kubeaggregatedapierrors">
+ KubeAggregatedAPIErrors
+ 
+ &lt;a class="anchor" href="#kubeaggregatedapierrors">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Kubernetes aggregated API has reported errors.
+It has appeared unavailable over 4 times averaged over the past 10m.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>From minor such as inability to see cluster metrics to more severe such as
+unable to use custom metrics to scale or even unable to use cluster.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check networking on the node.&lt;/li>
+&lt;li>Check firewall on the node.&lt;/li>
+&lt;li>Investigate additional API logs.&lt;/li>
+&lt;li>Investigate NetworkPolicies if kubeApi - additional API was not filtered out.&lt;/li>
+&lt;li>Investigate NetworkPolicies if prometheus/additional API was not filtered out.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>TODO&lt;/p></description></item><item><title>Kube API Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapidown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapidown/</guid><description>&lt;h1 id="kubeapidown">
+ KubeAPIDown
+ 
+ &lt;a class="anchor" href="#kubeapidown">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The &lt;code>KubeAPIDown&lt;/code> alert is triggered when all Kubernetes API servers have not
+been reachable by the monitoring system for more than 15 minutes.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This is a critical alert. The Kubernetes API is not responding. The
+cluster may partially or fully non-functional.&lt;/p>
+&lt;p>Applications, which do not use kubernetes API directly, will continue to work. Changing kubernetes resources is not possible.
+in the cluster.&lt;/p></description></item><item><title>Kube API Error Budget Burn</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapierrorbudgetburn/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapierrorbudgetburn/</guid><description>&lt;h1 id="kubeapierrorbudgetburn">
+ KubeAPIErrorBudgetBurn
+ 
+ &lt;a class="anchor" href="#kubeapierrorbudgetburn">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The overall availability of your Kubernetes cluster isn&amp;rsquo;t guaranteed any more.
+There may be &lt;strong>too many errors&lt;/strong> returned by the APIServer and/or &lt;strong>responses take too long&lt;/strong> for guarantee proper reconciliation.&lt;/p>
+&lt;p>&lt;strong>This is always important; the only deciding factor is how urgent it is at the current rate&lt;/strong>&lt;/p>
+&lt;details>
+&lt;summary>Full context&lt;/summary>
+&lt;p>This alert essentially means that a higher-than-expected percentage of the operations kube-apiserver is performing are erroring. Since random errors are inevitable, kube-apiserver has a &amp;ldquo;budget&amp;rdquo; of errors that it is allowed to make before triggering this alert.&lt;/p></description></item><item><title>Kube API Terminated Requests</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapiterminatedrequests/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapiterminatedrequests/</guid><description>&lt;h1 id="kubeapiterminatedrequests">
+ KubeAPITerminatedRequests
+ 
+ &lt;a class="anchor" href="#kubeapiterminatedrequests">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The apiserver has terminated over 20% of its incoming requests.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Client will not be able to interact with the cluster.
+Some in-cluster services this may degrade or make service unavailable.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Use the &lt;code>apiserver_flowcontrol_rejected_requests_total&lt;/code> metric to determine
+which flow schema is throttling the traffic to the API Server.
+The flow schema also provides information on the affected resources and subjects.&lt;/p></description></item><item><title>Kube Client Certificate Expiration</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeclientcertificateexpiration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeclientcertificateexpiration/</guid><description>&lt;h1 id="kubeclientcertificateexpiration">
+ KubeClientCertificateExpiration
+ 
+ &lt;a class="anchor" href="#kubeclientcertificateexpiration">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>A client certificate used to authenticate to the apiserver is expiring in less than 7 days (warning alert) or 24 hours (critical alert).&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Client will not be able to interact with the cluster.
+In cluster services communicating with Kubernetes API may degrade or become unavailable.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check when certificate was issued and when it expires.
+Check serviceAccounts and service account tokens.&lt;/p></description></item><item><title>Kube Client Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeclienterrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeclienterrors/</guid><description>&lt;h1 id="kubeclienterrors">
+ KubeClientErrors
+ 
+ &lt;a class="anchor" href="#kubeclienterrors">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Kubernetes API server client is experiencing over 1% error rate in the last 15 minutes.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Specific kubernetes client may malfunction. Service degradation.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Usual issues:&lt;/p>
+&lt;ul>
+&lt;li>networking errors&lt;/li>
+&lt;li>too low resources to perform given API calls (usually too low CPU/memory requests)&lt;/li>
+&lt;li>wrong api client (old libraries)&lt;/li>
+&lt;li>investigate if the app does not request more data than it really requires
+from kubernetes API, for example it has too wide permissions and scans for
+resources in all namespaces.&lt;/li>
+&lt;/ul>
+&lt;p>Check logs from client side (sometimes app logs).&lt;/p></description></item><item><title>Kube Container Waiting</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecontainerwaiting/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecontainerwaiting/</guid><description>&lt;h1 id="kubecontainerwaiting">
+ KubeContainerWaiting
+ 
+ &lt;a class="anchor" href="#kubecontainerwaiting">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Container in pod is in Waiting state for too long.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Service degradation or unavailability.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check pod events via &lt;code>kubectl -n $NAMESPACE describe pod $POD&lt;/code>.&lt;/li>
+&lt;li>Check pod logs via &lt;code>kubectl -n $NAMESPACE logs $POD -c $CONTAINER&lt;/code>&lt;/li>
+&lt;li>Check for missing files such as configmaps/secrets/volumes&lt;/li>
+&lt;li>Check for pod requests, especially special ones such as GPU.&lt;/li>
+&lt;li>Check for node taints and capabilities.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>See &lt;a href="https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/#my-pod-stays-waiting">Container waiting&lt;/a>&lt;/p></description></item><item><title>Kube Controller Manager Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecontrollermanagerdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecontrollermanagerdown/</guid><description>&lt;h1 id="kubecontrollermanagerdown">
+ KubeControllerManagerDown
+ 
+ &lt;a class="anchor" href="#kubecontrollermanagerdown">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>KubeControllerManager has disappeared from Prometheus target discovery.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The cluster is not functional and Kubernetes resources cannot be reconciled.&lt;/p>
+&lt;details>
+&lt;summary>Full context&lt;/summary>
+&lt;p>More about kube-controller-manager function can be found at &lt;a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/">https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/&lt;/a>&lt;/p>
+&lt;/details>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>TODO&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>See old CoreOS docs in &lt;a href="http://web.archive.org/web/20201026205154/https://coreos.com/tectonic/docs/latest/troubleshooting/controller-recovery.html">Web Archive&lt;/a>&lt;/p></description></item><item><title>Kube CPU Overcommit</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecpuovercommit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecpuovercommit/</guid><description>&lt;h1 id="kubecpuovercommit">
+ KubeCPUOvercommit
+ 
+ &lt;a class="anchor" href="#kubecpuovercommit">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Cluster has overcommitted CPU resource requests for Pods
+and cannot tolerate node failure.&lt;/p>
+&lt;details>
+&lt;summary>Full context&lt;/summary>
+&lt;p>Total number of CPU requests for pods exceeds cluster capacity.
+In case of node failure some pods will not fit in the remaining nodes.&lt;/p>
+&lt;/details>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The cluster cannot tolerate node failure. In the event of a node failure, some Pods will be in &lt;code>Pending&lt;/code> state.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check if CPU resource requests are adjusted to the app usage&lt;/li>
+&lt;li>Check if some nodes are available and not cordoned&lt;/li>
+&lt;li>Check if cluster-autoscaler has issues with adding new nodes&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>Add more nodes to the cluster - usually it is better to have more smaller
+nodes, than few bigger.&lt;/p></description></item><item><title>Kube CPU Quota Overcommit</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecpuquotaovercommit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecpuquotaovercommit/</guid><description>&lt;h1 id="kubecpuquotaovercommit">
+ KubeCPUQuotaOvercommit
+ 
+ &lt;a class="anchor" href="#kubecpuquotaovercommit">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Cluster has overcommitted CPU resource requests for Namespaces and cannot tolerate node failure.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>In the event of a node failure, some Pods will be in &lt;code>Pending&lt;/code> state due to a lack of available CPU resources.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check if CPU resource requests are adjusted to the app usage&lt;/li>
+&lt;li>Check if some nodes are available and not cordoned&lt;/li>
+&lt;li>Check if cluster-autoscaler has issues with adding new nodes&lt;/li>
+&lt;li>Check if the given namespace usage grows in time more than expected&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>Review existing quota for given namespace and adjust it accordingly.&lt;/p></description></item><item><title>Kube DaemonSet MisScheduled</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetmisscheduled/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetmisscheduled/</guid><description>&lt;h1 id="kubedaemonsetmisscheduled">
+ KubeDaemonSetMisScheduled
+ 
+ &lt;a class="anchor" href="#kubedaemonsetmisscheduled">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>A number of pods of daemonset are running where they are not supposed to run.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Service degradation or unavailability.
+Excessive resource usage where they could be used by other apps.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Usually happens when specifying wrong pod nodeSelector/taints/affinities or
+node (node pools) were tainted and existing pods were not scheduled for eviction.&lt;/p>
+&lt;ul>
+&lt;li>Check daemonset status via &lt;code>kubectl -n $NAMESPACE describe daemonset $NAME&lt;/code>.&lt;/li>
+&lt;li>Check &lt;a href="https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/">DaemonSet update strategy&lt;/a>&lt;/li>
+&lt;li>Check the status of the pods which belong to the replica sets under the deployment.&lt;/li>
+&lt;li>Check pod template parameters such as:
+&lt;ul>
+&lt;li>pod priority - maybe it was evicted by other more important pods&lt;/li>
+&lt;li>affinity rules - maybe due to affinities and not enough nodes it is not
+possible to schedule pods&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Check node taints and labels&lt;/li>
+&lt;li>Check logs for &lt;a href="https://kubernetes-sigs.github.io/node-feature-discovery/master/get-started/index.html">node-feature-discovery&lt;/a>
+and other supporting tools such as gpu-feature-discovery&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Update DaemonSet and apply change, delete pods manually.&lt;/p></description></item><item><title>Kube DaemonSet Not Scheduled</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetnotscheduled/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetnotscheduled/</guid><description>&lt;h1 id="kubedaemonsetnotscheduled">
+ KubeDaemonSetNotScheduled
+ 
+ &lt;a class="anchor" href="#kubedaemonsetnotscheduled">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>A number of pods of daemonset are not scheduled.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Service degradation or unavailability.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Usually happens when specifying wrong pod taints/affinities or lack of
+resources on the nodes.&lt;/p>
+&lt;ul>
+&lt;li>Check daemonset status via &lt;code>kubectl -n $NAMESPACE describe daemonset $NAME&lt;/code>.&lt;/li>
+&lt;li>Check &lt;a href="https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/">DaemonSet update strategy&lt;/a>&lt;/li>
+&lt;li>Check the status of the pods which belong to the replica sets under the deployment.&lt;/li>
+&lt;li>Check pod template parameters such as:
+&lt;ul>
+&lt;li>pod priority - maybe it was evicted by other more important pods&lt;/li>
+&lt;li>resources - maybe it tries to use unavailable resource, such as GPU but
+there is limited number of nodes with GPU&lt;/li>
+&lt;li>affinity rules - maybe due to affinities and not enough nodes it is not
+possible to schedule pods&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Check if Horizontal Pod Autoscaler (HPA) is not triggered due to untested
+values (requests values).&lt;/li>
+&lt;li>Check if cluster-autoscaler is able to create new nodes - see its logs or
+cluster-autoscaler status configmap.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Set proper priority class for important dameonsets to system-node-critical.&lt;/p></description></item><item><title>Kube DaemonSet Rollout Stuck</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetrolloutstuck/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetrolloutstuck/</guid><description>&lt;h1 id="kubedaemonsetrolloutstuck">
+ KubeDaemonSetRolloutStuck
+ 
+ &lt;a class="anchor" href="#kubedaemonsetrolloutstuck">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>DaemonSet update is stuck waiting for replaced pod.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Service degradation or unavailability.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check daemonset status via &lt;code>kubectl -n $NAMESPACE describe daemonset $NAME&lt;/code>.&lt;/li>
+&lt;li>Check &lt;a href="https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/">DaemonSet update strategy&lt;/a>&lt;/li>
+&lt;li>Check the status of the pods which belong to the replica sets under the deployment.&lt;/li>
+&lt;li>Check pod template parameters such as:
+&lt;ul>
+&lt;li>pod priority - maybe it was evicted by other more important pods&lt;/li>
+&lt;li>resources - maybe it tries to use unavailable resource, such as GPU but
+there is limited number of nodes with GPU&lt;/li>
+&lt;li>affinity rules - maybe due to affinities and not enough nodes it is not
+possible to schedule pods&lt;/li>
+&lt;li>pod termination grace period - if too long then pods may be for too long
+in terminating state&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Check if Horizontal Pod Autoscaler (HPA) is not triggered due to untested
+values (requests values).&lt;/li>
+&lt;li>Check if cluster-autoscaler is able to create new nodes - see its logs or
+cluster-autoscaler status configmap.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>See &lt;a href="https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/#daemonset-rolling-update-is-stuck">DaemonSet rolling update is stuck&lt;/a>&lt;/p></description></item><item><title>Kube Deployment Generation Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedeploymentgenerationmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedeploymentgenerationmismatch/</guid><description>&lt;h1 id="kubedeploymentgenerationmismatch">
+ KubeDeploymentGenerationMismatch
+ 
+ &lt;a class="anchor" href="#kubedeploymentgenerationmismatch">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Deployment generation mismatch due to possible roll-back.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Service degradation or unavailability.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>See &lt;a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#failed-deployment">Kubernetes Docs - Failed Deployment&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>Check out rollout history &lt;code>kubectl -n $NAMESPACE rollout history deployment $NAME&lt;/code>&lt;/li>
+&lt;li>Check rollout status if it is not paused&lt;/li>
+&lt;li>Check deployment status via &lt;code>kubectl -n $NAMESPACE describe deployment $NAME&lt;/code>.&lt;/li>
+&lt;li>Check how many replicas are there declared.&lt;/li>
+&lt;li>Investigate if new pods are not crashing.&lt;/li>
+&lt;li>Check the status of the pods which belong to the replica sets under the deployment.&lt;/li>
+&lt;li>Check pod template parameters such as:
+&lt;ul>
+&lt;li>pod priority - maybe it was evicted by other more important pods&lt;/li>
+&lt;li>resources - maybe it tries to use unavailable resource, such as GPU
+but there is limited number of nodes with GPU&lt;/li>
+&lt;li>affinity rules - maybe due to affinities and not enough nodes it is
+not possible to schedule pods&lt;/li>
+&lt;li>pod termination grace period - if too long then pods may be for too long
+in terminating state&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Check if Horizontal Pod Autoscaler (HPA) is not triggered due to untested
+values (requests values).&lt;/li>
+&lt;li>Check if cluster-autoscaler is able to create new nodes - see its logs or
+cluster-autoscaler status configmap.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Depending on the conditions usually adding new nodes solves the issue.&lt;/p></description></item><item><title>Kube Deployment Replicas Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedeploymentreplicasmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedeploymentreplicasmismatch/</guid><description>&lt;h1 id="kubedeploymentreplicasmismatch">
+ KubeDeploymentReplicasMismatch
+ 
+ &lt;a class="anchor" href="#kubedeploymentreplicasmismatch">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Deployment has not matched the expected number of replicas.&lt;/p>
+&lt;details>
+&lt;summary>Full context&lt;/summary>
+&lt;p>Kubernetes Deployment resource does not have number of replicas which were
+declared to be in operation.
+For example deployment is expected to have 3 replicas, but it has less than
+that for a noticeable period of time.&lt;/p>
+&lt;p>In rare occasions there may be more replicas than it should and system did
+not clean it up.&lt;/p></description></item><item><title>Kube HPA Replicas Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubehpareplicasmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubehpareplicasmismatch/</guid><description>&lt;h1 id="kubehpareplicasmismatch">
+ KubeHpaReplicasMismatch
+ 
+ &lt;a class="anchor" href="#kubehpareplicasmismatch">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Horizontal Pod Autoscaler has not matched the desired number of replicas for
+longer than 15 minutes.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>HPA was unable to schedule desired number of pods.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check why HPA was unable to scale:&lt;/p>
+&lt;ul>
+&lt;li>not enough nodes in the cluster&lt;/li>
+&lt;li>hitting resource quotas in the cluster&lt;/li>
+&lt;li>pods evicted due to pod priority&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>In case of cluster-autoscaler you may need to set up preemtive pod pools to
+ensure nodes are created on time.&lt;/p></description></item><item><title>Kube HPA Maxed Out</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubehpamaxedout/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubehpamaxedout/</guid><description>&lt;h1 id="kubehpamaxedout">
+ KubeHpaMaxedOut
+ 
+ &lt;a class="anchor" href="#kubehpamaxedout">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Horizontal Pod Autoscaler has been running at max replicas for longer
+than 15 minutes.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Horizontal Pod Autoscaler won&amp;rsquo;t be able to add new pods and thus scale application.
+&lt;strong>Notice&lt;/strong> for some services maximizing HPA is in fact desired.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check why HPA was unable to scale:&lt;/p>
+&lt;ul>
+&lt;li>max replicas too low&lt;/li>
+&lt;li>too low value for requests such as CPU?&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>If using basic metrics like CPU/Memory then ensure to set proper values for
+&lt;code>requests&lt;/code>.
+For memory based scaling ensure there are no memory leaks.
+If using custom metrics then fine-tune how app scales accordingly to it.&lt;/p></description></item><item><title>Kube Job Completion</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubejobcompletion/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubejobcompletion/</guid><description>&lt;h1 id="kubejobcompletion">
+ KubeJobCompletion
+ 
+ &lt;a class="anchor" href="#kubejobcompletion">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Job is taking more than 1h to complete.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Long processing of batch jobs.&lt;/li>
+&lt;li>Possible issues with scheduling next Job&lt;/li>
+&lt;/ul>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check job via &lt;code>kubectl -n $NAMESPACE describe jobs $JOB&lt;/code>.&lt;/li>
+&lt;li>Check pod events via &lt;code>kubectl -n $NAMESPACE describe job $JOB&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Give it more resources so it finishes faster, if applicable.&lt;/li>
+&lt;li>See &lt;a href="https://kubernetes.io/docs/tasks/job/">Job patterns&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Kube Job Failed</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubejobfailed/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubejobfailed/</guid><description>&lt;h1 id="kubejobfailed">
+ KubeJobFailed
+ 
+ &lt;a class="anchor" href="#kubejobfailed">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Job failed complete.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Failure of processing of a scheduled task.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check job via &lt;code>kubectl -n $NAMESPACE describe jobs $JOB&lt;/code>.&lt;/li>
+&lt;li>Check pod events via &lt;code>kubectl -n $NAMESPACE describe pod $POD_FROM_JOB&lt;/code>.&lt;/li>
+&lt;li>Check pod logs via &lt;code>kubectl -n $NAMESPACE log pod $POD_FROM_JOB&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>See &lt;a href="https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/#debugging-pods">Debugging Pods&lt;/a>&lt;/li>
+&lt;li>See &lt;a href="https://kubernetes.io/docs/tasks/job/">Job patterns&lt;/a>&lt;/li>
+&lt;li>redesign job so that it is idempotent (can be re-run many times which will
+always produce the same output even if input differs)&lt;/li>
+&lt;/ul></description></item><item><title>Kube Memory Overcommit</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubememoryovercommit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubememoryovercommit/</guid><description>&lt;h1 id="kubememoryovercommit">
+ KubeMemoryOvercommit
+ 
+ &lt;a class="anchor" href="#kubememoryovercommit">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Cluster has overcommitted Memory resource requests for Pods
+and cannot tolerate node failure.&lt;/p>
+&lt;details>
+&lt;summary>Full context&lt;/summary>
+&lt;p>Total number of Memory requests for pods exceeds cluster capacity.
+In case of node failure some pods will not fit in the remaining nodes.&lt;/p>
+&lt;/details>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The cluster cannot tolerate node failure. In the event of a node failure,
+some Pods will be in &lt;code>Pending&lt;/code> state.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check if Memory resource requests are adjusted to the app usage&lt;/li>
+&lt;li>Check if some nodes are available and not cordoned&lt;/li>
+&lt;li>Check if cluster-autoscaler has issues with adding new nodes&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>Add more nodes to the cluster - usually it is better to have more smaller
+nodes, than few bigger.&lt;/p></description></item><item><title>Kube Memory Quota Overcommit</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubememoryquotaovercommit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubememoryquotaovercommit/</guid><description>&lt;h1 id="kubememoryquotaovercommit">
+ KubeMemoryQuotaOvercommit
+ 
+ &lt;a class="anchor" href="#kubememoryquotaovercommit">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Cluster has overcommitted memory resource requests for Namespaces.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Various services degradation or unavailability in case of single node failure.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check if Memory resource requests are adjusted to the app usage&lt;/li>
+&lt;li>Check if some nodes are available and not cordoned&lt;/li>
+&lt;li>Check if cluster-autoscaler has issues with adding new nodes&lt;/li>
+&lt;li>Check if the given namespace usage grows in time more than expected&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>Review existing quota for given namespace and adjust it accordingly.&lt;/p></description></item><item><title>Kube Node Not Ready</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodenotready/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodenotready/</guid><description>&lt;h1 id="kubenodenotready">
+ KubeNodeNotReady
+ 
+ &lt;a class="anchor" href="#kubenodenotready">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>KubeNodeNotReady alert is fired when a Kubernetes node is not in &lt;code>Ready&lt;/code>
+state for a certain period. In this case, the node is not able to host any new
+pods as described [here][KubeNode].&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The performance of the cluster deployments is affected, depending on the overall
+workload and the type of the node.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The notification details should list the node that&amp;rsquo;s not ready. For Example:&lt;/p></description></item><item><title>Kube Node Readiness Flapping</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodereadinessflapping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodereadinessflapping/</guid><description>&lt;h1 id="kubenodereadinessflapping">
+ KubeNodeReadinessFlapping
+ 
+ &lt;a class="anchor" href="#kubenodereadinessflapping">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The readiness status of node has changed few times in the last 15 minutes.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The performance of the cluster deployments is affected, depending on the overall
+workload and the type of the node.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The notification details should list the node that&amp;rsquo;s not reachable. For Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-txt" data-lang="txt">&lt;span style="display:flex;">&lt;span> - alertname = KubeNodeUnreachable
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - node = node1.example.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Login to the cluster. Check the status of that node:&lt;/p></description></item><item><title>Kube Node Unreachable</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodeunreachable/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodeunreachable/</guid><description>&lt;h1 id="kubenodeunreachable">
+ KubeNodeUnreachable
+ 
+ &lt;a class="anchor" href="#kubenodeunreachable">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Kubernetes node is unreachable and some workloads may be rescheduled.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The performance of the cluster deployments is affected, depending on the overall
+workload and the type of the node.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The notification details should list the node that&amp;rsquo;s not reachable. For Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-txt" data-lang="txt">&lt;span style="display:flex;">&lt;span> - alertname = KubeNodeUnreachable
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - node = node1.example.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Login to the cluster. Check the status of that node:&lt;/p></description></item><item><title>Kube Persistent Volume Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepersistentvolumeerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepersistentvolumeerrors/</guid><description>&lt;h1 id="kubepersistentvolumeerrors">
+ KubePersistentVolumeErrors
+ 
+ &lt;a class="anchor" href="#kubepersistentvolumeerrors">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>PersistentVolume is having issues with provisioning.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Volue may be unavailable or have data erors (corrupted storage).&lt;/p>
+&lt;p>Service degradation, data loss.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check PV events via &lt;code>kubectl describe pv $PV&lt;/code>.&lt;/li>
+&lt;li>Check storage provider for logs.&lt;/li>
+&lt;li>Check storage quotas in the cloud.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>In happy scenario storage is just not provisioned as fast as expected.
+In worst scenario there is data corruption or data loss. Restore from backup.&lt;/p></description></item><item><title>Kube Persistent Volume Filling Up</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepersistentvolumefillingup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepersistentvolumefillingup/</guid><description>&lt;h1 id="kubepersistentvolumefillingup">
+ KubePersistentVolumeFillingUp
+ 
+ &lt;a class="anchor" href="#kubepersistentvolumefillingup">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>There can be various reasons why a volume is filling up.
+This runbook does not cover application specific reasons, only mitigations
+for volumes that are legitimately filling.&lt;/p>
+&lt;p>As always refer to recommended scenarios for given service.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Service degradation, switching to read only mode.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check app usage in time.
+Check if there are any configurations such as snapshotting, automatic data retention.&lt;/p></description></item><item><title>Kube Pod Crash Looping</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepodcrashlooping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepodcrashlooping/</guid><description>&lt;h1 id="kubepodcrashlooping">
+ KubePodCrashLooping
+ 
+ &lt;a class="anchor" href="#kubepodcrashlooping">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Pod is in CrashLoop which means the app dies or is unresponsive and
+kubernetes tries to restart it automatically.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Service degradation or unavailability.
+Inability to do rolling upgrades.
+Certain apps will not perform required tasks such as data migrations.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check template via &lt;code>kubectl -n $NAMESPACE get pod $POD&lt;/code>.&lt;/li>
+&lt;li>Check pod events via &lt;code>kubectl -n $NAMESPACE describe pod $POD&lt;/code>.&lt;/li>
+&lt;li>Check pod logs via &lt;code>kubectl -n $NAMESPACE logs $POD -c $CONTAINER&lt;/code>&lt;/li>
+&lt;li>Check pod template parameters such as:
+&lt;ul>
+&lt;li>pod priority&lt;/li>
+&lt;li>resources - maybe it tries to use unavailable resource, such as GPU but
+there is limited number of nodes with GPU&lt;/li>
+&lt;li>readiness and liveness probes may be incorrect - wrong port or command,
+check is failing too fast due to short timeout for response&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>Other things to check:&lt;/p></description></item><item><title>Kube Pod Not Ready</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepodnotready/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepodnotready/</guid><description>&lt;h1 id="kubepodnotready">
+ KubePodNotReady
+ 
+ &lt;a class="anchor" href="#kubepodnotready">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Pod has been in a non-ready state for more than 15 minutes.&lt;/p>
+&lt;p>State Running but not ready means readiness probe fails.
+State Pending means pod can not be created for specific namespace and node.&lt;/p>
+&lt;details>
+&lt;summary>Full context&lt;/summary>
+&lt;p>Pod failed to reach ready state, depending on the readiness/liveness probes.
+See &lt;a href="https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/">pod-lifecycle&lt;/a>&lt;/p>
+&lt;/details>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Service degradation or unavailability.
+Pod not attached to service, thus not getting any traffic.&lt;/p></description></item><item><title>Kube Quota Almost Full</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotaalmostfull/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotaalmostfull/</guid><description>&lt;h1 id="kubequotaalmostfull">
+ KubeQuotaAlmostFull
+ 
+ &lt;a class="anchor" href="#kubequotaalmostfull">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Cluster reaches to the allowed limits for given namespace.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>In the future deployments may not be possbile.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check resource usage for the namespace in given time span&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Review existing quota for given namespace and adjust it accordingly.&lt;/li>
+&lt;li>Review resources used by the quota and fine tune them.&lt;/li>
+&lt;li>Continue with standard capacity planning procedures.&lt;/li>
+&lt;li>See &lt;a href="https://kubernetes.io/docs/concepts/policy/resource-quotas/">Quotas&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Kube Quota Exceeded</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotaexceeded/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotaexceeded/</guid><description>&lt;h1 id="kubequotaexceeded">
+ KubeQuotaExceeded
+ 
+ &lt;a class="anchor" href="#kubequotaexceeded">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Cluster reaches to the allowed hard limits for given namespace.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Inability to create resources in kubernetes.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check resource usage for the namespace in given time span&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Review existing quota for given namespace and adjust it accordingly.&lt;/li>
+&lt;li>Review resources used by the quota and fine tune them.&lt;/li>
+&lt;li>Continue with standard capacity planning procedures.&lt;/li>
+&lt;li>See &lt;a href="https://kubernetes.io/docs/concepts/policy/resource-quotas/">Quotas&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Kube Quota Fully Used</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotafullyused/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotafullyused/</guid><description>&lt;h1 id="kubequotafullyused">
+ KubeQuotaFullyUsed
+ 
+ &lt;a class="anchor" href="#kubequotafullyused">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Cluster reached allowed limits for given namespace.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>New app installations may not be possible.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check resource usage for the namespace in given time span&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Review existing quota for given namespace and adjust it accordingly.&lt;/li>
+&lt;li>Review resources used by the quota and fine tune them.&lt;/li>
+&lt;li>Continue with standard capacity planning procedures.&lt;/li>
+&lt;li>See &lt;a href="https://kubernetes.io/docs/concepts/policy/resource-quotas/">Quotas&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Kube Scheduler Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeschedulerdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeschedulerdown/</guid><description>&lt;h1 id="kubeschedulerdown">
+ KubeSchedulerDown
+ 
+ &lt;a class="anchor" href="#kubeschedulerdown">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Kube Scheduler has disappeared from Prometheus target discovery.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This is a critical alert. The cluster may partially or fully non-functional.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>To be added.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>See old CoreOS docs in &lt;a href="http://web.archive.org/web/20201026205154/https://coreos.com/tectonic/docs/latest/troubleshooting/controller-recovery.html">Web Archive&lt;/a>&lt;/p></description></item><item><title>Kube StatefulSet Generation Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetgenerationmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetgenerationmismatch/</guid><description>&lt;h1 id="kubestatefulsetgenerationmismatch">
+ KubeStatefulSetGenerationMismatch
+ 
+ &lt;a class="anchor" href="#kubestatefulsetgenerationmismatch">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>StatefulSet generation mismatch due to possible roll-back.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Service degradation or unavailability.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>See &lt;a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#failed-deployment">Kubernetes Docs - Failed Deployment&lt;/a>
+which can be also applied to StatefulSets to some extent&lt;/p>
+&lt;ul>
+&lt;li>Check out rollout history &lt;code>kubectl -n $NAMESPACE rollout history statefulset $NAME&lt;/code>&lt;/li>
+&lt;li>Check rollout status if it is not paused&lt;/li>
+&lt;li>Check deployment status via &lt;code>kubectl -n $NAMESPACE describe statefulset $NAME&lt;/code>.&lt;/li>
+&lt;li>Check how many replicas are there declared.&lt;/li>
+&lt;li>Investigate if new pods are not crashing.&lt;/li>
+&lt;li>Look at the issues with PersistentVolumes attached to StatefulSets.&lt;/li>
+&lt;li>Check the status of the pods which belong to the replica sets under the deployment.&lt;/li>
+&lt;li>Check pod template parameters such as:
+&lt;ul>
+&lt;li>pod priority - maybe it was evicted by other more important pods&lt;/li>
+&lt;li>resources - maybe it tries to use unavailable resource, such as GPU
+but there is limited number of nodes with GPU&lt;/li>
+&lt;li>affinity rules - maybe due to affinities and not enough nodes it is
+not possible to schedule pods&lt;/li>
+&lt;li>pod termination grace period - if too long then pods may be for too long
+in terminating state&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Check if Horizontal Pod Autoscaler (HPA) is not triggered due to untested
+values (requests values).&lt;/li>
+&lt;li>Check if cluster-autoscaler is able to create new nodes - see its logs or
+cluster-autoscaler status configmap.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Statefulsets are quite specific, and usually have special scripts on pod termination.
+See if there are special commands executed such as data migration, which may significantly slow down the progress.&lt;/p></description></item><item><title>Kube StatefulSet Replicas Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetreplicasmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetreplicasmismatch/</guid><description>&lt;h1 id="kubestatefulsetreplicasmismatch">
+ KubeStatefulSetReplicasMismatch
+ 
+ &lt;a class="anchor" href="#kubestatefulsetreplicasmismatch">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>StatefulSet has not matched the expected number of replicas.&lt;/p>
+&lt;details>
+&lt;summary>Full context&lt;/summary>
+&lt;p>Kubernetes StatefulSet resource does not have number of replicas which were
+declared to be in operation.
+For example statefulset is expected to have 3 replicas, but it has less than
+that for a noticeable period of time.&lt;/p>
+&lt;p>In rare occasions there may be more replicas than it should and system did not
+clean it up.&lt;/p></description></item><item><title>Kube StatefulSet Update Not RolledOut</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetupdatenotrolledout/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetupdatenotrolledout/</guid><description>&lt;h1 id="kubestatefulsetupdatenotrolledout">
+ KubeStatefulSetUpdateNotRolledOut
+ 
+ &lt;a class="anchor" href="#kubestatefulsetupdatenotrolledout">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>StatefulSet update has not been rolled out.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Service degradation or unavailability.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>Check statefulset via &lt;code>kubectl -n $NAMESPACE describe statefulset $NAME&lt;/code>.&lt;/li>
+&lt;li>Check if statefuls update was not paused manually (see status)&lt;/li>
+&lt;li>Check how many replicas are there declared.&lt;/li>
+&lt;li>Check the status of the pods which belong to the replica sets under the
+statefulset.&lt;/li>
+&lt;li>Check pod template parameters such as:
+&lt;ul>
+&lt;li>pod priority - maybe it was evicted by other more importand pods&lt;/li>
+&lt;li>resources - maybe it tries to use unavailabe resource, such as GPU but
+there is limited number of nodes with GPU&lt;/li>
+&lt;li>affinity rules - maybe due to affinities and not enough nodes it is
+not possible to schedule pods&lt;/li>
+&lt;li>pod termination grace period - if too long then pods may be for too long
+in terminating state&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Check if there are issues with attaching disks to statefulset - for example
+disk was in Zone A, but pod is scheduled in Zone B.&lt;/li>
+&lt;li>Check if Horizontal Pod Autoscaler (HPA) is not triggered due to untested
+values (requests values).&lt;/li>
+&lt;li>Check if cluster-autoscaler is able to create new nodes - see its logs or
+cluster-autoscaler status configmap.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>TODO&lt;/p></description></item><item><title>Kube Version Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeversionmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeversionmismatch/</guid><description>&lt;h1 id="kubeversionmismatch">
+ KubeVersionMismatch
+ 
+ &lt;a class="anchor" href="#kubeversionmismatch">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Different semantic versions of Kubernetes components running.
+Usually happens during kubernetes cluster upgrade process.&lt;/p>
+&lt;details>
+&lt;summary>Full context&lt;/summary>
+&lt;p>Kubernetes control plane nodes or worker nodes use different versions.
+This usually happens when kubernetes cluster is upgraded between minor and
+major version.&lt;/p>
+&lt;/details>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Incompatible API versions between kubernetes components may have very
+broad range of issues, influencing single containers, through app stability,
+ending at whole cluster stability.&lt;/p></description></item><item><title>Kubelet Client Certificate Expiration</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletclientcertificateexpiration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletclientcertificateexpiration/</guid><description>&lt;h1 id="kubeletclientcertificateexpiration">
+ KubeletClientCertificateExpiration
+ 
+ &lt;a class="anchor" href="#kubeletclientcertificateexpiration">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Client certificate for Kubelet on node expires soon or already expired.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Node will not be able to be used within the cluster.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check when certificate was issued and when it expires.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Update certificates in the cluster control nodes and the worker nodes.
+Refer to the documentation of the tool used to create cluster.&lt;/p>
+&lt;p>Another option is to delete node if it affects only one,&lt;/p></description></item><item><title>Kubelet Client Certificate Renewal Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletclientcertificaterenewalerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletclientcertificaterenewalerrors/</guid><description>&lt;h1 id="kubeletclientcertificaterenewalerrors">
+ KubeletClientCertificateRenewalErrors
+ 
+ &lt;a class="anchor" href="#kubeletclientcertificaterenewalerrors">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Kubelet on node has failed to renew its client certificate
+(XX errors in the last 15 minutes)&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Node will not be able to be used within the cluster.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check when certificate was issued and when it expires.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Update certificates in the cluster control nodes and the worker nodes.
+Refer to the documentation of the tool used to create cluster.&lt;/p></description></item><item><title>Kubelet Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletdown/</guid><description>&lt;h1 id="kubeletdown">
+ KubeletDown
+ 
+ &lt;a class="anchor" href="#kubeletdown">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This alert is triggered when the monitoring system has not been able to reach
+any of the cluster&amp;rsquo;s Kubelets for more than 15 minutes.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>This alert represents a critical threat to the cluster&amp;rsquo;s stability. Excluding
+the possibility of a network issue preventing the monitoring system from
+scraping Kubelet metrics, multiple nodes in the cluster are likely unable to
+respond to configuration changes for pods and other resources, and some
+debugging tools are likely not functional, e.g. &lt;code>kubectl exec&lt;/code> and &lt;code>kubectl logs&lt;/code>.&lt;/p></description></item><item><title>Kubelet Pod Lifecycle Event Generator Duration High</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletplegdurationhigh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletplegdurationhigh/</guid><description>&lt;h1 id="kubeletplegdurationhigh">
+ KubeletPlegDurationHigh
+ 
+ &lt;a class="anchor" href="#kubeletplegdurationhigh">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The Kubelet Pod Lifecycle Event Generator has a 99th percentile duration of
+XX seconds on node.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>TODO&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>TODO&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>TODO&lt;/p></description></item><item><title>Kubelet Pod Start Up Latency High</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletpodstartuplatencyhigh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletpodstartuplatencyhigh/</guid><description>&lt;h1 id="kubeletpodstartuplatencyhigh">
+ KubeletPodStartUpLatencyHigh
+ 
+ &lt;a class="anchor" href="#kubeletpodstartuplatencyhigh">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Kubelet Pod startup 99th percentile latency is XX seconds on node.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Slow pod starts.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Usually exhaused IOPS for node storage.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>&lt;a href="https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/">Cordon and drain node&lt;/a> and delete it.
+If issue persists look into the node logs.&lt;/p></description></item><item><title>Kubelet Server Certificate Expiration</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletservercertificateexpiration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletservercertificateexpiration/</guid><description>&lt;h1 id="kubeletservercertificateexpiration">
+ KubeletServerCertificateExpiration
+ 
+ &lt;a class="anchor" href="#kubeletservercertificateexpiration">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Server certificate for Kubelet on node expires soon or already expired.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>&lt;strong>Critical&lt;/strong> - Cluster will be in inoperable state.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check when certificate was issued and when it expires.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Update certificates in the cluster control nodes and the worker nodes.
+Refer to the documentation of the tool used to create cluster.&lt;/p>
+&lt;p>Another option is to delete node if it affects only one,&lt;/p></description></item><item><title>Kubelet Server Certificate Renewal Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletservercertificaterenewalerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletservercertificaterenewalerrors/</guid><description>&lt;h1 id="kubeletservercertificaterenewalerrors">
+ KubeletServerCertificateRenewalErrors
+ 
+ &lt;a class="anchor" href="#kubeletservercertificaterenewalerrors">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Kubelet on node has failed to renew its server certificate
+(XX errors in the last 5 minutes)&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>&lt;strong>Critical&lt;/strong> - Cluster will be in inoperable state.&lt;/p>
+&lt;h2 id="diagnosis">
+ Diagnosis
+ 
+ &lt;a class="anchor" href="#diagnosis">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Check when certificate was issued and when it expires.&lt;/p>
+&lt;h2 id="mitigation">
+ Mitigation
+ 
+ &lt;a class="anchor" href="#mitigation">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Update certificates in the cluster control nodes and the worker nodes.
+Refer to the documentation of the tool used to create cluster.&lt;/p></description></item><item><title>Kubelet Too Many Pods</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubelettoomanypods/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubelettoomanypods/</guid><description>&lt;h1 id="kubelettoomanypods">
+ KubeletTooManyPods
+ 
+ &lt;a class="anchor" href="#kubelettoomanypods">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The alert fires when a specific node is running &amp;gt;95% of its capacity of pods
+(110 by default).&lt;/p>
+&lt;details>
+&lt;summary>Full context&lt;/summary>
+&lt;p>Kubelets have a configuration that limits how many Pods they can run.
+The default value of this is 110 Pods per Kubelet, but it is configurable
+(and this alert takes that configuration into account with the
+&lt;code>kube_node_status_capacity_pods&lt;/code> metric).&lt;/p>
+&lt;/details>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Running many pods (more than 110) on a single node places a strain on the
+Container Runtime Interface (CRI), Container Network Interface (CNI),
+and the operating system itself. Approaching that limit may affect performance
+and availability of that node.&lt;/p></description></item><item><title>KubeProxy Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeproxydown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeproxydown/</guid><description>&lt;h1 id="kubeproxydown">
+ KubeProxyDown
+ 
+ &lt;a class="anchor" href="#kubeproxydown">#&lt;/a>
+ 
+&lt;/h1>
+&lt;h2 id="meaning">
+ Meaning
+ 
+ &lt;a class="anchor" href="#meaning">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>The &lt;code>KubeProxyDown&lt;/code> alert is triggered when all Kubernetes Proxy instances have not
+been reachable by the monitoring system for more than 15 minutes.&lt;/p>
+&lt;h2 id="impact">
+ Impact
+ 
+ &lt;a class="anchor" href="#impact">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>kube-proxy is a network proxy that runs on each node in your cluster,
+implementing part of the Kubernetes Service concept.&lt;/p>
+&lt;p>kube-proxy maintains network rules on nodes.
+These network rules allow network communication to your Pods
+from network sessions inside or outside of your cluster.&lt;/p></description></item></channel></rss>

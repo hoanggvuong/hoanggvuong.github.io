@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/linux/</link><description>Recent content in Linux on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/linux/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/linux/server-hardening/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/linux/server-hardening/</guid><description>&lt;h3 id="objective">
+ Objective
+ 
+ &lt;a class="anchor" href="#objective">#&lt;/a>
+ 
+&lt;/h3>
+&lt;p>To provide a comprehensive checklist and set of procedures for securing a newly provisioned Linux server. This runbook ensures a consistent and strong security posture for all servers, minimizing the attack surface.&lt;/p>
+&lt;h3 id="prerequisites">
+ Prerequisites
+ 
+ &lt;a class="anchor" href="#prerequisites">#&lt;/a>
+ 
+&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Access:&lt;/strong> Root or &lt;code>sudo&lt;/code> access to the target Linux server via SSH.&lt;/li>
+&lt;li>&lt;strong>Knowledge:&lt;/strong> Basic Linux command-line skills and an understanding of networking and security concepts.&lt;/li>
+&lt;li>&lt;strong>Policy:&lt;/strong> Familiarity with your organization&amp;rsquo;s security policies.&lt;/li>
+&lt;/ul>
+&lt;h3 id="hardening-checklist-and-procedures">
+ Hardening Checklist and Procedures
+ 
+ &lt;a class="anchor" href="#hardening-checklist-and-procedures">#&lt;/a>
+ 
+&lt;/h3>
+&lt;h4 id="1-update-the-system">
+ 1. Update the System
+ 
+ &lt;a class="anchor" href="#1-update-the-system">#&lt;/a>
+ 
+&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>Action:&lt;/strong> Immediately apply all available security patches and updates.&lt;/li>
+&lt;li>&lt;strong>Command (Ubuntu/Debian):&lt;/strong>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt update &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> sudo apt upgrade -y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>&lt;strong>Command (CentOS/RHEL):&lt;/strong>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo dnf update -y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h4 id="2-configure-user-access">
+ 2. Configure User Access
+ 
+ &lt;a class="anchor" href="#2-configure-user-access">#&lt;/a>
+ 
+&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>Action:&lt;/strong> Disable direct root login and create a dedicated administrative user.&lt;/li>
+&lt;li>&lt;strong>Steps:&lt;/strong>
+&lt;ol>
+&lt;li>Create a new user: &lt;code>sudo adduser &amp;lt;adminuser&amp;gt;&lt;/code>&lt;/li>
+&lt;li>Add the user to the &lt;code>sudo&lt;/code> group: &lt;code>sudo usermod -aG sudo &amp;lt;adminuser&amp;gt;&lt;/code>&lt;/li>
+&lt;li>Disable root login via SSH. Edit &lt;code>/etc/ssh/sshd_config&lt;/code>:
+&lt;pre tabindex="0">&lt;code>PermitRootLogin no
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>Restart the SSH service: &lt;code>sudo systemctl restart sshd&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;h4 id="3-secure-ssh">
+ 3. Secure SSH
+ 
+ &lt;a class="anchor" href="#3-secure-ssh">#&lt;/a>
+ 
+&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>Action:&lt;/strong> Harden the SSH configuration to prevent unauthorized access.&lt;/li>
+&lt;li>&lt;strong>Steps:&lt;/strong> Edit &lt;code>/etc/ssh/sshd_config&lt;/code> and set the following (at a minimum):
+&lt;pre tabindex="0">&lt;code>PasswordAuthentication no # Enforce key-based authentication only
+X11Forwarding no # Disable X11 forwarding unless needed
+AllowUsers &amp;lt;adminuser&amp;gt; &amp;lt;otheruser&amp;gt; # Whitelist allowed SSH users
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>&lt;strong>Verification:&lt;/strong> After restarting &lt;code>sshd&lt;/code>, ensure you can still log in with your admin user via an SSH key.&lt;/li>
+&lt;/ul>
+&lt;h4 id="4-configure-a-firewall">
+ 4. Configure a Firewall
+ 
+ &lt;a class="anchor" href="#4-configure-a-firewall">#&lt;/a>
+ 
+&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>Action:&lt;/strong> Enable and configure a host-based firewall to block all traffic except for necessary services.&lt;/li>
+&lt;li>&lt;strong>Tool:&lt;/strong> &lt;code>ufw&lt;/code> (Uncomplicated Firewall) is common on Ubuntu.&lt;/li>
+&lt;li>&lt;strong>Commands:&lt;/strong>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo ufw default deny incoming &lt;span style="color:#75715e"># Deny all incoming traffic by default&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo ufw default allow outgoing &lt;span style="color:#75715e"># Allow all outgoing traffic&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo ufw allow ssh &lt;span style="color:#75715e"># Allow SSH (port 22)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo ufw allow http &lt;span style="color:#75715e"># Allow HTTP (port 80) if it&amp;#39;s a web server&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo ufw allow https &lt;span style="color:#75715e"># Allow HTTPS (port 443) if it&amp;#39;s a web server&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo ufw enable &lt;span style="color:#75715e"># Enable the firewall&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>&lt;strong>Verification:&lt;/strong> &lt;code>sudo ufw status verbose&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h4 id="5-remove-unnecessary-services">
+ 5. Remove Unnecessary Services
+ 
+ &lt;a class="anchor" href="#5-remove-unnecessary-services">#&lt;/a>
+ 
+&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>Action:&lt;/strong> Reduce the attack surface by uninstalling or disabling any software and services that are not required.&lt;/li>
+&lt;li>&lt;strong>Steps:&lt;/strong>
+&lt;ol>
+&lt;li>List installed packages to identify candidates for removal.&lt;/li>
+&lt;li>List running services: &lt;code>sudo systemctl list-units --type=service --state=running&lt;/code>&lt;/li>
+&lt;li>Uninstall a package (e.g., &lt;code>telnet&lt;/code> server): &lt;code>sudo apt remove telnetd -y&lt;/code>&lt;/li>
+&lt;li>Disable a service from starting on boot: &lt;code>sudo systemctl disable &amp;lt;service-name&amp;gt;&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;h4 id="6-install-security-tools">
+ 6. Install Security Tools
+ 
+ &lt;a class="anchor" href="#6-install-security-tools">#&lt;/a>
+ 
+&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>Action:&lt;/strong> Install tools for intrusion detection and monitoring.&lt;/li>
+&lt;li>&lt;strong>Recommendations:&lt;/strong>
+&lt;ul>
+&lt;li>&lt;strong>Fail2Ban:&lt;/strong> Monitors logs for malicious activity (like brute-force login attempts) and temporarily bans offending IPs.
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt install fail2ban -y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Default configuration is usually sufficient to start.&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>&lt;strong>Auditd:&lt;/strong> The Linux Auditing System provides detailed logging of security-relevant events.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="verification">
+ Verification
+ 
+ &lt;a class="anchor" href="#verification">#&lt;/a>
+ 
+&lt;/h3>
+&lt;ul>
+&lt;li>Perform a port scan of the server from an external machine (e.g., using &lt;code>nmap&lt;/code>) to confirm that only expected ports are open.
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>nmap -sT -p- &amp;lt;server-ip&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Attempt to log in as &lt;code>root&lt;/code> via SSH and confirm it is denied.&lt;/li>
+&lt;li>Attempt to log in with a password for your admin user and confirm it is denied (if key-only auth was enforced).&lt;/li>
+&lt;/ul>
+&lt;h3 id="rollback-plan">
+ Rollback Plan
+ 
+ &lt;a class="anchor" href="#rollback-plan">#&lt;/a>
+ 
+&lt;/h3>
+&lt;ul>
+&lt;li>If a hardening step locks you out (e.g., incorrect firewall rule), you will need console access (physical or via your cloud provider&amp;rsquo;s console) to log in and revert the change.&lt;/li>
+&lt;li>Always apply firewall and SSH changes with an active console session open as a backup.&lt;/li>
+&lt;/ul>
+&lt;h3 id="escalation">
+ Escalation
+ 
+ &lt;a class="anchor" href="#escalation">#&lt;/a>
+ 
+&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Who:&lt;/strong> Senior System Administrator or Security Team.&lt;/li>
+&lt;li>&lt;strong>When:&lt;/strong> If you are unsure about the impact of a specific hardening setting or if you suspect a security compromise during the provisioning process.&lt;/li>
+&lt;/ul></description></item></channel></rss>

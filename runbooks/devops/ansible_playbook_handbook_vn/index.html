@@ -1,0 +1,353 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  Ansible Playbook Handbook (VN)
+  
+  #
+  
+
+
+
+  Sổ tay thực chiến từ A→Z: cấu trúc project, inventory, roles, tags, limit, vars, vault, rolling update, testing, Windows hosts…
+
+
+  0) Chuẩn bị môi trường (Windows → WSL2 đề xuất)
+  
+  #
+  
+
+
+Cài WSL2 + Ubuntu 22.04:
+wsl --install -d Ubuntu-22.04
+
+Cài Ansible qua pipx (bản mới):
+sudo apt update && sudo apt install -y python3-pip python3-venv pipx git ssh
+pipx ensurepath
+pipx install --include-deps ansible
+ansible --version
+
+(Nếu quản Windows hosts) cài thêm winrm libs:
+pipx inject ansible pywinrm pywinrm[credssp] kerberos requests-kerberos
+
+
+
+
+  1) Tổ chức thư mục project (khuyến nghị)
+  
+  #
+  
+
+ansible/
+├─ inventories/
+│  ├─ dev/
+│  │  ├─ hosts.ini
+│  │  ├─ group_vars/
+│  │  │  ├─ all.yml
+│  │  │  ├─ web.yml
+│  │  │  └─ db.yml
+│  │  └─ host_vars/
+│  │     ├─ web01.yml
+│  │     └─ db01.yml
+│  ├─ uat/ ...
+│  └─ prod/ ...
+├─ roles/
+│  ├─ common/
+│  │  ├─ tasks/main.yml
+│  │  ├─ handlers/main.yml
+│  │  ├─ templates/
+│  │  ├─ files/
+│  │  ├─ vars/main.yml
+│  │  └─ defaults/main.yml
+│  ├─ nginx/ ...
+│  └─ app/   ...
+├─ group_vars/ (tuỳ chọn dùng chung mọi môi trường)
+├─ host_vars/ (tuỳ chọn)
+├─ playbooks/
+│  ├─ site.yml
+│  ├─ play_nginx.yml
+│  └─ play_app.yml
+├─ requirements.yml (galaxy)
+├─ ansible.cfg
+└─ README.md
+ansible.cfg (mẫu):"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://runbooks.prometheus-operator.dev/runbooks/devops/ansible_playbook_handbook_vn/"><meta property="og:site_name" content="kube-prometheus runbooks"><meta property="og:title" content="kube-prometheus runbooks"><meta property="og:description" content="Ansible Playbook Handbook (VN)#Sổ tay thực chiến từ A→Z: cấu trúc project, inventory, roles, tags, limit, vars, vault, rolling update, testing, Windows hosts…
+0) Chuẩn bị môi trường (Windows → WSL2 đề xuất)#Cài WSL2 + Ubuntu 22.04: wsl --install -d Ubuntu-22.04 Cài Ansible qua pipx (bản mới): sudo apt update && sudo apt install -y python3-pip python3-venv pipx git ssh pipx ensurepath pipx install --include-deps ansible ansible --version (Nếu quản Windows hosts) cài thêm winrm libs: pipx inject ansible pywinrm pywinrm[credssp] kerberos requests-kerberos 1) Tổ chức thư mục project (khuyến nghị)#ansible/ ├─ inventories/ │ ├─ dev/ │ │ ├─ hosts.ini │ │ ├─ group_vars/ │ │ │ ├─ all.yml │ │ │ ├─ web.yml │ │ │ └─ db.yml │ │ └─ host_vars/ │ │ ├─ web01.yml │ │ └─ db01.yml │ ├─ uat/ ... │ └─ prod/ ... ├─ roles/ │ ├─ common/ │ │ ├─ tasks/main.yml │ │ ├─ handlers/main.yml │ │ ├─ templates/ │ │ ├─ files/ │ │ ├─ vars/main.yml │ │ └─ defaults/main.yml │ ├─ nginx/ ... │ └─ app/ ... ├─ group_vars/ (tuỳ chọn dùng chung mọi môi trường) ├─ host_vars/ (tuỳ chọn) ├─ playbooks/ │ ├─ site.yml │ ├─ play_nginx.yml │ └─ play_app.yml ├─ requirements.yml (galaxy) ├─ ansible.cfg └─ README.md ansible.cfg (mẫu):"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="runbooks"><title>Ansible Playbook Handbook Vn | kube-prometheus runbooks</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://runbooks.prometheus-operator.dev/runbooks/devops/ansible_playbook_handbook_vn/><link rel=stylesheet href=/book.min.ce742184041b67827be505801d71b6b40c09608dfb292033ea54dbbc1d71a174.css integrity="sha256-znQhhAQbZ4J75QWAHXG2tAwJYI37KSAz6lTbvB1xoXQ=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.44d74421841e5306a8c32ab0d84cda4030bf19a681bbd0ef3b95b616eea35bd6.js integrity="sha256-RNdEIYQeUwaowyqw2EzaQDC/GaaBu9DvO5W2Fu6jW9Y=" crossorigin=anonymous></script></head><body dir=ltr class="book-kind-page book-type-runbooks"><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>kube-prometheus runbooks</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li class=book-section-flat><input type=checkbox id=section-febcc99bf5ed6ad22f0c18af55312b96 class=toggle>
+<label for=section-febcc99bf5ed6ad22f0c18af55312b96 class=flex><a role=button class=flex-auto>general</a></label><ul><li><a href=/runbooks/general/infoinhibitor/>Info Inhibitor</a></li><li><a href=/runbooks/general/nodenetworkinterfaceflapping/>Node Network Interface Flapping</a></li><li><a href=/runbooks/general/watchdog/>Watchdog</a></li><li><a href=/runbooks/general/targetdown/>Target Down</a></li></ul></li><li class=book-section-flat><input type=checkbox id=section-db3e163ffd356e392b64d749c66d9c07 class=toggle>
+<label for=section-db3e163ffd356e392b64d749c66d9c07 class=flex><a role=button class=flex-auto>alertmanager</a></label><ul><li><a href=/runbooks/alertmanager/alertmanagerclustercrashlooping/>Alertmanager Cluster Crashlooping</a></li><li><a href=/runbooks/alertmanager/alertmanagerclusterdown/>Alertmanager Cluster Down</a></li><li><a href=/runbooks/alertmanager/alertmanagerclusterfailedtosendalerts/>Alertmanager Cluster Failed To Send Alerts</a></li><li><a href=/runbooks/alertmanager/alertmanagerconfiginconsistent/>Alertmanager ConfigInconsistent</a></li><li><a href=/runbooks/alertmanager/alertmanagerfailedreload/>Alertmanager Failed Reload</a></li><li><a href=/runbooks/alertmanager/alertmanagerfailedtosendalerts/>Alertmanager Failed To Send Alerts</a></li><li><a href=/runbooks/alertmanager/alertmanagermembersinconsistent/>Alertmanager Members Inconsistent</a></li></ul></li><li class=book-section-flat><input type=checkbox id=section-960031989fc4dfee196705f49acfe97f class=toggle checked>
+<label for=section-960031989fc4dfee196705f49acfe97f class=flex><a role=button class=flex-auto>DevOps</a></label><ul><li><a href=/runbooks/devops/ansible_playbook_handbook_vn/ class=active>Ansible Playbook Handbook Vn</a></li><li><a href=/runbooks/devops/ci-cd-failure-resolution/>Ci Cd Failure Resolution</a></li><li><a href=/runbooks/devops/trivy-offline-scan-guide/>Trivy Offline Scan Guide</a></li></ul></li><li class=book-section-flat><input type=checkbox id=section-c5b7e8c48710cba798c1fa32906f20a3 class=toggle>
+<label for=section-c5b7e8c48710cba798c1fa32906f20a3 class=flex><a role=button class=flex-auto>etcd</a></label><ul><li><a href=/runbooks/etcd/etcdbackendquotalowspace/>Etcd Backend Quota Low Space</a></li><li><a href=/runbooks/etcd/etcdgrpcrequestsslow/>Etcd Grpcrequests Slow</a></li><li><a href=/runbooks/etcd/etcdhighfsyncdurations/>Etcd High Fsync Durations</a></li><li><a href=/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/>Etcd High Number of Failed Grpcrequests</a></li><li><a href=/runbooks/etcd/etcdinsufficientmembers/>Etcd Insufficient Members</a></li><li><a href=/runbooks/etcd/etcdmembersdown/>Etcd Members Down</a></li><li><a href=/runbooks/etcd/etcdnoleader/>Etcd No Leader</a></li></ul></li><li class=book-section-flat><input type=checkbox id=section-4d9573c6de4f0f219f3fca50adf1246b class=toggle>
+<label for=section-4d9573c6de4f0f219f3fca50adf1246b class=flex><a role=button class=flex-auto>GitOps</a></label><ul><li><a href=/runbooks/gitops/argocd-application-bootstrap/>Argo Cd Application Bootstrap</a></li></ul></li><li class=book-section-flat><input type=checkbox id=section-260bf675a64908500d1b381d3fe43f5f class=toggle>
+<label for=section-260bf675a64908500d1b381d3fe43f5f class=flex><a role=button class=flex-auto>kube-state-metrics</a></label><ul><li><a href=/runbooks/kube-state-metrics/kubestatemetricswatcherrors/>Kube State Metric sWatch Errors</a></li><li><a href=/runbooks/kube-state-metrics/kubestatemetricslisterrors/>Kube State Metrics List Errors</a></li><li><a href=/runbooks/kube-state-metrics/kubestatemetricsshardingmismatch/>Kube State Metrics Sharding Mismatch</a></li><li><a href=/runbooks/kube-state-metrics/kubestatemetricsshardsmissing/>Kube State Metrics Shards Missing</a></li></ul></li><li class=book-section-flat><input type=checkbox id=section-daf652c035f1499b3f30b4eaaadaf2c7 class=toggle>
+<label for=section-daf652c035f1499b3f30b4eaaadaf2c7 class=flex><a role=button class=flex-auto>kubernetes</a></label><ul><li><a href=/runbooks/kubernetes/cputhrottlinghigh/>CPU Throttling High</a></li><li><a href=/runbooks/kubernetes/kubeaggregatedapidown/>Kube Aggregated API Down</a></li><li><a href=/runbooks/kubernetes/kubeaggregatedapierrors/>Kube Aggregated API Errors</a></li><li><a href=/runbooks/kubernetes/kubeapidown/>Kube API Down</a></li><li><a href=/runbooks/kubernetes/kubeapierrorbudgetburn/>Kube API Error Budget Burn</a></li><li><a href=/runbooks/kubernetes/kubeapiterminatedrequests/>Kube API Terminated Requests</a></li><li><a href=/runbooks/kubernetes/kubeclientcertificateexpiration/>Kube Client Certificate Expiration</a></li><li><a href=/runbooks/kubernetes/kubeclienterrors/>Kube Client Errors</a></li><li><a href=/runbooks/kubernetes/kubecontainerwaiting/>Kube Container Waiting</a></li><li><a href=/runbooks/kubernetes/kubecontrollermanagerdown/>Kube Controller Manager Down</a></li><li><a href=/runbooks/kubernetes/kubecpuovercommit/>Kube CPU Overcommit</a></li><li><a href=/runbooks/kubernetes/kubecpuquotaovercommit/>Kube CPU Quota Overcommit</a></li><li><a href=/runbooks/kubernetes/kubedaemonsetmisscheduled/>Kube DaemonSet MisScheduled</a></li><li><a href=/runbooks/kubernetes/kubedaemonsetnotscheduled/>Kube DaemonSet Not Scheduled</a></li><li><a href=/runbooks/kubernetes/kubedaemonsetrolloutstuck/>Kube DaemonSet Rollout Stuck</a></li><li><a href=/runbooks/kubernetes/kubedeploymentgenerationmismatch/>Kube Deployment Generation Mismatch</a></li><li><a href=/runbooks/kubernetes/kubedeploymentreplicasmismatch/>Kube Deployment Replicas Mismatch</a></li><li><a href=/runbooks/kubernetes/kubehpareplicasmismatch/>Kube HPA Replicas Mismatch</a></li><li><a href=/runbooks/kubernetes/kubehpamaxedout/>Kube HPA Maxed Out</a></li><li><a href=/runbooks/kubernetes/kubejobcompletion/>Kube Job Completion</a></li><li><a href=/runbooks/kubernetes/kubejobfailed/>Kube Job Failed</a></li><li><a href=/runbooks/kubernetes/kubememoryovercommit/>Kube Memory Overcommit</a></li><li><a href=/runbooks/kubernetes/kubememoryquotaovercommit/>Kube Memory Quota Overcommit</a></li><li><a href=/runbooks/kubernetes/kubenodenotready/>Kube Node Not Ready</a></li><li><a href=/runbooks/kubernetes/kubenodereadinessflapping/>Kube Node Readiness Flapping</a></li><li><a href=/runbooks/kubernetes/kubenodeunreachable/>Kube Node Unreachable</a></li><li><a href=/runbooks/kubernetes/kubepersistentvolumeerrors/>Kube Persistent Volume Errors</a></li><li><a href=/runbooks/kubernetes/kubepersistentvolumefillingup/>Kube Persistent Volume Filling Up</a></li><li><a href=/runbooks/kubernetes/kubepodcrashlooping/>Kube Pod Crash Looping</a></li><li><a href=/runbooks/kubernetes/kubepodnotready/>Kube Pod Not Ready</a></li><li><a href=/runbooks/kubernetes/kubequotaalmostfull/>Kube Quota Almost Full</a></li><li><a href=/runbooks/kubernetes/kubequotaexceeded/>Kube Quota Exceeded</a></li><li><a href=/runbooks/kubernetes/kubequotafullyused/>Kube Quota Fully Used</a></li><li><a href=/runbooks/kubernetes/kubeschedulerdown/>Kube Scheduler Down</a></li><li><a href=/runbooks/kubernetes/kubestatefulsetgenerationmismatch/>Kube StatefulSet Generation Mismatch</a></li><li><a href=/runbooks/kubernetes/kubestatefulsetreplicasmismatch/>Kube StatefulSet Replicas Mismatch</a></li><li><a href=/runbooks/kubernetes/kubestatefulsetupdatenotrolledout/>Kube StatefulSet Update Not RolledOut</a></li><li><a href=/runbooks/kubernetes/kubeversionmismatch/>Kube Version Mismatch</a></li><li><a href=/runbooks/kubernetes/kubeletclientcertificateexpiration/>Kubelet Client Certificate Expiration</a></li><li><a href=/runbooks/kubernetes/kubeletclientcertificaterenewalerrors/>Kubelet Client Certificate Renewal Errors</a></li><li><a href=/runbooks/kubernetes/kubeletdown/>Kubelet Down</a></li><li><a href=/runbooks/kubernetes/kubeletplegdurationhigh/>Kubelet Pod Lifecycle Event Generator Duration High</a></li><li><a href=/runbooks/kubernetes/kubeletpodstartuplatencyhigh/>Kubelet Pod Start Up Latency High</a></li><li><a href=/runbooks/kubernetes/kubeletservercertificateexpiration/>Kubelet Server Certificate Expiration</a></li><li><a href=/runbooks/kubernetes/kubeletservercertificaterenewalerrors/>Kubelet Server Certificate Renewal Errors</a></li><li><a href=/runbooks/kubernetes/kubelettoomanypods/>Kubelet Too Many Pods</a></li><li><a href=/runbooks/kubernetes/kubeproxydown/>KubeProxy Down</a></li></ul></li><li class=book-section-flat><input type=checkbox id=section-08e8a4091ab3f90a0f09dce349025634 class=toggle>
+<label for=section-08e8a4091ab3f90a0f09dce349025634 class=flex><a href=/runbooks/linux/ class=flex-auto>Linux</a></label><ul><li><a href=/runbooks/linux/server-hardening/>Server Hardening</a></li></ul></li><li class=book-section-flat><input type=checkbox id=section-fd4a0b0fd48654cddf3d9df1df6f1b3a class=toggle>
+<label for=section-fd4a0b0fd48654cddf3d9df1df6f1b3a class=flex><a role=button class=flex-auto>node</a></label><ul><li><a href=/runbooks/node/nodeclocknotsynchronising/>Node Clock Not Synchronising</a></li><li><a href=/runbooks/node/nodeclockskewdetected/>Node Clock Skew Detected</a></li><li><a href=/runbooks/node/nodefiledescriptorlimit/>Node File Descriptor Limit</a></li><li><a href=/runbooks/node/nodefilesystemalmostoutoffiles/>Node Filesystem Almost Out Of Files</a></li><li><a href=/runbooks/node/nodefilesystemalmostoutofspace/>Node Filesystem Almost Out Of Space</a></li><li><a href=/runbooks/node/nodefilesystemfilesfillingup/>Node Filesystem Files Filling Up</a></li><li><a href=/runbooks/node/nodefilesystemspacefillingup/>Node Filesystem Space Filling Up</a></li><li><a href=/runbooks/node/nodehighnumberconntrackentriesused/>Node High Number Conntrack Entries Used</a></li><li><a href=/runbooks/node/nodenetworkreceiveerrs/>Node Network Receive Errors</a></li><li><a href=/runbooks/node/nodenetworktransmiterrs/>Node Network Transmit Errors</a></li><li><a href=/runbooks/node/noderaiddegraded/>Node RAID Degraded</a></li><li><a href=/runbooks/node/noderaiddiskfailure/>Node RAID Disk Failure</a></li><li><a href=/runbooks/node/nodetextfilecollectorscrapeerror/>Node Text File Collector Scrape Error</a></li></ul></li><li class=book-section-flat><input type=checkbox id=section-a4be051134543e2634dd470d64290df4 class=toggle>
+<label for=section-a4be051134543e2634dd470d64290df4 class=flex><a role=button class=flex-auto>prometheus</a></label><ul><li><a href=/runbooks/prometheus/prometheusbadconfig/>Prometheus Bad Config</a></li><li><a href=/runbooks/prometheus/prometheusduplicatetimestamps/>Prometheus Duplicate Timestamps</a></li><li><a href=/runbooks/prometheus/prometheuserrorsendingalertstoanyalertmanager/>Prometheus Error Sending Alerts To Any Alertmanager</a></li><li><a href=/runbooks/prometheus/prometheuserrorsendingalertstosomealertmanagers/>Prometheus Error Sending Alerts To Some Alertmanagers</a></li><li><a href=/runbooks/prometheus/prometheusfederation/>Prometheus Federation - Detailed Implementation Guide</a></li><li><a href=/runbooks/prometheus/prometheuslabellimithit/>Prometheus Label LimitHit</a></li><li><a href=/runbooks/prometheus/prometheusmissingruleevaluations/>Prometheus Missing Rule Evaluations</a></li><li><a href=/runbooks/prometheus/prometheusnotconnectedtoalertmanagers/>Prometheus Not Connected To Alertmanagers</a></li><li><a href=/runbooks/prometheus/prometheusnotingestingsamples/>Prometheus Not Ingesting Samples</a></li><li><a href=/runbooks/prometheus/prometheusnotificationqueuerunningfull/>Prometheus Notification Queue Running Full</a></li><li><a href=/runbooks/prometheus/prometheusoutofordertimestamps/>Prometheus Out Of Order Timestamps</a></li><li><a href=/runbooks/prometheus/prometheusremotestoragefailures/>Prometheus Remote Storage Failures</a></li><li><a href=/runbooks/prometheus/prometheusremotewritebehind/>Prometheus Remote Write Behind</a></li><li><a href=/runbooks/prometheus/prometheusrulefailures/>Prometheus Rule Failures</a></li><li><a href=/runbooks/prometheus/prometheustargetlimithit/>Prometheus Target Limit Hit</a></li><li><a href=/runbooks/prometheus/prometheustargetsyncfailure/>Prometheus Target Sync Failure</a></li><li><a href=/runbooks/prometheus/prometheustsdbcompactionsfailing/>Prometheus TSDB Compactions Failing</a></li><li><a href=/runbooks/prometheus/prometheustsdbreloadsfailing/>Prometheus TSDB Reloads Failing</a></li><li><a href=/runbooks/prometheus/prometheusremotewritedesiredshards/>PrometheusRemoteWriteDesiredShards</a></li></ul></li><li class=book-section-flat><input type=checkbox id=section-bdb1b659825ae46d3ea0f27214f356f6 class=toggle>
+<label for=section-bdb1b659825ae46d3ea0f27214f356f6 class=flex><a role=button class=flex-auto>prometheus-operator</a></label><ul><li><a href=/runbooks/prometheus-operator/configreloadersidecarerrors/>Config Reloader Sidecar Errors</a></li><li><a href=/runbooks/prometheus-operator/prometheusoperatorlisterrors/>Prometheus Operator List Errors</a></li><li><a href=/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/>Prometheus Operator Node Lookup Errors</a></li><li><a href=/runbooks/prometheus-operator/prometheusoperatornotready/>Prometheus Operator NotReady</a></li><li><a href=/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/>Prometheus Operator Reconcile Errors</a></li><li><a href=/runbooks/prometheus-operator/prometheusoperatorrejectedresources/>Prometheus Operator Rejected Resources</a></li><li><a href=/runbooks/prometheus-operator/prometheusoperatorsyncfailed/>Prometheus Operator Sync Failed</a></li><li><a href=/runbooks/prometheus-operator/prometheusoperatorwatcherrors/>Prometheus Operator Watch Errors</a></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>Ansible Playbook Handbook Vn</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#0-chuẩn-bị-môi-trường-windows--wsl2-đề-xuất>0) Chuẩn bị môi trường (Windows → WSL2 đề xuất)</a></li><li><a href=#1-tổ-chức-thư-mục-project-khuyến-nghị>1) Tổ chức thư mục project (khuyến nghị)</a></li><li><a href=#2-inventory-định-nghĩa-máy-chủ--group>2) Inventory: định nghĩa máy chủ & group</a></li><li><a href=#3-biến-số-vars-all-group_vars-host_vars>3) Biến số (vars): all, group_vars, host_vars</a></li><li><a href=#4-roles-cấu-trúc--best-practices>4) Roles: cấu trúc & best practices</a></li><li><a href=#5-playbook-mẫu-site-tổng--play-lẻ>5) Playbook mẫu: site tổng & play lẻ</a></li><li><a href=#6-cách-chạy-theo-grouphostrole-siêu-nhanh>6) Cách chạy theo group/host/role siêu nhanh</a></li><li><a href=#7-biến-hoá-linh-hoạt-vars-includeimport-when-loop>7) Biến hoá linh hoạt: vars, include/import, when, loop</a></li><li><a href=#8-template-jinja2--files>8) Template (Jinja2) & Files</a></li><li><a href=#9-handlers--notify-idempotent--service-restart-chuẩn>9) Handlers & Notify (idempotent + service restart chuẩn)</a></li><li><a href=#10-vault-bảo-mật-bí-mật>10) Vault: bảo mật bí mật</a></li><li><a href=#11-rolling-update--chiến-lược-chạy>11) Rolling update & chiến lược chạy</a></li><li><a href=#12-kiểm-thử--an-toàn-check-diff-start-at-task>12) Kiểm thử & an toàn: check, diff, start-at-task</a></li><li><a href=#13-galaxy--requirements>13) Galaxy & requirements</a></li><li><a href=#14-dynamic-inventory-gợi-ý>14) Dynamic inventory (gợi ý)</a></li><li><a href=#15-quản-windows-hosts-bằng-winrm-tóm-tắt>15) Quản <strong>Windows hosts</strong> bằng WinRM (tóm tắt)</a></li><li><a href=#16-mẹo-hiệu-năng--độ-tin-cậy>16) Mẹo hiệu năng & độ tin cậy</a></li><li><a href=#17-lỗi-thường-gặp--cách-fix-nhanh>17) Lỗi thường gặp & cách fix nhanh</a></li><li><a href=#18-cheat-sheet-cli-copy-là-chạy>18) Cheat-sheet CLI (copy là chạy)</a></li><li><a href=#19-mẫu-readme-ngắn-cho-repo>19) Mẫu README ngắn cho repo</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=ansible-playbook-handbook-vn>Ansible Playbook Handbook (VN)
+<a class=anchor href=#ansible-playbook-handbook-vn>#</a></h1><blockquote class=book-hint><p>Sổ tay thực chiến từ A→Z: cấu trúc project, inventory, roles, tags, limit, vars, vault, rolling update, testing, Windows hosts…</p></blockquote><hr><h2 id=0-chuẩn-bị-môi-trường-windows--wsl2-đề-xuất>0) Chuẩn bị môi trường (Windows → WSL2 đề xuất)
+<a class=anchor href=#0-chu%e1%ba%a9n-b%e1%bb%8b-m%c3%b4i-tr%c6%b0%e1%bb%9dng-windows--wsl2-%c4%91%e1%bb%81-xu%e1%ba%a5t>#</a></h2><ul><li><strong>Cài WSL2 + Ubuntu 22.04</strong>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=display:flex><span>wsl --install -d Ubuntu-<span style=color:#ae81ff>22.04</span>
+</span></span></code></pre></div></li><li><strong>Cài Ansible qua pipx (bản mới)</strong>:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt update <span style=color:#f92672>&amp;&amp;</span> sudo apt install -y python3-pip python3-venv pipx git ssh
+</span></span><span style=display:flex><span>pipx ensurepath
+</span></span><span style=display:flex><span>pipx install --include-deps ansible
+</span></span><span style=display:flex><span>ansible --version
+</span></span></code></pre></div></li><li>(Nếu quản Windows hosts) cài thêm winrm libs:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>pipx inject ansible pywinrm pywinrm<span style=color:#f92672>[</span>credssp<span style=color:#f92672>]</span> kerberos requests-kerberos
+</span></span></code></pre></div></li></ul><hr><h2 id=1-tổ-chức-thư-mục-project-khuyến-nghị>1) Tổ chức thư mục project (khuyến nghị)
+<a class=anchor href=#1-t%e1%bb%95-ch%e1%bb%a9c-th%c6%b0-m%e1%bb%a5c-project-khuy%e1%ba%bfn-ngh%e1%bb%8b>#</a></h2><pre tabindex=0><code>ansible/
+├─ inventories/
+│  ├─ dev/
+│  │  ├─ hosts.ini
+│  │  ├─ group_vars/
+│  │  │  ├─ all.yml
+│  │  │  ├─ web.yml
+│  │  │  └─ db.yml
+│  │  └─ host_vars/
+│  │     ├─ web01.yml
+│  │     └─ db01.yml
+│  ├─ uat/ ...
+│  └─ prod/ ...
+├─ roles/
+│  ├─ common/
+│  │  ├─ tasks/main.yml
+│  │  ├─ handlers/main.yml
+│  │  ├─ templates/
+│  │  ├─ files/
+│  │  ├─ vars/main.yml
+│  │  └─ defaults/main.yml
+│  ├─ nginx/ ...
+│  └─ app/   ...
+├─ group_vars/ (tuỳ chọn dùng chung mọi môi trường)
+├─ host_vars/ (tuỳ chọn)
+├─ playbooks/
+│  ├─ site.yml
+│  ├─ play_nginx.yml
+│  └─ play_app.yml
+├─ requirements.yml (galaxy)
+├─ ansible.cfg
+└─ README.md
+</code></pre><p><strong>ansible.cfg (mẫu):</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#66d9ef>[defaults]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>inventory</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>inventories/dev/hosts.ini</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>host_key_checking</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>False</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>retry_files_enabled</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>False</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>forks</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>20</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>stdout_callback</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>yaml</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>interpreter_python</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>auto_silent</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[ssh_connection]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ssh_args</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>-o ControlMaster=auto -o ControlPersist=60s</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>pipelining</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>True</span>
+</span></span></code></pre></div><hr><h2 id=2-inventory-định-nghĩa-máy-chủ--group>2) Inventory: định nghĩa máy chủ & group
+<a class=anchor href=#2-inventory-%c4%91%e1%bb%8bnh-ngh%c4%a9a-m%c3%a1y-ch%e1%bb%a7--group>#</a></h2><p><strong>inventories/dev/hosts.ini</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#66d9ef>[web]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>web01 ansible_host</span><span style=color:#f92672>=</span><span style=color:#e6db74>10.10.10.11</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>web02 ansible_host</span><span style=color:#f92672>=</span><span style=color:#e6db74>10.10.10.12</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[db]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>db01 ansible_host</span><span style=color:#f92672>=</span><span style=color:#e6db74>10.10.10.21</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[prod]</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># ví dụ group môi trường</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># ...</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[all:vars]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ansible_user</span><span style=color:#f92672>=</span><span style=color:#e6db74>ubuntu</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ansible_ssh_private_key_file</span><span style=color:#f92672>=</span><span style=color:#e6db74>~/.ssh/id_ed25519</span>
+</span></span></code></pre></div><blockquote class=book-hint><p>Mẹo: Dùng <code>--list-hosts</code> để xem kết quả lọc theo pattern/limit.</p></blockquote><hr><h2 id=3-biến-số-vars-all-group_vars-host_vars>3) Biến số (vars): all, group_vars, host_vars
+<a class=anchor href=#3-bi%e1%ba%bfn-s%e1%bb%91-vars-all-group_vars-host_vars>#</a></h2><p>Ưu tiên từ thấp → cao: <strong>defaults</strong> &lt; <strong>vars</strong> &lt; <strong>inventory vars</strong> &lt; <strong>extra-vars (-e)</strong>.</p><p><strong>group_vars/web.yml</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>nginx_listen_port</span>: <span style=color:#ae81ff>80</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>app_env</span>: <span style=color:#ae81ff>dev</span>
+</span></span></code></pre></div><p><strong>host_vars/web01.yml</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>app_env</span>: <span style=color:#ae81ff>dev-a</span>
+</span></span></code></pre></div><p><strong>Gán tạm tại CLI</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml -e app_env<span style=color:#f92672>=</span>hotfix
+</span></span></code></pre></div><hr><h2 id=4-roles-cấu-trúc--best-practices>4) Roles: cấu trúc & best practices
+<a class=anchor href=#4-roles-c%e1%ba%a5u-tr%c3%bac--best-practices>#</a></h2><p><strong>roles/nginx/tasks/main.yml</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>---
+</span></span><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Install Nginx</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>apt</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>nginx</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>state</span>: <span style=color:#ae81ff>present</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>update_cache</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>notify</span>: <span style=color:#ae81ff>Restart Nginx</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Deploy config from template</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>template</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>src</span>: <span style=color:#ae81ff>nginx.conf.j2</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>dest</span>: <span style=color:#ae81ff>/etc/nginx/nginx.conf</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>notify</span>: <span style=color:#ae81ff>Reload Nginx</span>
+</span></span></code></pre></div><p><strong>roles/nginx/handlers/main.yml</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>---
+</span></span><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Restart Nginx</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>service</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>nginx</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>state</span>: <span style=color:#ae81ff>restarted</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Reload Nginx</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>service</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>nginx</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>state</span>: <span style=color:#ae81ff>reloaded</span>
+</span></span></code></pre></div><p><strong>roles/nginx/templates/nginx.conf.j2</strong> (ví dụ)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#66d9ef>user</span> <span style=color:#e6db74>www-data</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>worker_processes</span> <span style=color:#e6db74>auto</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>http</span> {
+</span></span><span style=display:flex><span>  <span style=color:#f92672>server</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>listen</span> {<span style=color:#f92672>{</span> <span style=color:#e6db74>nginx_listen_port</span> <span style=color:#960050;background-color:#1e0010>}}</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>location</span> <span style=color:#e6db74>/</span> { <span style=color:#f92672>return</span> <span style=color:#ae81ff>200</span> <span style=color:#e6db74>&#39;ok&#39;</span>; }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>Tag role để lọc khi chạy</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># playbooks/site.yml</span>
+</span></span><span style=display:flex><span>- <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>all</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>roles</span>:
+</span></span><span style=display:flex><span>    - { <span style=color:#f92672>role: common, tags</span>: [<span style=color:#e6db74>&#39;common&#39;</span>] }
+</span></span><span style=display:flex><span>    - { <span style=color:#f92672>role: nginx,  tags</span>: [<span style=color:#e6db74>&#39;nginx&#39;</span>] }
+</span></span><span style=display:flex><span>    - { <span style=color:#f92672>role: app,    tags</span>: [<span style=color:#e6db74>&#39;app&#39;</span>] }
+</span></span></code></pre></div><hr><h2 id=5-playbook-mẫu-site-tổng--play-lẻ>5) Playbook mẫu: site tổng & play lẻ
+<a class=anchor href=#5-playbook-m%e1%ba%abu-site-t%e1%bb%95ng--play-l%e1%ba%bb>#</a></h2><p><strong>playbooks/site.yml</strong> (tổng hợp nhiều role)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>---
+</span></span><span style=display:flex><span>- <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>web</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>serial</span>: <span style=color:#ae81ff>2</span>            <span style=color:#75715e># rolling update 2 host/lượt</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>strategy</span>: <span style=color:#ae81ff>free      </span> <span style=color:#75715e># không chờ các host khác</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>vars</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>app_release</span>: <span style=color:#ae81ff>v1.2.3</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>roles</span>:
+</span></span><span style=display:flex><span>    - { <span style=color:#f92672>role: common, tags</span>: [<span style=color:#e6db74>&#39;common&#39;</span>] }
+</span></span><span style=display:flex><span>    - { <span style=color:#f92672>role: nginx,  tags</span>: [<span style=color:#e6db74>&#39;nginx&#39;</span>] }
+</span></span><span style=display:flex><span>    - { <span style=color:#f92672>role: app,    tags</span>: [<span style=color:#e6db74>&#39;app&#39;</span>] }
+</span></span></code></pre></div><p><strong>playbooks/play_nginx.yml</strong> (chỉ nginx trên nhóm web)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>---
+</span></span><span style=display:flex><span>- <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>web</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>roles</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>nginx</span>
+</span></span></code></pre></div><p><strong>playbooks/play_app.yml</strong> (import role theo task + điều kiện)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>---
+</span></span><span style=display:flex><span>- <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>web</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>tasks</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Run app role if enabled</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>import_role</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>name</span>: <span style=color:#ae81ff>app</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>when</span>: <span style=color:#ae81ff>app_enabled | default(true)</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>tags</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>app</span>
+</span></span></code></pre></div><hr><h2 id=6-cách-chạy-theo-grouphostrole-siêu-nhanh>6) Cách chạy theo group/host/role siêu nhanh
+<a class=anchor href=#6-c%c3%a1ch-ch%e1%ba%a1y-theo-grouphostrole-si%c3%aau-nhanh>#</a></h2><ul><li><strong>Theo group</strong><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --limit web
+</span></span></code></pre></div></li><li><strong>Theo host</strong><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --limit web01
+</span></span></code></pre></div></li><li><strong>Theo pattern</strong> (giao 2 group, hoặc exclude)<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --limit <span style=color:#e6db74>&#39;web:&amp;prod&#39;</span>
+</span></span><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --limit <span style=color:#e6db74>&#39;web:!web02&#39;</span>
+</span></span></code></pre></div></li><li><strong>Theo role/tag</strong><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --tags nginx
+</span></span><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --tags common,app
+</span></span><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --skip-tags app
+</span></span></code></pre></div></li><li><strong>Xem trước danh sách host/tags/tasks</strong><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --list-hosts
+</span></span><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --list-tags
+</span></span><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --list-tasks
+</span></span></code></pre></div></li></ul><hr><h2 id=7-biến-hoá-linh-hoạt-vars-includeimport-when-loop>7) Biến hoá linh hoạt: vars, include/import, when, loop
+<a class=anchor href=#7-bi%e1%ba%bfn-ho%c3%a1-linh-ho%e1%ba%a1t-vars-includeimport-when-loop>#</a></h2><p><strong>Chọn role qua biến</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>all</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>vars</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>run_roles</span>: []   <span style=color:#75715e># ví dụ -e &#39;run_roles=[&#34;nginx&#34;,&#34;app&#34;]&#39;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>tasks</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>import_role</span>: { <span style=color:#f92672>name</span>: <span style=color:#ae81ff>common }</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>when</span>: <span style=color:#e6db74>&#34;common&#34;</span> <span style=color:#ae81ff>in run_roles</span>
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>import_role</span>: { <span style=color:#f92672>name</span>: <span style=color:#ae81ff>nginx }</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>when</span>: <span style=color:#e6db74>&#34;nginx&#34;</span> <span style=color:#ae81ff>in run_roles</span>
+</span></span><span style=display:flex><span>    - <span style=color:#f92672>import_role</span>: { <span style=color:#f92672>name</span>: <span style=color:#ae81ff>app }</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>when</span>: <span style=color:#e6db74>&#34;app&#34;</span> <span style=color:#ae81ff>in run_roles</span>
+</span></span></code></pre></div><p><strong>Điều kiện & loop</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Only on Ubuntu</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>apt</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>htop</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>state</span>: <span style=color:#ae81ff>present</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>when</span>: <span style=color:#ae81ff>ansible_facts[&#39;os_family&#39;] == &#39;Debian&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Create users</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>user</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>name</span>: <span style=color:#e6db74>&#34;{{ item.name }}&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>state</span>: <span style=color:#ae81ff>present</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>shell</span>: <span style=color:#ae81ff>/bin/bash</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>loop</span>: <span style=color:#e6db74>&#34;{{ users }}&#34;</span>
+</span></span></code></pre></div><hr><h2 id=8-template-jinja2--files>8) Template (Jinja2) & Files
+<a class=anchor href=#8-template-jinja2--files>#</a></h2><p><strong>Template</strong> cho cấu hình động (xem <code>nginx.conf.j2</code> ở trên).</p><p><strong>Copy file</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Push static file</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>copy</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>src</span>: <span style=color:#ae81ff>files/motd</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>dest</span>: <span style=color:#ae81ff>/etc/motd</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>mode</span>: <span style=color:#e6db74>&#39;0644&#39;</span>
+</span></span></code></pre></div><hr><h2 id=9-handlers--notify-idempotent--service-restart-chuẩn>9) Handlers & Notify (idempotent + service restart chuẩn)
+<a class=anchor href=#9-handlers--notify-idempotent--service-restart-chu%e1%ba%a9n>#</a></h2><ul><li>Tasks gọi <code>notify: &lt;handler></code> khi thay đổi → handler gom và chạy cuối play (một lần).</li><li>Đảm bảo idempotency: dùng module chuẩn (apt/yum/package, template, lineinfile…).</li></ul><hr><h2 id=10-vault-bảo-mật-bí-mật>10) Vault: bảo mật bí mật
+<a class=anchor href=#10-vault-b%e1%ba%a3o-m%e1%ba%adt-b%c3%ad-m%e1%ba%adt>#</a></h2><ul><li>Tạo file vault:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-vault create group_vars/all/vault.yml
+</span></span></code></pre></div></li><li>Sử dụng trong vars:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>db_password</span>: <span style=color:#e6db74>&#34;{{ vault_db_password }}&#34;</span>
+</span></span></code></pre></div></li><li>Chạy playbook với vault password file hoặc prompt:<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-playbook playbooks/site.yml --ask-vault-pass
+</span></span><span style=display:flex><span><span style=color:#75715e># hoặc</span>
+</span></span><span style=display:flex><span>ansible-playbook playbooks/site.yml --vault-password-file .vault_pass
+</span></span></code></pre></div></li></ul><hr><h2 id=11-rolling-update--chiến-lược-chạy>11) Rolling update & chiến lược chạy
+<a class=anchor href=#11-rolling-update--chi%e1%ba%bfn-l%c6%b0%e1%bb%a3c-ch%e1%ba%a1y>#</a></h2><ul><li><strong>serial:</strong> số host chạy mỗi lượt (triển khai cuốn chiếu)</li><li><strong>max_fail_percentage:</strong> fail threshold</li><li><strong>strategy:</strong> <code>linear</code> (mặc định), <code>free</code> (song song không chờ), <code>debug</code> (dừng debug)</li></ul><p>Ví dụ:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>web</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>serial</span>: <span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>max_fail_percentage</span>: <span style=color:#ae81ff>20</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>strategy</span>: <span style=color:#ae81ff>free</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>roles</span>:
+</span></span><span style=display:flex><span>    - <span style=color:#ae81ff>app</span>
+</span></span></code></pre></div><hr><h2 id=12-kiểm-thử--an-toàn-check-diff-start-at-task>12) Kiểm thử & an toàn: check, diff, start-at-task
+<a class=anchor href=#12-ki%e1%bb%83m-th%e1%bb%ad--an-to%c3%a0n-check-diff-start-at-task>#</a></h2><ul><li><strong>Dry-run:</strong><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-playbook playbooks/site.yml --check
+</span></span></code></pre></div></li><li><strong>Hiện diff file/template:</strong><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-playbook playbooks/site.yml --diff
+</span></span></code></pre></div></li><li><strong>Resume từ task X:</strong><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-playbook playbooks/site.yml --start-at-task <span style=color:#e6db74>&#34;Deploy config from template&#34;</span>
+</span></span></code></pre></div></li></ul><hr><h2 id=13-galaxy--requirements>13) Galaxy & requirements
+<a class=anchor href=#13-galaxy--requirements>#</a></h2><p><strong>requirements.yml</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>---
+</span></span><span style=display:flex><span><span style=color:#f92672>roles</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>geerlingguy.nginx</span>
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>community.general</span>
+</span></span></code></pre></div><p>Cài đặt:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-galaxy install -r requirements.yml
+</span></span></code></pre></div><hr><h2 id=14-dynamic-inventory-gợi-ý>14) Dynamic inventory (gợi ý)
+<a class=anchor href=#14-dynamic-inventory-g%e1%bb%a3i-%c3%bd>#</a></h2><ul><li>Dùng <strong>inventory plugin</strong> (aws_ec2, azure_rm, kubernetes, gitlab…) để sinh host tự động.</li><li>Ví dụ AWS EC2 plugin (tối giản):</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e># inventories/prod/aws_ec2.yml</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>plugin</span>: <span style=color:#ae81ff>amazon.aws.aws_ec2</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>regions</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#ae81ff>ap-southeast-1</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>filters</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>tag:Environment</span>: <span style=color:#ae81ff>prod</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>groups</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>web</span>: <span style=color:#e6db74>&#34;&#39;web&#39; in tags.get(&#39;Role&#39;, &#39;&#39;)&#34;</span>
+</span></span></code></pre></div><p>Chạy:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible-inventory -i inventories/prod/aws_ec2.yml --list
+</span></span></code></pre></div><hr><h2 id=15-quản-windows-hosts-bằng-winrm-tóm-tắt>15) Quản <strong>Windows hosts</strong> bằng WinRM (tóm tắt)
+<a class=anchor href=#15-qu%e1%ba%a3n-windows-hosts-b%e1%ba%b1ng-winrm-t%c3%b3m-t%e1%ba%aft>#</a></h2><ul><li>Trên Windows host: bật WinRM HTTPS bằng script của Microsoft/Ansible (<code>ConfigureRemotingForAnsible.ps1</code>).</li><li>Inventory ví dụ:</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#66d9ef>[windows]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>winhost01 ansible_host</span><span style=color:#f92672>=</span><span style=color:#e6db74>10.10.20.5</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>[windows:vars]</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ansible_user</span><span style=color:#f92672>=</span><span style=color:#e6db74>Administrator</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ansible_password</span><span style=color:#f92672>=</span><span style=color:#e6db74>SuperSecret!</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ansible_connection</span><span style=color:#f92672>=</span><span style=color:#e6db74>winrm</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ansible_winrm_transport</span><span style=color:#f92672>=</span><span style=color:#e6db74>credssp</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>ansible_winrm_server_cert_validation</span><span style=color:#f92672>=</span><span style=color:#e6db74>ignore</span>
+</span></span></code></pre></div><ul><li>Test:</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ansible -i inventories/dev/hosts.ini windows -m win_ping
+</span></span></code></pre></div><hr><h2 id=16-mẹo-hiệu-năng--độ-tin-cậy>16) Mẹo hiệu năng & độ tin cậy
+<a class=anchor href=#16-m%e1%ba%b9o-hi%e1%bb%87u-n%c4%83ng--%c4%91%e1%bb%99-tin-c%e1%ba%ady>#</a></h2><ul><li>Bật <strong>pipelining</strong>, <strong>ControlPersist</strong> trong <code>ansible.cfg</code> (đã mẫu ở trên).</li><li>Giảm <code>gather_facts</code> nếu không cần, hoặc dùng <code>setup</code> có filter.</li><li>Chia nhỏ role, dùng handlers thay vì restart vô tội vạ.</li><li>Dùng <code>retries/delay/until</code> cho task cần chờ sẵn sàng (e.g. service up, HTTP 200…).</li></ul><p>Ví dụ:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Wait for app ready</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>uri</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>url</span>: <span style=color:#ae81ff>http://127.0.0.1/health</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>status_code</span>: <span style=color:#ae81ff>200</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>register</span>: <span style=color:#ae81ff>result</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>retries</span>: <span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>delay</span>: <span style=color:#ae81ff>3</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>until</span>: <span style=color:#ae81ff>result.status == 200</span>
+</span></span></code></pre></div><hr><h2 id=17-lỗi-thường-gặp--cách-fix-nhanh>17) Lỗi thường gặp & cách fix nhanh
+<a class=anchor href=#17-l%e1%bb%97i-th%c6%b0%e1%bb%9dng-g%e1%ba%b7p--c%c3%a1ch-fix-nhanh>#</a></h2><ul><li><code>Permission denied (publickey)</code>: check quyền <code>~/.ssh</code>, đúng key, đúng user.</li><li><code>FAILED! => {"msg": "Missing sudo perms"}</code>: thêm <code>become: true</code> hoặc sudoers.</li><li><code>template error</code>: kiểm tra syntax Jinja2, biến có tồn tại không (<code>|default(...)</code>).</li><li>WinRM không kết nối: kiểm tra firewall, cert, đồng bộ thời gian, thử <code>ansible_winrm_transport=ntlm</code>.</li></ul><hr><h2 id=18-cheat-sheet-cli-copy-là-chạy>18) Cheat-sheet CLI (copy là chạy)
+<a class=anchor href=#18-cheat-sheet-cli-copy-l%c3%a0-ch%e1%ba%a1y>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Lọc theo group/host</span>
+</span></span><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --limit web
+</span></span><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --limit <span style=color:#e6db74>&#39;web:&amp;prod&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Lọc theo role/tag</span>
+</span></span><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --tags nginx
+</span></span><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --skip-tags app
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Rolling update + free strategy</span>
+</span></span><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --limit web -e ansible_serial<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Kiểm thử, diff, xem trước</span>
+</span></span><span style=display:flex><span>ansible-playbook ... --check
+</span></span><span style=display:flex><span>ansible-playbook ... --diff
+</span></span><span style=display:flex><span>ansible-playbook ... --list-hosts|--list-tags|--list-tasks
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Truyền biến nhanh</span>
+</span></span><span style=display:flex><span>ansible-playbook ... -e app_release<span style=color:#f92672>=</span>v1.2.3 -e <span style=color:#e6db74>&#39;{&#34;run_roles&#34;:[&#34;nginx&#34;,&#34;app&#34;]}&#39;</span>
+</span></span></code></pre></div><hr><h2 id=19-mẫu-readme-ngắn-cho-repo>19) Mẫu README ngắn cho repo
+<a class=anchor href=#19-m%e1%ba%abu-readme-ng%e1%ba%afn-cho-repo>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-md data-lang=md><span style=display:flex><span># Ansible Stack
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Cấu trúc
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>-</span> inventories/{dev,uat,prod}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> roles/{common,nginx,app}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> playbooks/{site,play_nginx,play_app}.yml
+</span></span><span style=display:flex><span><span style=color:#66d9ef>-</span> ansible.cfg, requirements.yml
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Quick start
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>```bash
+</span></span><span style=display:flex><span>pipx install --include-deps ansible
+</span></span><span style=display:flex><span>ansible-galaxy install -r requirements.yml
+</span></span><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --check
+</span></span><span style=display:flex><span>ansible-playbook -i inventories/dev/hosts.ini playbooks/site.yml --limit web --tags nginx
+</span></span></code></pre></div><pre tabindex=0><code>
+---
+
+&gt; **Kết luận:** Với cấu trúc chuẩn + tags + limit + serial/strategy, anh có thể rollout an toàn theo nhóm/đợt, tái sử dụng role, và kiểm soát cấu hình chặt chẽ. Bổ sung vault cho secrets, dynamic inventory cho cloud, và hãy luôn `--check/--diff` trước khi bắn prod.
+</code></pre></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><div class="flex flex-wrap justify-between"><span><a href=/runbooks/alertmanager/alertmanagermembersinconsistent/ class="flex align-center book-icon"><img src=/svg/backward.svg class=book-icon alt=Previous title="Alertmanager Members Inconsistent">
+<span>Alertmanager Members Inconsistent</span>
+</a></span><span><a href=/runbooks/devops/ci-cd-failure-resolution/ class="flex align-center book-icon"><span>Ci Cd Failure Resolution</span>
+<img src=/svg/forward.svg class=book-icon alt=Next title="Ci Cd Failure Resolution"></a></span></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#0-chuẩn-bị-môi-trường-windows--wsl2-đề-xuất>0) Chuẩn bị môi trường (Windows → WSL2 đề xuất)</a></li><li><a href=#1-tổ-chức-thư-mục-project-khuyến-nghị>1) Tổ chức thư mục project (khuyến nghị)</a></li><li><a href=#2-inventory-định-nghĩa-máy-chủ--group>2) Inventory: định nghĩa máy chủ & group</a></li><li><a href=#3-biến-số-vars-all-group_vars-host_vars>3) Biến số (vars): all, group_vars, host_vars</a></li><li><a href=#4-roles-cấu-trúc--best-practices>4) Roles: cấu trúc & best practices</a></li><li><a href=#5-playbook-mẫu-site-tổng--play-lẻ>5) Playbook mẫu: site tổng & play lẻ</a></li><li><a href=#6-cách-chạy-theo-grouphostrole-siêu-nhanh>6) Cách chạy theo group/host/role siêu nhanh</a></li><li><a href=#7-biến-hoá-linh-hoạt-vars-includeimport-when-loop>7) Biến hoá linh hoạt: vars, include/import, when, loop</a></li><li><a href=#8-template-jinja2--files>8) Template (Jinja2) & Files</a></li><li><a href=#9-handlers--notify-idempotent--service-restart-chuẩn>9) Handlers & Notify (idempotent + service restart chuẩn)</a></li><li><a href=#10-vault-bảo-mật-bí-mật>10) Vault: bảo mật bí mật</a></li><li><a href=#11-rolling-update--chiến-lược-chạy>11) Rolling update & chiến lược chạy</a></li><li><a href=#12-kiểm-thử--an-toàn-check-diff-start-at-task>12) Kiểm thử & an toàn: check, diff, start-at-task</a></li><li><a href=#13-galaxy--requirements>13) Galaxy & requirements</a></li><li><a href=#14-dynamic-inventory-gợi-ý>14) Dynamic inventory (gợi ý)</a></li><li><a href=#15-quản-windows-hosts-bằng-winrm-tóm-tắt>15) Quản <strong>Windows hosts</strong> bằng WinRM (tóm tắt)</a></li><li><a href=#16-mẹo-hiệu-năng--độ-tin-cậy>16) Mẹo hiệu năng & độ tin cậy</a></li><li><a href=#17-lỗi-thường-gặp--cách-fix-nhanh>17) Lỗi thường gặp & cách fix nhanh</a></li><li><a href=#18-cheat-sheet-cli-copy-là-chạy>18) Cheat-sheet CLI (copy là chạy)</a></li><li><a href=#19-mẫu-readme-ngắn-cho-repo>19) Mẫu README ngắn cho repo</a></li></ul></nav></div></aside></main></body></html>

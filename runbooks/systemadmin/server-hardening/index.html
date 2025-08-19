@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Objective
+  
+  #
+  
+
+To provide a comprehensive checklist and set of procedures for securing a newly provisioned Linux server. This runbook ensures a consistent and strong security posture for all servers, minimizing the attack surface.
+
+  Prerequisites
+  
+  #
+  
+
+
+Access: Root or sudo access to the target Linux server via SSH.
+Knowledge: Basic Linux command-line skills and an understanding of networking and security concepts.
+Policy: Familiarity with your organization&rsquo;s security policies.
+
+
+  Hardening Checklist and Procedures
+  
+  #
+  
+
+
+  1. Update the System
+  
+  #
+  
+
+
+Action: Immediately apply all available security patches and updates.
+Command (Ubuntu/Debian):
+sudo apt update &amp;&amp; sudo apt upgrade -y
+
+Command (CentOS/RHEL):
+sudo dnf update -y
+
+
+
+  2. Configure User Access
+  
+  #
+  
+
+
+Action: Disable direct root login and create a dedicated administrative user.
+Steps:
+
+Create a new user: sudo adduser &lt;adminuser&gt;
+Add the user to the sudo group: sudo usermod -aG sudo &lt;adminuser&gt;
+Disable root login via SSH. Edit /etc/ssh/sshd_config:
+PermitRootLogin no
+
+Restart the SSH service: sudo systemctl restart sshd
+
+
+
+
+  3. Secure SSH
+  
+  #
+  
+
+
+Action: Harden the SSH configuration to prevent unauthorized access.
+Steps: Edit /etc/ssh/sshd_config and set the following (at a minimum):
+PasswordAuthentication no          # Enforce key-based authentication only
+X11Forwarding no                   # Disable X11 forwarding unless needed
+AllowUsers &lt;adminuser&gt; &lt;otheruser&gt; # Whitelist allowed SSH users
+
+Verification: After restarting sshd, ensure you can still log in with your admin user via an SSH key.
+
+
+  4. Configure a Firewall
+  
+  #
+  
+
+
+Action: Enable and configure a host-based firewall to block all traffic except for necessary services.
+Tool: ufw (Uncomplicated Firewall) is common on Ubuntu.
+Commands:
+sudo ufw default deny incoming  # Deny all incoming traffic by default
+sudo ufw default allow outgoing # Allow all outgoing traffic
+sudo ufw allow ssh              # Allow SSH (port 22)
+sudo ufw allow http             # Allow HTTP (port 80) if it&#39;s a web server
+sudo ufw allow https            # Allow HTTPS (port 443) if it&#39;s a web server
+sudo ufw enable                 # Enable the firewall
+
+Verification: sudo ufw status verbose
+
+
+  5. Remove Unnecessary Services
+  
+  #
+  
+
+
+Action: Reduce the attack surface by uninstalling or disabling any software and services that are not required.
+Steps:
+
+List installed packages to identify candidates for removal.
+List running services: sudo systemctl list-units --type=service --state=running
+Uninstall a package (e.g., telnet server): sudo apt remove telnetd -y
+Disable a service from starting on boot: sudo systemctl disable &lt;service-name&gt;
+
+
+
+
+  6. Install Security Tools
+  
+  #
+  
+
+
+Action: Install tools for intrusion detection and monitoring.
+Recommendations:
+
+Fail2Ban: Monitors logs for malicious activity (like brute-force login attempts) and temporarily bans offending IPs.
+sudo apt install fail2ban -y
+# Default configuration is usually sufficient to start.
+
+Auditd: The Linux Auditing System provides detailed logging of security-relevant events.
+
+
+
+
+  Verification
+  
+  #
+  
+
+
+Perform a port scan of the server from an external machine (e.g., using nmap) to confirm that only expected ports are open.
+nmap -sT -p- &lt;server-ip&gt;
+
+Attempt to log in as root via SSH and confirm it is denied.
+Attempt to log in with a password for your admin user and confirm it is denied (if key-only auth was enforced).
+
+
+  Rollback Plan
+  
+  #
+  
+
+
+If a hardening step locks you out (e.g., incorrect firewall rule), you will need console access (physical or via your cloud provider&rsquo;s console) to log in and revert the change.
+Always apply firewall and SSH changes with an active console session open as a backup.
+
+
+  Escalation
+  
+  #
+  
+
+
+Who: Senior System Administrator or Security Team.
+When: If you are unsure about the impact of a specific hardening setting or if you suspect a security compromise during the provisioning process.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/runbooks/systemadmin/server-hardening/">
+  <meta property="og:site_name" content="kube-prometheus runbooks">
+  <meta property="og:title" content="kube-prometheus runbooks">
+  <meta property="og:description" content="Objective#To provide a comprehensive checklist and set of procedures for securing a newly provisioned Linux server. This runbook ensures a consistent and strong security posture for all servers, minimizing the attack surface.
+Prerequisites#Access: Root or sudo access to the target Linux server via SSH. Knowledge: Basic Linux command-line skills and an understanding of networking and security concepts. Policy: Familiarity with your organization’s security policies. Hardening Checklist and Procedures#1. Update the System#Action: Immediately apply all available security patches and updates. Command (Ubuntu/Debian): sudo apt update &amp;&amp; sudo apt upgrade -y Command (CentOS/RHEL): sudo dnf update -y 2. Configure User Access#Action: Disable direct root login and create a dedicated administrative user. Steps: Create a new user: sudo adduser &lt;adminuser&gt; Add the user to the sudo group: sudo usermod -aG sudo &lt;adminuser&gt; Disable root login via SSH. Edit /etc/ssh/sshd_config: PermitRootLogin no Restart the SSH service: sudo systemctl restart sshd 3. Secure SSH#Action: Harden the SSH configuration to prevent unauthorized access. Steps: Edit /etc/ssh/sshd_config and set the following (at a minimum): PasswordAuthentication no # Enforce key-based authentication onlyX11Forwarding no # Disable X11 forwarding unless neededAllowUsers &lt;adminuser&gt; &lt;otheruser&gt; # Whitelist allowed SSH users Verification: After restarting sshd, ensure you can still log in with your admin user via an SSH key. 4. Configure a Firewall#Action: Enable and configure a host-based firewall to block all traffic except for necessary services. Tool: ufw (Uncomplicated Firewall) is common on Ubuntu. Commands: sudo ufw default deny incoming # Deny all incoming traffic by default sudo ufw default allow outgoing # Allow all outgoing traffic sudo ufw allow ssh # Allow SSH (port 22) sudo ufw allow http # Allow HTTP (port 80) if it&#39;s a web server sudo ufw allow https # Allow HTTPS (port 443) if it&#39;s a web server sudo ufw enable # Enable the firewall Verification: sudo ufw status verbose 5. Remove Unnecessary Services#Action: Reduce the attack surface by uninstalling or disabling any software and services that are not required. Steps: List installed packages to identify candidates for removal. List running services: sudo systemctl list-units --type=service --state=running Uninstall a package (e.g., telnet server): sudo apt remove telnetd -y Disable a service from starting on boot: sudo systemctl disable &lt;service-name&gt; 6. Install Security Tools#Action: Install tools for intrusion detection and monitoring. Recommendations: Fail2Ban: Monitors logs for malicious activity (like brute-force login attempts) and temporarily bans offending IPs. sudo apt install fail2ban -y # Default configuration is usually sufficient to start. Auditd: The Linux Auditing System provides detailed logging of security-relevant events. Verification#Perform a port scan of the server from an external machine (e.g., using nmap) to confirm that only expected ports are open. nmap -sT -p- &lt;server-ip&gt; Attempt to log in as root via SSH and confirm it is denied. Attempt to log in with a password for your admin user and confirm it is denied (if key-only auth was enforced). Rollback Plan#If a hardening step locks you out (e.g., incorrect firewall rule), you will need console access (physical or via your cloud provider’s console) to log in and revert the change. Always apply firewall and SSH changes with an active console session open as a backup. Escalation#Who: Senior System Administrator or Security Team. When: If you are unsure about the impact of a specific hardening setting or if you suspect a security compromise during the provisioning process.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="runbooks">
+<title>Server Hardening | kube-prometheus runbooks</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/runbooks/systemadmin/server-hardening/">
+<link rel="stylesheet" href="/book.min.ce742184041b67827be505801d71b6b40c09608dfb292033ea54dbbc1d71a174.css" integrity="sha256-znQhhAQbZ4J75QWAHXG2tAwJYI37KSAz6lTbvB1xoXQ=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.b90907985df8e75fe2be96dba4fa875f92bf833fac03c309b1994c8f57585779.js" integrity="sha256-uQkHmF3451/ivpbbpPqHX5K/gz&#43;sA8MJsZlMj1dYV3k=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-runbooks">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>kube-prometheus runbooks</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-febcc99bf5ed6ad22f0c18af55312b96" class="toggle"  />
+    <label for="section-febcc99bf5ed6ad22f0c18af55312b96" class="flex">
+      <a role="button" class="flex-auto ">general</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/general/infoinhibitor/" class="">Info Inhibitor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/general/nodenetworkinterfaceflapping/" class="">Node Network Interface Flapping</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/general/watchdog/" class="">Watchdog</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/general/targetdown/" class="">Target Down</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-db3e163ffd356e392b64d749c66d9c07" class="toggle"  />
+    <label for="section-db3e163ffd356e392b64d749c66d9c07" class="flex">
+      <a role="button" class="flex-auto ">alertmanager</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagerclustercrashlooping/" class="">Alertmanager Cluster Crashlooping</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagerclusterdown/" class="">Alertmanager Cluster Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagerclusterfailedtosendalerts/" class="">Alertmanager Cluster Failed To Send Alerts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagerconfiginconsistent/" class="">Alertmanager ConfigInconsistent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagerfailedreload/" class="">Alertmanager Failed Reload</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagerfailedtosendalerts/" class="">Alertmanager Failed To Send Alerts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/alertmanager/alertmanagermembersinconsistent/" class="">Alertmanager Members Inconsistent</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c5b7e8c48710cba798c1fa32906f20a3" class="toggle"  />
+    <label for="section-c5b7e8c48710cba798c1fa32906f20a3" class="flex">
+      <a role="button" class="flex-auto ">etcd</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdbackendquotalowspace/" class="">Etcd Backend Quota Low Space</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdgrpcrequestsslow/" class="">Etcd Grpcrequests Slow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdhighfsyncdurations/" class="">Etcd High Fsync Durations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/" class="">Etcd High Number of Failed Grpcrequests</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdinsufficientmembers/" class="">Etcd Insufficient Members</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdmembersdown/" class="">Etcd Members Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/etcd/etcdnoleader/" class="">Etcd No Leader</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-260bf675a64908500d1b381d3fe43f5f" class="toggle"  />
+    <label for="section-260bf675a64908500d1b381d3fe43f5f" class="flex">
+      <a role="button" class="flex-auto ">kube-state-metrics</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kube-state-metrics/kubestatemetricswatcherrors/" class="">Kube State Metric sWatch Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kube-state-metrics/kubestatemetricslisterrors/" class="">Kube State Metrics List Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kube-state-metrics/kubestatemetricsshardingmismatch/" class="">Kube State Metrics Sharding Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kube-state-metrics/kubestatemetricsshardsmissing/" class="">Kube State Metrics Shards Missing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-daf652c035f1499b3f30b4eaaadaf2c7" class="toggle"  />
+    <label for="section-daf652c035f1499b3f30b4eaaadaf2c7" class="flex">
+      <a role="button" class="flex-auto ">kubernetes</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/cputhrottlinghigh/" class="">CPU Throttling High</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeaggregatedapidown/" class="">Kube Aggregated API Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeaggregatedapierrors/" class="">Kube Aggregated API Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeapidown/" class="">Kube API Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeapierrorbudgetburn/" class="">Kube API Error Budget Burn</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeapiterminatedrequests/" class="">Kube API Terminated Requests</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeclientcertificateexpiration/" class="">Kube Client Certificate Expiration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeclienterrors/" class="">Kube Client Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubecontainerwaiting/" class="">Kube Container Waiting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubecontrollermanagerdown/" class="">Kube Controller Manager Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubecpuovercommit/" class="">Kube CPU Overcommit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubecpuquotaovercommit/" class="">Kube CPU Quota Overcommit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubedaemonsetmisscheduled/" class="">Kube DaemonSet MisScheduled</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubedaemonsetnotscheduled/" class="">Kube DaemonSet Not Scheduled</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubedaemonsetrolloutstuck/" class="">Kube DaemonSet Rollout Stuck</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubedeploymentgenerationmismatch/" class="">Kube Deployment Generation Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubedeploymentreplicasmismatch/" class="">Kube Deployment Replicas Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubehpareplicasmismatch/" class="">Kube HPA  Replicas Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubehpamaxedout/" class="">Kube HPA Maxed Out</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubejobcompletion/" class="">Kube Job Completion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubejobfailed/" class="">Kube Job Failed</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubememoryovercommit/" class="">Kube Memory Overcommit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubememoryquotaovercommit/" class="">Kube Memory Quota Overcommit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubenodenotready/" class="">Kube Node Not Ready</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubenodereadinessflapping/" class="">Kube Node Readiness Flapping</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubenodeunreachable/" class="">Kube Node Unreachable</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubepersistentvolumeerrors/" class="">Kube Persistent Volume Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubepersistentvolumefillingup/" class="">Kube Persistent Volume Filling Up</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubepodcrashlooping/" class="">Kube Pod Crash Looping</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubepodnotready/" class="">Kube Pod Not Ready</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubequotaalmostfull/" class="">Kube Quota Almost Full</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubequotaexceeded/" class="">Kube Quota Exceeded</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubequotafullyused/" class="">Kube Quota Fully Used</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeschedulerdown/" class="">Kube Scheduler Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubestatefulsetgenerationmismatch/" class="">Kube StatefulSet Generation Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubestatefulsetreplicasmismatch/" class="">Kube StatefulSet Replicas Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubestatefulsetupdatenotrolledout/" class="">Kube StatefulSet Update Not RolledOut</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeversionmismatch/" class="">Kube Version Mismatch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletclientcertificateexpiration/" class="">Kubelet Client Certificate Expiration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletclientcertificaterenewalerrors/" class="">Kubelet Client Certificate Renewal Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletdown/" class="">Kubelet Down</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletplegdurationhigh/" class="">Kubelet Pod Lifecycle Event Generator Duration High</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletpodstartuplatencyhigh/" class="">Kubelet Pod Start Up Latency High</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletservercertificateexpiration/" class="">Kubelet Server Certificate Expiration</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeletservercertificaterenewalerrors/" class="">Kubelet Server Certificate Renewal Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubelettoomanypods/" class="">Kubelet Too Many Pods</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/kubernetes/kubeproxydown/" class="">KubeProxy Down</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-fd4a0b0fd48654cddf3d9df1df6f1b3a" class="toggle"  />
+    <label for="section-fd4a0b0fd48654cddf3d9df1df6f1b3a" class="flex">
+      <a role="button" class="flex-auto ">node</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodeclocknotsynchronising/" class="">Node Clock Not Synchronising</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodeclockskewdetected/" class="">Node Clock Skew Detected</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodefiledescriptorlimit/" class="">Node File Descriptor Limit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodefilesystemalmostoutoffiles/" class="">Node Filesystem Almost Out Of Files</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodefilesystemalmostoutofspace/" class="">Node Filesystem Almost Out Of Space</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodefilesystemfilesfillingup/" class="">Node Filesystem Files Filling Up</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodefilesystemspacefillingup/" class="">Node Filesystem Space Filling Up</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodehighnumberconntrackentriesused/" class="">Node High Number Conntrack Entries Used</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodenetworkreceiveerrs/" class="">Node Network Receive Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodenetworktransmiterrs/" class="">Node Network Transmit Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/noderaiddegraded/" class="">Node RAID Degraded</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/noderaiddiskfailure/" class="">Node RAID Disk Failure</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/node/nodetextfilecollectorscrapeerror/" class="">Node Text File Collector Scrape Error</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a4be051134543e2634dd470d64290df4" class="toggle"  />
+    <label for="section-a4be051134543e2634dd470d64290df4" class="flex">
+      <a role="button" class="flex-auto ">prometheus</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusbadconfig/" class="">Prometheus Bad Config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusduplicatetimestamps/" class="">Prometheus Duplicate Timestamps</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheuserrorsendingalertstoanyalertmanager/" class="">Prometheus Error Sending Alerts To Any Alertmanager</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheuserrorsendingalertstosomealertmanagers/" class="">Prometheus Error Sending Alerts To Some Alertmanagers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheuslabellimithit/" class="">Prometheus Label LimitHit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusmissingruleevaluations/" class="">Prometheus Missing Rule Evaluations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusnotconnectedtoalertmanagers/" class="">Prometheus Not Connected To Alertmanagers</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusnotingestingsamples/" class="">Prometheus Not Ingesting Samples</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusnotificationqueuerunningfull/" class="">Prometheus Notification Queue Running Full</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusoutofordertimestamps/" class="">Prometheus Out Of Order Timestamps</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusremotestoragefailures/" class="">Prometheus Remote Storage Failures</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusremotewritebehind/" class="">Prometheus Remote Write Behind</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusrulefailures/" class="">Prometheus Rule Failures</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheustargetlimithit/" class="">Prometheus Target Limit Hit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheustargetsyncfailure/" class="">Prometheus Target Sync Failure</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheustsdbcompactionsfailing/" class="">Prometheus TSDB Compactions Failing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheustsdbreloadsfailing/" class="">Prometheus TSDB Reloads Failing</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusremotewritedesiredshards/" class="">PrometheusRemoteWriteDesiredShards</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus/prometheusfederation/" class="">Prometheus Federation</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bdb1b659825ae46d3ea0f27214f356f6" class="toggle"  />
+    <label for="section-bdb1b659825ae46d3ea0f27214f356f6" class="flex">
+      <a role="button" class="flex-auto ">prometheus-operator</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/configreloadersidecarerrors/" class="">Config Reloader Sidecar Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatorlisterrors/" class="">Prometheus Operator List Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/" class="">Prometheus Operator Node Lookup Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatornotready/" class="">Prometheus Operator NotReady</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/" class="">Prometheus Operator Reconcile Errors</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatorrejectedresources/" class="">Prometheus Operator Rejected Resources</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatorsyncfailed/" class="">Prometheus Operator Sync Failed</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/prometheus-operator/prometheusoperatorwatcherrors/" class="">Prometheus Operator Watch Errors</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/devops/ci-cd-failure-resolution/" class="">Ci Cd Failure Resolution</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/gitops/argocd-application-bootstrap/" class="">Argo Cd Application Bootstrap</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/systemadmin/" class="">System Admin</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/runbooks/systemadmin/server-hardening/" class="active">Server Hardening</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Server Hardening</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#objective">Objective</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#hardening-checklist-and-procedures">Hardening Checklist and Procedures</a></li>
+        <li><a href="#verification">Verification</a></li>
+        <li><a href="#rollback-plan">Rollback Plan</a></li>
+        <li><a href="#escalation">Escalation</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h3 id="objective">
+  Objective
+  
+  <a class="anchor" href="#objective">#</a>
+  
+</h3>
+<p>To provide a comprehensive checklist and set of procedures for securing a newly provisioned Linux server. This runbook ensures a consistent and strong security posture for all servers, minimizing the attack surface.</p>
+<h3 id="prerequisites">
+  Prerequisites
+  
+  <a class="anchor" href="#prerequisites">#</a>
+  
+</h3>
+<ul>
+<li><strong>Access:</strong> Root or <code>sudo</code> access to the target Linux server via SSH.</li>
+<li><strong>Knowledge:</strong> Basic Linux command-line skills and an understanding of networking and security concepts.</li>
+<li><strong>Policy:</strong> Familiarity with your organization&rsquo;s security policies.</li>
+</ul>
+<h3 id="hardening-checklist-and-procedures">
+  Hardening Checklist and Procedures
+  
+  <a class="anchor" href="#hardening-checklist-and-procedures">#</a>
+  
+</h3>
+<h4 id="1-update-the-system">
+  1. Update the System
+  
+  <a class="anchor" href="#1-update-the-system">#</a>
+  
+</h4>
+<ul>
+<li><strong>Action:</strong> Immediately apply all available security patches and updates.</li>
+<li><strong>Command (Ubuntu/Debian):</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt update <span style="color:#f92672">&amp;&amp;</span> sudo apt upgrade -y
+</span></span></code></pre></div></li>
+<li><strong>Command (CentOS/RHEL):</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf update -y
+</span></span></code></pre></div></li>
+</ul>
+<h4 id="2-configure-user-access">
+  2. Configure User Access
+  
+  <a class="anchor" href="#2-configure-user-access">#</a>
+  
+</h4>
+<ul>
+<li><strong>Action:</strong> Disable direct root login and create a dedicated administrative user.</li>
+<li><strong>Steps:</strong>
+<ol>
+<li>Create a new user: <code>sudo adduser &lt;adminuser&gt;</code></li>
+<li>Add the user to the <code>sudo</code> group: <code>sudo usermod -aG sudo &lt;adminuser&gt;</code></li>
+<li>Disable root login via SSH. Edit <code>/etc/ssh/sshd_config</code>:
+<pre tabindex="0"><code>PermitRootLogin no
+</code></pre></li>
+<li>Restart the SSH service: <code>sudo systemctl restart sshd</code></li>
+</ol>
+</li>
+</ul>
+<h4 id="3-secure-ssh">
+  3. Secure SSH
+  
+  <a class="anchor" href="#3-secure-ssh">#</a>
+  
+</h4>
+<ul>
+<li><strong>Action:</strong> Harden the SSH configuration to prevent unauthorized access.</li>
+<li><strong>Steps:</strong> Edit <code>/etc/ssh/sshd_config</code> and set the following (at a minimum):
+<pre tabindex="0"><code>PasswordAuthentication no          # Enforce key-based authentication only
+X11Forwarding no                   # Disable X11 forwarding unless needed
+AllowUsers &lt;adminuser&gt; &lt;otheruser&gt; # Whitelist allowed SSH users
+</code></pre></li>
+<li><strong>Verification:</strong> After restarting <code>sshd</code>, ensure you can still log in with your admin user via an SSH key.</li>
+</ul>
+<h4 id="4-configure-a-firewall">
+  4. Configure a Firewall
+  
+  <a class="anchor" href="#4-configure-a-firewall">#</a>
+  
+</h4>
+<ul>
+<li><strong>Action:</strong> Enable and configure a host-based firewall to block all traffic except for necessary services.</li>
+<li><strong>Tool:</strong> <code>ufw</code> (Uncomplicated Firewall) is common on Ubuntu.</li>
+<li><strong>Commands:</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ufw default deny incoming  <span style="color:#75715e"># Deny all incoming traffic by default</span>
+</span></span><span style="display:flex;"><span>sudo ufw default allow outgoing <span style="color:#75715e"># Allow all outgoing traffic</span>
+</span></span><span style="display:flex;"><span>sudo ufw allow ssh              <span style="color:#75715e"># Allow SSH (port 22)</span>
+</span></span><span style="display:flex;"><span>sudo ufw allow http             <span style="color:#75715e"># Allow HTTP (port 80) if it&#39;s a web server</span>
+</span></span><span style="display:flex;"><span>sudo ufw allow https            <span style="color:#75715e"># Allow HTTPS (port 443) if it&#39;s a web server</span>
+</span></span><span style="display:flex;"><span>sudo ufw enable                 <span style="color:#75715e"># Enable the firewall</span>
+</span></span></code></pre></div></li>
+<li><strong>Verification:</strong> <code>sudo ufw status verbose</code></li>
+</ul>
+<h4 id="5-remove-unnecessary-services">
+  5. Remove Unnecessary Services
+  
+  <a class="anchor" href="#5-remove-unnecessary-services">#</a>
+  
+</h4>
+<ul>
+<li><strong>Action:</strong> Reduce the attack surface by uninstalling or disabling any software and services that are not required.</li>
+<li><strong>Steps:</strong>
+<ol>
+<li>List installed packages to identify candidates for removal.</li>
+<li>List running services: <code>sudo systemctl list-units --type=service --state=running</code></li>
+<li>Uninstall a package (e.g., <code>telnet</code> server): <code>sudo apt remove telnetd -y</code></li>
+<li>Disable a service from starting on boot: <code>sudo systemctl disable &lt;service-name&gt;</code></li>
+</ol>
+</li>
+</ul>
+<h4 id="6-install-security-tools">
+  6. Install Security Tools
+  
+  <a class="anchor" href="#6-install-security-tools">#</a>
+  
+</h4>
+<ul>
+<li><strong>Action:</strong> Install tools for intrusion detection and monitoring.</li>
+<li><strong>Recommendations:</strong>
+<ul>
+<li><strong>Fail2Ban:</strong> Monitors logs for malicious activity (like brute-force login attempts) and temporarily bans offending IPs.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install fail2ban -y
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Default configuration is usually sufficient to start.</span>
+</span></span></code></pre></div></li>
+<li><strong>Auditd:</strong> The Linux Auditing System provides detailed logging of security-relevant events.</li>
+</ul>
+</li>
+</ul>
+<h3 id="verification">
+  Verification
+  
+  <a class="anchor" href="#verification">#</a>
+  
+</h3>
+<ul>
+<li>Perform a port scan of the server from an external machine (e.g., using <code>nmap</code>) to confirm that only expected ports are open.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nmap -sT -p- &lt;server-ip&gt;
+</span></span></code></pre></div></li>
+<li>Attempt to log in as <code>root</code> via SSH and confirm it is denied.</li>
+<li>Attempt to log in with a password for your admin user and confirm it is denied (if key-only auth was enforced).</li>
+</ul>
+<h3 id="rollback-plan">
+  Rollback Plan
+  
+  <a class="anchor" href="#rollback-plan">#</a>
+  
+</h3>
+<ul>
+<li>If a hardening step locks you out (e.g., incorrect firewall rule), you will need console access (physical or via your cloud provider&rsquo;s console) to log in and revert the change.</li>
+<li>Always apply firewall and SSH changes with an active console session open as a backup.</li>
+</ul>
+<h3 id="escalation">
+  Escalation
+  
+  <a class="anchor" href="#escalation">#</a>
+  
+</h3>
+<ul>
+<li><strong>Who:</strong> Senior System Administrator or Security Team.</li>
+<li><strong>When:</strong> If you are unsure about the impact of a specific hardening setting or if you suspect a security compromise during the provisioning process.</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/runbooks/systemadmin/" class="flex align-center book-icon">
+        <img src="/svg/backward.svg" class="book-icon" alt="Previous" title="System Admin" />
+        <span>System Admin</span>
+      </a>
+    
+    </span>
+    <span>
+    
+    </span>
+  </div>
+  
+
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+
+<aside class="book-toc">
+  <div class="book-toc-content">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#objective">Objective</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#hardening-checklist-and-procedures">Hardening Checklist and Procedures</a></li>
+        <li><a href="#verification">Verification</a></li>
+        <li><a href="#rollback-plan">Rollback Plan</a></li>
+        <li><a href="#escalation">Escalation</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </div>
+</aside>
+
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DevOps on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/devops/</link><description>Recent content in DevOps on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/devops/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/devops/ansible_playbook_handbook_vn/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/devops/ansible_playbook_handbook_vn/</guid><description>&lt;h1 id="ansible-playbook-handbook-vn">
+ Ansible Playbook Handbook (VN)
+ 
+ &lt;a class="anchor" href="#ansible-playbook-handbook-vn">#&lt;/a>
+ 
+&lt;/h1>
+
+&lt;blockquote class='book-hint '>
+ &lt;p>Sổ tay thực chiến từ A→Z: cấu trúc project, inventory, roles, tags, limit, vars, vault, rolling update, testing, Windows hosts…&lt;/p>
+&lt;/blockquote>&lt;hr>
+&lt;h2 id="0-chuẩn-bị-môi-trường-windows--wsl2-đề-xuất">
+ 0) Chuẩn bị môi trường (Windows → WSL2 đề xuất)
+ 
+ &lt;a class="anchor" href="#0-chu%e1%ba%a9n-b%e1%bb%8b-m%c3%b4i-tr%c6%b0%e1%bb%9dng-windows--wsl2-%c4%91%e1%bb%81-xu%e1%ba%a5t">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Cài WSL2 + Ubuntu 22.04&lt;/strong>:
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>wsl --install -d Ubuntu-&lt;span style="color:#ae81ff">22.04&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>&lt;strong>Cài Ansible qua pipx (bản mới)&lt;/strong>:
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt update &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> sudo apt install -y python3-pip python3-venv pipx git ssh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pipx ensurepath
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pipx install --include-deps ansible
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ansible --version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>(Nếu quản Windows hosts) cài thêm winrm libs:
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>pipx inject ansible pywinrm pywinrm&lt;span style="color:#f92672">[&lt;/span>credssp&lt;span style="color:#f92672">]&lt;/span> kerberos requests-kerberos
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="1-tổ-chức-thư-mục-project-khuyến-nghị">
+ 1) Tổ chức thư mục project (khuyến nghị)
+ 
+ &lt;a class="anchor" href="#1-t%e1%bb%95-ch%e1%bb%a9c-th%c6%b0-m%e1%bb%a5c-project-khuy%e1%ba%bfn-ngh%e1%bb%8b">#&lt;/a>
+ 
+&lt;/h2>
+&lt;pre tabindex="0">&lt;code>ansible/
+├─ inventories/
+│ ├─ dev/
+│ │ ├─ hosts.ini
+│ │ ├─ group_vars/
+│ │ │ ├─ all.yml
+│ │ │ ├─ web.yml
+│ │ │ └─ db.yml
+│ │ └─ host_vars/
+│ │ ├─ web01.yml
+│ │ └─ db01.yml
+│ ├─ uat/ ...
+│ └─ prod/ ...
+├─ roles/
+│ ├─ common/
+│ │ ├─ tasks/main.yml
+│ │ ├─ handlers/main.yml
+│ │ ├─ templates/
+│ │ ├─ files/
+│ │ ├─ vars/main.yml
+│ │ └─ defaults/main.yml
+│ ├─ nginx/ ...
+│ └─ app/ ...
+├─ group_vars/ (tuỳ chọn dùng chung mọi môi trường)
+├─ host_vars/ (tuỳ chọn)
+├─ playbooks/
+│ ├─ site.yml
+│ ├─ play_nginx.yml
+│ └─ play_app.yml
+├─ requirements.yml (galaxy)
+├─ ansible.cfg
+└─ README.md
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>ansible.cfg (mẫu):&lt;/strong>&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/devops/ci-cd-failure-resolution/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/devops/ci-cd-failure-resolution/</guid><description>&lt;h3 id="objective">
+ Objective
+ 
+ &lt;a class="anchor" href="#objective">#&lt;/a>
+ 
+&lt;/h3>
+&lt;p>To provide a systematic approach for diagnosing, resolving, and documenting failures within the Continuous Integration/Continuous Delivery (CI/CD) pipeline. This runbook ensures that pipeline blockages are resolved quickly and efficiently, minimizing disruption to development workflows.&lt;/p>
+&lt;h3 id="prerequisites">
+ Prerequisites
+ 
+ &lt;a class="anchor" href="#prerequisites">#&lt;/a>
+ 
+&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Access:&lt;/strong> Read/write access to the CI/CD platform (e.g., GitLab CI, GitHub Actions, Jenkins).&lt;/li>
+&lt;li>&lt;strong>Permissions:&lt;/strong> Ability to view pipeline execution logs, re-run jobs, and access the source code repository.&lt;/li>
+&lt;li>&lt;strong>Knowledge:&lt;/strong> Familiarity with the application&amp;rsquo;s architecture, build process, and deployment targets.&lt;/li>
+&lt;/ul>
+&lt;h3 id="steps-for-resolution">
+ Steps for Resolution
+ 
+ &lt;a class="anchor" href="#steps-for-resolution">#&lt;/a>
+ 
+&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Identify the Failure Point:&lt;/strong>&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/devops/trivy-offline-scan-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/devops/trivy-offline-scan-guide/</guid><description>&lt;h1 id="-trivy-offline-scan-guide">
+ 🔒 Trivy Offline Scan Guide
+ 
+ &lt;a class="anchor" href="#-trivy-offline-scan-guide">#&lt;/a>
+ 
+&lt;/h1>
+&lt;p>This guide explains how to run &lt;strong>Trivy scans offline&lt;/strong> using a previously downloaded vulnerability database (DB).&lt;/p>
+&lt;hr>
+&lt;h2 id="-prerequisites">
+ 📂 Prerequisites
+ 
+ &lt;a class="anchor" href="#-prerequisites">#&lt;/a>
+ 
+&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Trivy Docker image&lt;/strong> pulled:
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker pull aquasec/trivy:latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>&lt;strong>Offline DB downloaded&lt;/strong> into &lt;code>./db&lt;/code> (from another machine with internet access):
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run --rm -v ./db:/root/.cache/trivy/db aquasec/trivy:latest image --download-db-only
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="-config-scan-iac-dockerfile-k8s-manifests">
+ ⚙️ Config Scan (IaC, Dockerfile, K8s Manifests)
+ 
+ &lt;a class="anchor" href="#-config-scan-iac-dockerfile-k8s-manifests">#&lt;/a>
+ 
+&lt;/h2>
+&lt;p>Scan Infrastructure-as-Code configs in a project folder:&lt;/p></description></item></channel></rss>
