@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>node on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/</link><description>Recent content in node on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/node/index.xml" rel="self" type="application/rss+xml"/><item><title>Node Clock Not Synchronising</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodeclocknotsynchronising/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodeclocknotsynchronising/</guid><description>&lt;h1 id="nodeclocknotsynchronising">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>node on kube-prometheus runbooks</title><link>https://hoanggvuong.github.io/runbooks/node/</link><description>Recent content in node on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://hoanggvuong.github.io/runbooks/node/index.xml" rel="self" type="application/rss+xml"/><item><title>Node Clock Not Synchronising</title><link>https://hoanggvuong.github.io/runbooks/node/nodeclocknotsynchronising/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodeclocknotsynchronising/</guid><description>&lt;h1 id="nodeclocknotsynchronising">
  NodeClockNotSynchronising
  
  &lt;a class="anchor" href="#nodeclocknotsynchronising">#&lt;/a>
@@ -31,7 +31,7 @@
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>See &lt;a href="https://runbooks.prometheus-operator.dev/runbooks/node/nodeclockskewdetected/">Node Clok Skew Detected&lt;/a> for mitigation steps.&lt;/p></description></item><item><title>Node Clock Skew Detected</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodeclockskewdetected/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodeclockskewdetected/</guid><description>&lt;h1 id="nodeclockskewdetected">
+&lt;p>See &lt;a href="https://hoanggvuong.github.io/runbooks/node/nodeclockskewdetected/">Node Clok Skew Detected&lt;/a> for mitigation steps.&lt;/p></description></item><item><title>Node Clock Skew Detected</title><link>https://hoanggvuong.github.io/runbooks/node/nodeclockskewdetected/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodeclockskewdetected/</guid><description>&lt;h1 id="nodeclockskewdetected">
  NodeClockSkewDetected
  
  &lt;a class="anchor" href="#nodeclockskewdetected">#&lt;/a>
@@ -69,7 +69,7 @@ Set proper time servers.
 Esure to sync time on server start, especially when using
 low power mode or hibernation.&lt;/p>
 &lt;p>Some resource consuming process can cause issues on given hardware,
-so move it to different servers.&lt;/p></description></item><item><title>Node File Descriptor Limit</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodefiledescriptorlimit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodefiledescriptorlimit/</guid><description>&lt;h1 id="nodefiledescriptorlimit">
+so move it to different servers.&lt;/p></description></item><item><title>Node File Descriptor Limit</title><link>https://hoanggvuong.github.io/runbooks/node/nodefiledescriptorlimit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodefiledescriptorlimit/</guid><description>&lt;h1 id="nodefiledescriptorlimit">
  NodeFileDescriptorLimit
  
  &lt;a class="anchor" href="#nodefiledescriptorlimit">#&lt;/a>
@@ -92,7 +92,7 @@ and a &lt;code>critical&lt;/code> level alert at greater than 90% usage.&lt;/p>
 &lt;/h2>
 &lt;p>Applications on the node may no longer be able to open and operate on
 files. This is likely to have severe consequences for anything scheduled on this
-node.&lt;/p></description></item><item><title>Node Filesystem Almost Out Of Files</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutoffiles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutoffiles/</guid><description>&lt;h1 id="nodefilesystemalmostoutoffiles">
+node.&lt;/p></description></item><item><title>Node Filesystem Almost Out Of Files</title><link>https://hoanggvuong.github.io/runbooks/node/nodefilesystemalmostoutoffiles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodefilesystemalmostoutoffiles/</guid><description>&lt;h1 id="nodefilesystemalmostoutoffiles">
  NodeFilesystemAlmostOutOfFiles
  
  &lt;a class="anchor" href="#nodefilesystemalmostoutoffiles">#&lt;/a>
@@ -119,7 +119,7 @@ with 3% of available inodes left.&lt;/p>
 cause any or all of the applications scheduled to that node to experience
 anything from performance degradation to full inoperability. Depending on the
 node and filesystem involved, this could pose a critical threat to the stability
-of the cluster.&lt;/p></description></item><item><title>Node Filesystem Almost Out Of Space</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutofspace/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutofspace/</guid><description>&lt;h1 id="nodefilesystemalmostoutofspace">
+of the cluster.&lt;/p></description></item><item><title>Node Filesystem Almost Out Of Space</title><link>https://hoanggvuong.github.io/runbooks/node/nodefilesystemalmostoutofspace/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodefilesystemalmostoutofspace/</guid><description>&lt;h1 id="nodefilesystemalmostoutofspace">
  NodeFilesystemAlmostOutOfSpace
  
  &lt;a class="anchor" href="#nodefilesystemalmostoutofspace">#&lt;/a>
@@ -145,7 +145,7 @@ amount of time, it uses simple static thresholds. The alert will fire as at a
 cause any or all of the applications scheduled to that node to experience
 anything from performance degradation to full inoperability. Depending on the
 node and filesystem involved, this could pose a critical threat to the stability
-of the cluster.&lt;/p></description></item><item><title>Node Filesystem Files Filling Up</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemfilesfillingup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemfilesfillingup/</guid><description>&lt;h1 id="nodefilesystemfilesfillingup">
+of the cluster.&lt;/p></description></item><item><title>Node Filesystem Files Filling Up</title><link>https://hoanggvuong.github.io/runbooks/node/nodefilesystemfilesfillingup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodefilesystemfilesfillingup/</guid><description>&lt;h1 id="nodefilesystemfilesfillingup">
  NodeFilesystemFilesFillingUp
  
  &lt;a class="anchor" href="#nodefilesystemfilesfillingup">#&lt;/a>
@@ -171,7 +171,7 @@ run out of available inodes within four hours.&lt;/p>
 cause any or all of the applications scheduled to that node to experience
 anything from performance degradation to full inoperability. Depending on the
 node and filesystem involved, this could pose a critical threat to the stability
-of the cluster.&lt;/p></description></item><item><title>Node Filesystem Space Filling Up</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemspacefillingup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemspacefillingup/</guid><description>&lt;h1 id="nodefilesystemspacefillingup">
+of the cluster.&lt;/p></description></item><item><title>Node Filesystem Space Filling Up</title><link>https://hoanggvuong.github.io/runbooks/node/nodefilesystemspacefillingup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodefilesystemspacefillingup/</guid><description>&lt;h1 id="nodefilesystemspacefillingup">
  NodeFilesystemSpaceFillingUp
  
  &lt;a class="anchor" href="#nodefilesystemspacefillingup">#&lt;/a>
@@ -195,7 +195,7 @@ time is less than 4h.&lt;/p>
 Since Kubelet automatically handles [cleaning up old logs][2] and
 [deleting unused images][3], container ephemeral storage is a common cause of
 this alert. Although this alert may be triggered before Kubelet&amp;rsquo;s garbage
-collection kicks in.&lt;/p></description></item><item><title>Node High Number Conntrack Entries Used</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodehighnumberconntrackentriesused/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodehighnumberconntrackentriesused/</guid><description>&lt;h1 id="nodehighnumberconntrackentriesused">
+collection kicks in.&lt;/p></description></item><item><title>Node High Number Conntrack Entries Used</title><link>https://hoanggvuong.github.io/runbooks/node/nodehighnumberconntrackentriesused/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodehighnumberconntrackentriesused/</guid><description>&lt;h1 id="nodehighnumberconntrackentriesused">
  NodeHighNumberConntrackEntriesUsed
  
  &lt;a class="anchor" href="#nodehighnumberconntrackentriesused">#&lt;/a>
@@ -230,7 +230,7 @@ Check which apps are generating a lot of connections.&lt;/p>
  
 &lt;/h2>
 &lt;p>Migrate some pods to another nodes.
-Bump conntrack limit directly on the node, remembering to make it persistent across node reboots.&lt;/p></description></item><item><title>Node Network Receive Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodenetworkreceiveerrs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodenetworkreceiveerrs/</guid><description>&lt;h1 id="nodenetworkreceiveerrs">
+Bump conntrack limit directly on the node, remembering to make it persistent across node reboots.&lt;/p></description></item><item><title>Node Network Receive Errors</title><link>https://hoanggvuong.github.io/runbooks/node/nodenetworkreceiveerrs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodenetworkreceiveerrs/</guid><description>&lt;h1 id="nodenetworkreceiveerrs">
  NodeNetworkReceiveErrs
  
  &lt;a class="anchor" href="#nodenetworkreceiveerrs">#&lt;/a>
@@ -265,7 +265,7 @@ Check physical cables, check networking firewall rules and so on.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>In general mitigation landscape is quite vast, some suggestions:&lt;/p></description></item><item><title>Node Network Transmit Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodenetworktransmiterrs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodenetworktransmiterrs/</guid><description>&lt;h1 id="nodenetworktransmiterrs">
+&lt;p>In general mitigation landscape is quite vast, some suggestions:&lt;/p></description></item><item><title>Node Network Transmit Errors</title><link>https://hoanggvuong.github.io/runbooks/node/nodenetworktransmiterrs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodenetworktransmiterrs/</guid><description>&lt;h1 id="nodenetworktransmiterrs">
  NodeNetworkTransmitErrs
  
  &lt;a class="anchor" href="#nodenetworktransmiterrs">#&lt;/a>
@@ -295,7 +295,7 @@ Network attached storage performance issues or even data loss.&lt;/p>
 &lt;p>Investigate networking issues on the node and to connected hardware.
 Check network interface saturation.
 Check CPU usage saturation.
-Check physical cables, check networking firewall rules and so on.&lt;/p></description></item><item><title>Node RAID Degraded</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/noderaiddegraded/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/noderaiddegraded/</guid><description>&lt;h1 id="noderaiddegraded">
+Check physical cables, check networking firewall rules and so on.&lt;/p></description></item><item><title>Node RAID Degraded</title><link>https://hoanggvuong.github.io/runbooks/node/noderaiddegraded/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/noderaiddegraded/</guid><description>&lt;h1 id="noderaiddegraded">
  NodeRAIDDegraded
  
  &lt;a class="anchor" href="#noderaiddegraded">#&lt;/a>
@@ -327,13 +327,13 @@ due to further issues with disks.&lt;/p>
 &lt;/h2>
 &lt;p>You can open a shell on the node and use the standard Linux utilities to
 diagnose the issue, but you may need to install additional software in the debug
-container:&lt;/p></description></item><item><title>Node RAID Disk Failure</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/noderaiddiskfailure/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/noderaiddiskfailure/</guid><description>&lt;h1 id="noderaiddiskfailure">
+container:&lt;/p></description></item><item><title>Node RAID Disk Failure</title><link>https://hoanggvuong.github.io/runbooks/node/noderaiddiskfailure/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/noderaiddiskfailure/</guid><description>&lt;h1 id="noderaiddiskfailure">
  NodeRAIDDiskFailure
  
  &lt;a class="anchor" href="#noderaiddiskfailure">#&lt;/a>
  
 &lt;/h1>
-&lt;p>See &lt;a href="https://runbooks.prometheus-operator.dev/runbooks/node/noderaiddegraded/">Node RAID Degraded&lt;/a>&lt;/p></description></item><item><title>Node Text File Collector Scrape Error</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodetextfilecollectorscrapeerror/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodetextfilecollectorscrapeerror/</guid><description>&lt;h1 id="nodetextfilecollectorscrapeerror">
+&lt;p>See &lt;a href="https://hoanggvuong.github.io/runbooks/node/noderaiddegraded/">Node RAID Degraded&lt;/a>&lt;/p></description></item><item><title>Node Text File Collector Scrape Error</title><link>https://hoanggvuong.github.io/runbooks/node/nodetextfilecollectorscrapeerror/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodetextfilecollectorscrapeerror/</guid><description>&lt;h1 id="nodetextfilecollectorscrapeerror">
  NodeTextFileCollectorScrapeError
  
  &lt;a class="anchor" href="#nodetextfilecollectorscrapeerror">#&lt;/a>

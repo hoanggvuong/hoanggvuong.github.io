@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>etcd on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/</link><description>Recent content in etcd on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/etcd/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdbackendquotalowspace/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdbackendquotalowspace/</guid><description>&lt;h1 id="etcdbackendquotalowspace">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>etcd on kube-prometheus runbooks</title><link>https://hoanggvuong.github.io/runbooks/etcd/</link><description>Recent content in etcd on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://hoanggvuong.github.io/runbooks/etcd/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdbackendquotalowspace/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdbackendquotalowspace/</guid><description>&lt;h1 id="etcdbackendquotalowspace">
  etcdBackendQuotaLowSpace
  
  &lt;a class="anchor" href="#etcdbackendquotalowspace">#&lt;/a>
@@ -22,7 +22,7 @@ DB quota. The consumed space is in Prometheus represented by the metric
 &lt;/h2>
 &lt;p>In case the DB size exceeds the DB quota, no writes can be performed anymore on
 the etcd cluster. This further prevents any updates in the cluster, such as the
-creation of pods.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdgrpcrequestsslow/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdgrpcrequestsslow/</guid><description>&lt;h1 id="etcdgrpcrequestsslow">
+creation of pods.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdgrpcrequestsslow/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdgrpcrequestsslow/</guid><description>&lt;h1 id="etcdgrpcrequestsslow">
  etcdGRPCRequestsSlow
  
  &lt;a class="anchor" href="#etcdgrpcrequestsslow">#&lt;/a>
@@ -57,7 +57,7 @@ election failure, slow reads and writes.&lt;/p>
  
 &lt;/h3>
 &lt;p>One of the most common reasons for slow gRPC requests is disk. Checking disk
-related metrics and dashboards should provide a more clear picture.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdhighfsyncdurations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdhighfsyncdurations/</guid><description>&lt;h1 id="etcdhighfsyncdurations">
+related metrics and dashboards should provide a more clear picture.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdhighfsyncdurations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdhighfsyncdurations/</guid><description>&lt;h1 id="etcdhighfsyncdurations">
  etcdHighFsyncDurations
  
  &lt;a class="anchor" href="#etcdhighfsyncdurations">#&lt;/a>
@@ -73,7 +73,7 @@ related metrics and dashboards should provide a more clear picture.&lt;/p></desc
 high for 10 minutes.&lt;/p>
 &lt;details>
 &lt;summary>Full context&lt;/summary>
-&lt;p>Every write request sent to etcd has to be [fsync&amp;rsquo;d][fsync] to disk by the leader node, transmitted to its peers, and fsync&amp;rsquo;d to those disks as well before etcd can tell the client that the write request succeeded (as part of the [Raft consensus algorithm][raft]). As a result of all those fsync&amp;rsquo;s, etcd cares a LOT about disk latency, which this alert picks up on.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/</guid><description>&lt;h1 id="etcdhighnumberoffailedgrpcrequests">
+&lt;p>Every write request sent to etcd has to be [fsync&amp;rsquo;d][fsync] to disk by the leader node, transmitted to its peers, and fsync&amp;rsquo;d to those disks as well before etcd can tell the client that the write request succeeded (as part of the [Raft consensus algorithm][raft]). As a result of all those fsync&amp;rsquo;s, etcd cares a LOT about disk latency, which this alert picks up on.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/</guid><description>&lt;h1 id="etcdhighnumberoffailedgrpcrequests">
  etcdHighNumberOfFailedGRPCRequests
  
  &lt;a class="anchor" href="#etcdhighnumberoffailedgrpcrequests">#&lt;/a>
@@ -110,7 +110,7 @@ instance that has failing requests:&lt;/p>
 &lt;p>All the gRPC errors should also be logged in each respective etcd instance logs.
 You can get the instance name from the alert that is firing or by running the
 query detailed above. Those etcd instance logs should serve as further insight
-into what is wrong.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdinsufficientmembers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdinsufficientmembers/</guid><description>&lt;h1 id="etcdinsufficientmembers">
+into what is wrong.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdinsufficientmembers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdinsufficientmembers/</guid><description>&lt;h1 id="etcdinsufficientmembers">
  etcdInsufficientMembers
  
  &lt;a class="anchor" href="#etcdinsufficientmembers">#&lt;/a>
@@ -133,7 +133,7 @@ This means that etcd cluster has not enough members in the cluster to create quo
 &lt;/h2>
 &lt;p>When etcd does not have a majority of instances available the Kubernetes and
 OpenShift APIs will reject read and write requests and operations that preserve
-the health of workloads cannot be performed.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdmembersdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdmembersdown/</guid><description>&lt;h1 id="etcdmembersdown">
+the health of workloads cannot be performed.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdmembersdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdmembersdown/</guid><description>&lt;h1 id="etcdmembersdown">
  etcdMembersDown
  
  &lt;a class="anchor" href="#etcdmembersdown">#&lt;/a>
@@ -160,7 +160,7 @@ upgrade proposals. With this approach, a split-brain inconsistency can be
 avoided. In the case that only one member is down in a 3-member cluster, it
 still can make forward progress. Due to the fact that the quorum is 2 and 2
 members are still alive. However, when more members are down, the cluster
-becomes unrecoverable.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdnoleader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdnoleader/</guid><description>&lt;h1 id="etcdnoleader">
+becomes unrecoverable.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdnoleader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdnoleader/</guid><description>&lt;h1 id="etcdnoleader">
  etcdNoLeader
  
  &lt;a class="anchor" href="#etcdnoleader">#&lt;/a>

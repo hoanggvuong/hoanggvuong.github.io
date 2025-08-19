@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>kube-state-metrics on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/</link><description>Recent content in kube-state-metrics on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/index.xml" rel="self" type="application/rss+xml"/><item><title>Kube State Metric sWatch Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricswatcherrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricswatcherrors/</guid><description>&lt;h1 id="kubestatemetricswatcherrors">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>kube-state-metrics on kube-prometheus runbooks</title><link>https://hoanggvuong.github.io/runbooks/kube-state-metrics/</link><description>Recent content in kube-state-metrics on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://hoanggvuong.github.io/runbooks/kube-state-metrics/index.xml" rel="self" type="application/rss+xml"/><item><title>Kube State Metric sWatch Errors</title><link>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricswatcherrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricswatcherrors/</guid><description>&lt;h1 id="kubestatemetricswatcherrors">
  KubeStateMetricsWatchErrors
  
  &lt;a class="anchor" href="#kubestatemetricswatcherrors">#&lt;/a>
@@ -33,7 +33,7 @@ Check networking rules and network policies.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Kube State Metrics List Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricslisterrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricslisterrors/</guid><description>&lt;h1 id="kubestatemetricslisterrors">
+&lt;p>TODO&lt;/p></description></item><item><title>Kube State Metrics List Errors</title><link>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricslisterrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricslisterrors/</guid><description>&lt;h1 id="kubestatemetricslisterrors">
  KubeStateMetricsListErrors
  
  &lt;a class="anchor" href="#kubestatemetricslisterrors">#&lt;/a>
@@ -68,7 +68,7 @@ Check networking rules and network policies.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Kube State Metrics Sharding Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricsshardingmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricsshardingmismatch/</guid><description>&lt;h1 id="kubestatemetricsshardingmismatch">
+&lt;p>TODO&lt;/p></description></item><item><title>Kube State Metrics Sharding Mismatch</title><link>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricsshardingmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricsshardingmismatch/</guid><description>&lt;h1 id="kubestatemetricsshardingmismatch">
  KubeStateMetricsShardingMismatch
  
  &lt;a class="anchor" href="#kubestatemetricsshardingmismatch">#&lt;/a>
@@ -104,7 +104,7 @@ Check networking rules and network policies.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Kube State Metrics Shards Missing</title><link>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricsshardsmissing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricsshardsmissing/</guid><description>&lt;h1 id="kubestatemetricsshardsmissing">
+&lt;p>TODO&lt;/p></description></item><item><title>Kube State Metrics Shards Missing</title><link>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricsshardsmissing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricsshardsmissing/</guid><description>&lt;h1 id="kubestatemetricsshardsmissing">
  KubeStateMetricsShardsMissing
  
  &lt;a class="anchor" href="#kubestatemetricsshardsmissing">#&lt;/a>

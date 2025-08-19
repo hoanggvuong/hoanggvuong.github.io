@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>prometheus-operator on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/</link><description>Recent content in prometheus-operator on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/index.xml" rel="self" type="application/rss+xml"/><item><title>Config Reloader Sidecar Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/configreloadersidecarerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/configreloadersidecarerrors/</guid><description>&lt;h1 id="configreloadersidecarerrors">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>prometheus-operator on kube-prometheus runbooks</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/</link><description>Recent content in prometheus-operator on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://hoanggvuong.github.io/runbooks/prometheus-operator/index.xml" rel="self" type="application/rss+xml"/><item><title>Config Reloader Sidecar Errors</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/configreloadersidecarerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/configreloadersidecarerrors/</guid><description>&lt;h1 id="configreloadersidecarerrors">
  ConfigReloaderSidecarErrors
  
  &lt;a class="anchor" href="#configreloadersidecarerrors">#&lt;/a>
@@ -34,7 +34,7 @@ stale and cannot be automatically updated.'&lt;/p>
  
 &lt;/h2>
 &lt;p>Usually means new config was rejected by the controlled app because it contains
-errors such as unknown configuration sections or bad resource definitions.&lt;/p></description></item><item><title>Prometheus Operator List Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorlisterrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorlisterrors/</guid><description>&lt;h1 id="prometheusoperatorlisterrors">
+errors such as unknown configuration sections or bad resource definitions.&lt;/p></description></item><item><title>Prometheus Operator List Errors</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorlisterrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorlisterrors/</guid><description>&lt;h1 id="prometheusoperatorlisterrors">
  PrometheusOperatorListErrors
  
  &lt;a class="anchor" href="#prometheusoperatorlisterrors">#&lt;/a>
@@ -70,7 +70,7 @@ errors such as unknown configuration sections or bad resource definitions.&lt;/p
  
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
-&lt;/h2></description></item><item><title>Prometheus Operator Node Lookup Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/</guid><description>&lt;h1 id="prometheusoperatornodelookuperrors">
+&lt;/h2></description></item><item><title>Prometheus Operator Node Lookup Errors</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/</guid><description>&lt;h1 id="prometheusoperatornodelookuperrors">
  PrometheusOperatorNodeLookupErrors
  
  &lt;a class="anchor" href="#prometheusoperatornodelookuperrors">#&lt;/a>
@@ -105,7 +105,7 @@ errors such as unknown configuration sections or bad resource definitions.&lt;/p
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Mitigation&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TODO
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Prometheus Operator NotReady</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatornotready/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatornotready/</guid><description>&lt;h1 id="prometheusoperatornotready">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Prometheus Operator NotReady</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatornotready/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatornotready/</guid><description>&lt;h1 id="prometheusoperatornotready">
  PrometheusOperatorNotReady
  
  &lt;a class="anchor" href="#prometheusoperatornotready">#&lt;/a>
@@ -142,7 +142,7 @@ errors such as unknown configuration sections or bad resource definitions.&lt;/p
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Prometheus Operator Reconcile Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/</guid><description>&lt;h1 id="prometheusoperatorreconcileerrors">
+&lt;p>TODO&lt;/p></description></item><item><title>Prometheus Operator Reconcile Errors</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/</guid><description>&lt;h1 id="prometheusoperatorreconcileerrors">
  PrometheusOperatorReconcileErrors
  
  &lt;a class="anchor" href="#prometheusoperatorreconcileerrors">#&lt;/a>
@@ -175,7 +175,7 @@ Check service account tokens.&lt;/p>
  
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
-&lt;/h2></description></item><item><title>Prometheus Operator Rejected Resources</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorrejectedresources/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorrejectedresources/</guid><description>&lt;h1 id="prometheusoperatorrejectedresources">
+&lt;/h2></description></item><item><title>Prometheus Operator Rejected Resources</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorrejectedresources/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorrejectedresources/</guid><description>&lt;h1 id="prometheusoperatorrejectedresources">
  PrometheusOperatorRejectedResources
  
  &lt;a class="anchor" href="#prometheusoperatorrejectedresources">#&lt;/a>
@@ -211,7 +211,7 @@ Check service account tokens.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Fix newly created Custom Resource to conform to the schema defined in a CRD and reapply it to the cluster.&lt;/p></description></item><item><title>Prometheus Operator Sync Failed</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorsyncfailed/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorsyncfailed/</guid><description>&lt;h1 id="prometheusoperatorsyncfailed">
+&lt;p>Fix newly created Custom Resource to conform to the schema defined in a CRD and reapply it to the cluster.&lt;/p></description></item><item><title>Prometheus Operator Sync Failed</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorsyncfailed/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorsyncfailed/</guid><description>&lt;h1 id="prometheusoperatorsyncfailed">
  PrometheusOperatorSyncFailed
  
  &lt;a class="anchor" href="#prometheusoperatorsyncfailed">#&lt;/a>
@@ -244,7 +244,7 @@ Check service account tokens.&lt;/p>
  
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
-&lt;/h2></description></item><item><title>Prometheus Operator Watch Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorwatcherrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorwatcherrors/</guid><description>&lt;h1 id="prometheusoperatorwatcherrors">
+&lt;/h2></description></item><item><title>Prometheus Operator Watch Errors</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorwatcherrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorwatcherrors/</guid><description>&lt;h1 id="prometheusoperatorwatcherrors">
  PrometheusOperatorWatchErrors
  
  &lt;a class="anchor" href="#prometheusoperatorwatcherrors">#&lt;/a>

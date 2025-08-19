@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Introduction on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/</link><description>Recent content in Introduction on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/index.xml" rel="self" type="application/rss+xml"/><item><title>Alertmanager Cluster Crashlooping</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerclustercrashlooping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerclustercrashlooping/</guid><description>&lt;h1 id="alertmanagerclustercrashlooping">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Introduction on kube-prometheus runbooks</title><link>https://hoanggvuong.github.io/</link><description>Recent content in Introduction on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://hoanggvuong.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Alertmanager Cluster Crashlooping</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerclustercrashlooping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerclustercrashlooping/</guid><description>&lt;h1 id="alertmanagerclustercrashlooping">
  AlertmanagerClusterCrashlooping
  
  &lt;a class="anchor" href="#alertmanagerclustercrashlooping">#&lt;/a>
@@ -30,7 +30,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default alertmanager-main-0 1/2 CrashLoopBackOff &lt;span style="color:#ae81ff">37107&lt;/span> 2d
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default alertmanager-main-1 2/2 Running &lt;span style="color:#ae81ff">0&lt;/span> 43d
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default alertmanager-main-2 2/2 Running &lt;span style="color:#ae81ff">0&lt;/span> 43d 
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Find the root cause by looking to events for a given pod/deployement&lt;/p></description></item><item><title>Alertmanager Cluster Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerclusterdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerclusterdown/</guid><description>&lt;h1 id="alertmanagerclusterdown">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Find the root cause by looking to events for a given pod/deployement&lt;/p></description></item><item><title>Alertmanager Cluster Down</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerclusterdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerclusterdown/</guid><description>&lt;h1 id="alertmanagerclusterdown">
  AlertmanagerClusterDown
  
  &lt;a class="anchor" href="#alertmanagerclusterdown">#&lt;/a>
@@ -66,7 +66,7 @@ You can get a big picture with &lt;code>events&lt;/code>.&lt;/p>
  
 &lt;/h2>
 &lt;p>There are no cheap options to mitigate this risk.
-Verifying any new changes in preprod before production environment should improve stability.&lt;/p></description></item><item><title>Alertmanager Cluster Failed To Send Alerts</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerclusterfailedtosendalerts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerclusterfailedtosendalerts/</guid><description>&lt;h1 id="alertmanagerclusterfailedtosendalerts">
+Verifying any new changes in preprod before production environment should improve stability.&lt;/p></description></item><item><title>Alertmanager Cluster Failed To Send Alerts</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerclusterfailedtosendalerts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerclusterfailedtosendalerts/</guid><description>&lt;h1 id="alertmanagerclusterfailedtosendalerts">
  AlertmanagerClusterFailedToSendAlerts
  
  &lt;a class="anchor" href="#alertmanagerclusterfailedtosendalerts">#&lt;/a>
@@ -99,7 +99,7 @@ Verifying any new changes in preprod before production environment should improv
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Depending on the integration, correct the integration with the faulty instance (network, authorization token, firewall&amp;hellip;)&lt;/p></description></item><item><title>Alertmanager ConfigInconsistent</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerconfiginconsistent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerconfiginconsistent/</guid><description>&lt;h1 id="alertmanagerconfiginconsistent">
+&lt;p>Depending on the integration, correct the integration with the faulty instance (network, authorization token, firewall&amp;hellip;)&lt;/p></description></item><item><title>Alertmanager ConfigInconsistent</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerconfiginconsistent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerconfiginconsistent/</guid><description>&lt;h1 id="alertmanagerconfiginconsistent">
  AlertmanagerConfigInconsistent
  
  &lt;a class="anchor" href="#alertmanagerconfiginconsistent">#&lt;/a>
@@ -127,7 +127,7 @@ Nevertheless, in most cases the alert might be lost or routed to the incorrect i
  
 &lt;/h2>
 &lt;p>Run a &lt;code>diff&lt;/code> tool between all &lt;code>alertmanager.yml&lt;/code> that are deployed to find what is wrong.
-You could run a job within your CI to avoid this issue in the future.&lt;/p></description></item><item><title>Alertmanager Failed Reload</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerfailedreload/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerfailedreload/</guid><description>&lt;h1 id="alertmanagerfailedreload">
+You could run a job within your CI to avoid this issue in the future.&lt;/p></description></item><item><title>Alertmanager Failed Reload</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerfailedreload/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerfailedreload/</guid><description>&lt;h1 id="alertmanagerfailedreload">
  AlertmanagerFailedReload
  
  &lt;a class="anchor" href="#alertmanagerfailedreload">#&lt;/a>
@@ -158,7 +158,7 @@ instances, so avoid deleting existing pods.&lt;/p>
  
 &lt;/h2>
 &lt;p>Verify if there is an error in &lt;code>config-reloader&lt;/code> container logs.
-Here an example with network issues.&lt;/p></description></item><item><title>Alertmanager Failed To Send Alerts</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerfailedtosendalerts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerfailedtosendalerts/</guid><description>&lt;h1 id="alertmanagerfailedtosendalerts">
+Here an example with network issues.&lt;/p></description></item><item><title>Alertmanager Failed To Send Alerts</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerfailedtosendalerts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerfailedtosendalerts/</guid><description>&lt;h1 id="alertmanagerfailedtosendalerts">
  AlertmanagerFailedToSendAlerts
  
  &lt;a class="anchor" href="#alertmanagerfailedtosendalerts">#&lt;/a>
@@ -190,7 +190,7 @@ a specific integration.&lt;/p>
 &lt;p>You can look metrics exposed in prometheus console using promQL.
 For exemple the following query will display the number of failed
 notifications per instance for pager duty integration.
-We have 3 instances involved in the example bellow.&lt;/p></description></item><item><title>Alertmanager Members Inconsistent</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagermembersinconsistent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagermembersinconsistent/</guid><description>&lt;h1 id="alertmanagermembersinconsistent">
+We have 3 instances involved in the example bellow.&lt;/p></description></item><item><title>Alertmanager Members Inconsistent</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagermembersinconsistent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagermembersinconsistent/</guid><description>&lt;h1 id="alertmanagermembersinconsistent">
  AlertmanagerMembersInconsistent
  
  &lt;a class="anchor" href="#alertmanagermembersinconsistent">#&lt;/a>
@@ -234,7 +234,7 @@ We have 3 instances involved in the example bellow.&lt;/p></description></item><
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Deleting an incorrect Endpoint should trigger its recreation with a correct IP address.&lt;/p></description></item><item><title>Config Reloader Sidecar Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/configreloadersidecarerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/configreloadersidecarerrors/</guid><description>&lt;h1 id="configreloadersidecarerrors">
+&lt;p>Deleting an incorrect Endpoint should trigger its recreation with a correct IP address.&lt;/p></description></item><item><title>Config Reloader Sidecar Errors</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/configreloadersidecarerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/configreloadersidecarerrors/</guid><description>&lt;h1 id="configreloadersidecarerrors">
  ConfigReloaderSidecarErrors
  
  &lt;a class="anchor" href="#configreloadersidecarerrors">#&lt;/a>
@@ -270,7 +270,7 @@ stale and cannot be automatically updated.'&lt;/p>
  
 &lt;/h2>
 &lt;p>Usually means new config was rejected by the controlled app because it contains
-errors such as unknown configuration sections or bad resource definitions.&lt;/p></description></item><item><title>CPU Throttling High</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/cputhrottlinghigh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/cputhrottlinghigh/</guid><description>&lt;h1 id="cpu-throttling-high">
+errors such as unknown configuration sections or bad resource definitions.&lt;/p></description></item><item><title>CPU Throttling High</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/cputhrottlinghigh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/cputhrottlinghigh/</guid><description>&lt;h1 id="cpu-throttling-high">
  CPU Throttling High
  
  &lt;a class="anchor" href="#cpu-throttling-high">#&lt;/a>
@@ -310,7 +310,7 @@ the application, it can be skipped.&lt;/p>
 &lt;/h2>
 &lt;p>&lt;strong>Notice&lt;/strong>:
 User shouldn&amp;rsquo;t increase CPU limits unless the application is behaving
-erratically (another alert firing).&lt;/p></description></item><item><title>Info Inhibitor</title><link>https://runbooks.prometheus-operator.dev/runbooks/general/infoinhibitor/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/general/infoinhibitor/</guid><description>&lt;h1 id="infoinhibitor">
+erratically (another alert firing).&lt;/p></description></item><item><title>Info Inhibitor</title><link>https://hoanggvuong.github.io/runbooks/general/infoinhibitor/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/general/infoinhibitor/</guid><description>&lt;h1 id="infoinhibitor">
  InfoInhibitor
  
  &lt;a class="anchor" href="#infoinhibitor">#&lt;/a>
@@ -335,7 +335,7 @@ but they are relevant when combined with other alerts.&lt;/p>
  &lt;a class="anchor" href="#impact">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Alert does not have any impact and it is used only as a workaround to a missing feature in alertmanager.&lt;/p></description></item><item><title>Kube Aggregated API Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeaggregatedapidown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeaggregatedapidown/</guid><description>&lt;h1 id="kubeaggregatedapidown">
+&lt;p>Alert does not have any impact and it is used only as a workaround to a missing feature in alertmanager.&lt;/p></description></item><item><title>Kube Aggregated API Down</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeaggregatedapidown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeaggregatedapidown/</guid><description>&lt;h1 id="kubeaggregatedapidown">
  KubeAggregatedAPIDown
  
  &lt;a class="anchor" href="#kubeaggregatedapidown">#&lt;/a>
@@ -376,7 +376,7 @@ unable to use custom metrics to scale or even unable to use cluster.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Kube Aggregated API Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeaggregatedapierrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeaggregatedapierrors/</guid><description>&lt;h1 id="kubeaggregatedapierrors">
+&lt;p>TODO&lt;/p></description></item><item><title>Kube Aggregated API Errors</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeaggregatedapierrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeaggregatedapierrors/</guid><description>&lt;h1 id="kubeaggregatedapierrors">
  KubeAggregatedAPIErrors
  
  &lt;a class="anchor" href="#kubeaggregatedapierrors">#&lt;/a>
@@ -417,7 +417,7 @@ unable to use custom metrics to scale or even unable to use cluster.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Kube API Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapidown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapidown/</guid><description>&lt;h1 id="kubeapidown">
+&lt;p>TODO&lt;/p></description></item><item><title>Kube API Down</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeapidown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeapidown/</guid><description>&lt;h1 id="kubeapidown">
  KubeAPIDown
  
  &lt;a class="anchor" href="#kubeapidown">#&lt;/a>
@@ -440,7 +440,7 @@ been reachable by the monitoring system for more than 15 minutes.&lt;/p>
 &lt;p>This is a critical alert. The Kubernetes API is not responding. The
 cluster may partially or fully non-functional.&lt;/p>
 &lt;p>Applications, which do not use kubernetes API directly, will continue to work. Changing kubernetes resources is not possible.
-in the cluster.&lt;/p></description></item><item><title>Kube API Error Budget Burn</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapierrorbudgetburn/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapierrorbudgetburn/</guid><description>&lt;h1 id="kubeapierrorbudgetburn">
+in the cluster.&lt;/p></description></item><item><title>Kube API Error Budget Burn</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeapierrorbudgetburn/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeapierrorbudgetburn/</guid><description>&lt;h1 id="kubeapierrorbudgetburn">
  KubeAPIErrorBudgetBurn
  
  &lt;a class="anchor" href="#kubeapierrorbudgetburn">#&lt;/a>
@@ -457,7 +457,7 @@ There may be &lt;strong>too many errors&lt;/strong> returned by the APIServer an
 &lt;p>&lt;strong>This is always important; the only deciding factor is how urgent it is at the current rate&lt;/strong>&lt;/p>
 &lt;details>
 &lt;summary>Full context&lt;/summary>
-&lt;p>This alert essentially means that a higher-than-expected percentage of the operations kube-apiserver is performing are erroring. Since random errors are inevitable, kube-apiserver has a &amp;ldquo;budget&amp;rdquo; of errors that it is allowed to make before triggering this alert.&lt;/p></description></item><item><title>Kube API Terminated Requests</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapiterminatedrequests/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapiterminatedrequests/</guid><description>&lt;h1 id="kubeapiterminatedrequests">
+&lt;p>This alert essentially means that a higher-than-expected percentage of the operations kube-apiserver is performing are erroring. Since random errors are inevitable, kube-apiserver has a &amp;ldquo;budget&amp;rdquo; of errors that it is allowed to make before triggering this alert.&lt;/p></description></item><item><title>Kube API Terminated Requests</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeapiterminatedrequests/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeapiterminatedrequests/</guid><description>&lt;h1 id="kubeapiterminatedrequests">
  KubeAPITerminatedRequests
  
  &lt;a class="anchor" href="#kubeapiterminatedrequests">#&lt;/a>
@@ -486,7 +486,7 @@ Some in-cluster services this may degrade or make service unavailable.&lt;/p>
 &lt;/h2>
 &lt;p>Use the &lt;code>apiserver_flowcontrol_rejected_requests_total&lt;/code> metric to determine
 which flow schema is throttling the traffic to the API Server.
-The flow schema also provides information on the affected resources and subjects.&lt;/p></description></item><item><title>Kube Client Certificate Expiration</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeclientcertificateexpiration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeclientcertificateexpiration/</guid><description>&lt;h1 id="kubeclientcertificateexpiration">
+The flow schema also provides information on the affected resources and subjects.&lt;/p></description></item><item><title>Kube Client Certificate Expiration</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeclientcertificateexpiration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeclientcertificateexpiration/</guid><description>&lt;h1 id="kubeclientcertificateexpiration">
  KubeClientCertificateExpiration
  
  &lt;a class="anchor" href="#kubeclientcertificateexpiration">#&lt;/a>
@@ -514,7 +514,7 @@ In cluster services communicating with Kubernetes API may degrade or become unav
  
 &lt;/h2>
 &lt;p>Check when certificate was issued and when it expires.
-Check serviceAccounts and service account tokens.&lt;/p></description></item><item><title>Kube Client Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeclienterrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeclienterrors/</guid><description>&lt;h1 id="kubeclienterrors">
+Check serviceAccounts and service account tokens.&lt;/p></description></item><item><title>Kube Client Errors</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeclienterrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeclienterrors/</guid><description>&lt;h1 id="kubeclienterrors">
  KubeClientErrors
  
  &lt;a class="anchor" href="#kubeclienterrors">#&lt;/a>
@@ -549,7 +549,7 @@ Check serviceAccounts and service account tokens.&lt;/p></description></item><it
 from kubernetes API, for example it has too wide permissions and scans for
 resources in all namespaces.&lt;/li>
 &lt;/ul>
-&lt;p>Check logs from client side (sometimes app logs).&lt;/p></description></item><item><title>Kube Container Waiting</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecontainerwaiting/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecontainerwaiting/</guid><description>&lt;h1 id="kubecontainerwaiting">
+&lt;p>Check logs from client side (sometimes app logs).&lt;/p></description></item><item><title>Kube Container Waiting</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubecontainerwaiting/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubecontainerwaiting/</guid><description>&lt;h1 id="kubecontainerwaiting">
  KubeContainerWaiting
  
  &lt;a class="anchor" href="#kubecontainerwaiting">#&lt;/a>
@@ -588,7 +588,7 @@ resources in all namespaces.&lt;/li>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>See &lt;a href="https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/#my-pod-stays-waiting">Container waiting&lt;/a>&lt;/p></description></item><item><title>Kube Controller Manager Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecontrollermanagerdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecontrollermanagerdown/</guid><description>&lt;h1 id="kubecontrollermanagerdown">
+&lt;p>See &lt;a href="https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/#my-pod-stays-waiting">Container waiting&lt;/a>&lt;/p></description></item><item><title>Kube Controller Manager Down</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubecontrollermanagerdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubecontrollermanagerdown/</guid><description>&lt;h1 id="kubecontrollermanagerdown">
  KubeControllerManagerDown
  
  &lt;a class="anchor" href="#kubecontrollermanagerdown">#&lt;/a>
@@ -625,7 +625,7 @@ resources in all namespaces.&lt;/li>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>See old CoreOS docs in &lt;a href="http://web.archive.org/web/20201026205154/https://coreos.com/tectonic/docs/latest/troubleshooting/controller-recovery.html">Web Archive&lt;/a>&lt;/p></description></item><item><title>Kube CPU Overcommit</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecpuovercommit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecpuovercommit/</guid><description>&lt;h1 id="kubecpuovercommit">
+&lt;p>See old CoreOS docs in &lt;a href="http://web.archive.org/web/20201026205154/https://coreos.com/tectonic/docs/latest/troubleshooting/controller-recovery.html">Web Archive&lt;/a>&lt;/p></description></item><item><title>Kube CPU Overcommit</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubecpuovercommit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubecpuovercommit/</guid><description>&lt;h1 id="kubecpuovercommit">
  KubeCPUOvercommit
  
  &lt;a class="anchor" href="#kubecpuovercommit">#&lt;/a>
@@ -671,7 +671,7 @@ In case of node failure some pods will not fit in the remaining nodes.&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>Add more nodes to the cluster - usually it is better to have more smaller
-nodes, than few bigger.&lt;/p></description></item><item><title>Kube CPU Quota Overcommit</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecpuquotaovercommit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubecpuquotaovercommit/</guid><description>&lt;h1 id="kubecpuquotaovercommit">
+nodes, than few bigger.&lt;/p></description></item><item><title>Kube CPU Quota Overcommit</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubecpuquotaovercommit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubecpuquotaovercommit/</guid><description>&lt;h1 id="kubecpuquotaovercommit">
  KubeCPUQuotaOvercommit
  
  &lt;a class="anchor" href="#kubecpuquotaovercommit">#&lt;/a>
@@ -711,7 +711,7 @@ nodes, than few bigger.&lt;/p></description></item><item><title>Kube CPU Quota O
 &lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>Review existing quota for given namespace and adjust it accordingly.&lt;/p></description></item><item><title>Kube DaemonSet MisScheduled</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetmisscheduled/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetmisscheduled/</guid><description>&lt;h1 id="kubedaemonsetmisscheduled">
+&lt;p>Review existing quota for given namespace and adjust it accordingly.&lt;/p></description></item><item><title>Kube DaemonSet MisScheduled</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubedaemonsetmisscheduled/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubedaemonsetmisscheduled/</guid><description>&lt;h1 id="kubedaemonsetmisscheduled">
  KubeDaemonSetMisScheduled
  
  &lt;a class="anchor" href="#kubedaemonsetmisscheduled">#&lt;/a>
@@ -761,7 +761,7 @@ and other supporting tools such as gpu-feature-discovery&lt;/li>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Update DaemonSet and apply change, delete pods manually.&lt;/p></description></item><item><title>Kube DaemonSet Not Scheduled</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetnotscheduled/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetnotscheduled/</guid><description>&lt;h1 id="kubedaemonsetnotscheduled">
+&lt;p>Update DaemonSet and apply change, delete pods manually.&lt;/p></description></item><item><title>Kube DaemonSet Not Scheduled</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubedaemonsetnotscheduled/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubedaemonsetnotscheduled/</guid><description>&lt;h1 id="kubedaemonsetnotscheduled">
  KubeDaemonSetNotScheduled
  
  &lt;a class="anchor" href="#kubedaemonsetnotscheduled">#&lt;/a>
@@ -813,7 +813,7 @@ cluster-autoscaler status configmap.&lt;/li>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Set proper priority class for important dameonsets to system-node-critical.&lt;/p></description></item><item><title>Kube DaemonSet Rollout Stuck</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetrolloutstuck/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedaemonsetrolloutstuck/</guid><description>&lt;h1 id="kubedaemonsetrolloutstuck">
+&lt;p>Set proper priority class for important dameonsets to system-node-critical.&lt;/p></description></item><item><title>Kube DaemonSet Rollout Stuck</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubedaemonsetrolloutstuck/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubedaemonsetrolloutstuck/</guid><description>&lt;h1 id="kubedaemonsetrolloutstuck">
  KubeDaemonSetRolloutStuck
  
  &lt;a class="anchor" href="#kubedaemonsetrolloutstuck">#&lt;/a>
@@ -865,7 +865,7 @@ cluster-autoscaler status configmap.&lt;/li>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>See &lt;a href="https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/#daemonset-rolling-update-is-stuck">DaemonSet rolling update is stuck&lt;/a>&lt;/p></description></item><item><title>Kube Deployment Generation Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedeploymentgenerationmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedeploymentgenerationmismatch/</guid><description>&lt;h1 id="kubedeploymentgenerationmismatch">
+&lt;p>See &lt;a href="https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/#daemonset-rolling-update-is-stuck">DaemonSet rolling update is stuck&lt;/a>&lt;/p></description></item><item><title>Kube Deployment Generation Mismatch</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubedeploymentgenerationmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubedeploymentgenerationmismatch/</guid><description>&lt;h1 id="kubedeploymentgenerationmismatch">
  KubeDeploymentGenerationMismatch
  
  &lt;a class="anchor" href="#kubedeploymentgenerationmismatch">#&lt;/a>
@@ -921,7 +921,7 @@ cluster-autoscaler status configmap.&lt;/li>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Depending on the conditions usually adding new nodes solves the issue.&lt;/p></description></item><item><title>Kube Deployment Replicas Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedeploymentreplicasmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubedeploymentreplicasmismatch/</guid><description>&lt;h1 id="kubedeploymentreplicasmismatch">
+&lt;p>Depending on the conditions usually adding new nodes solves the issue.&lt;/p></description></item><item><title>Kube Deployment Replicas Mismatch</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubedeploymentreplicasmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubedeploymentreplicasmismatch/</guid><description>&lt;h1 id="kubedeploymentreplicasmismatch">
  KubeDeploymentReplicasMismatch
  
  &lt;a class="anchor" href="#kubedeploymentreplicasmismatch">#&lt;/a>
@@ -941,7 +941,7 @@ declared to be in operation.
 For example deployment is expected to have 3 replicas, but it has less than
 that for a noticeable period of time.&lt;/p>
 &lt;p>In rare occasions there may be more replicas than it should and system did
-not clean it up.&lt;/p></description></item><item><title>Kube HPA Replicas Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubehpareplicasmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubehpareplicasmismatch/</guid><description>&lt;h1 id="kubehpareplicasmismatch">
+not clean it up.&lt;/p></description></item><item><title>Kube HPA Replicas Mismatch</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubehpareplicasmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubehpareplicasmismatch/</guid><description>&lt;h1 id="kubehpareplicasmismatch">
  KubeHpaReplicasMismatch
  
  &lt;a class="anchor" href="#kubehpareplicasmismatch">#&lt;/a>
@@ -981,7 +981,7 @@ longer than 15 minutes.&lt;/p>
  
 &lt;/h2>
 &lt;p>In case of cluster-autoscaler you may need to set up preemtive pod pools to
-ensure nodes are created on time.&lt;/p></description></item><item><title>Kube HPA Maxed Out</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubehpamaxedout/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubehpamaxedout/</guid><description>&lt;h1 id="kubehpamaxedout">
+ensure nodes are created on time.&lt;/p></description></item><item><title>Kube HPA Maxed Out</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubehpamaxedout/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubehpamaxedout/</guid><description>&lt;h1 id="kubehpamaxedout">
  KubeHpaMaxedOut
  
  &lt;a class="anchor" href="#kubehpamaxedout">#&lt;/a>
@@ -1023,7 +1023,7 @@ than 15 minutes.&lt;/p>
 &lt;p>If using basic metrics like CPU/Memory then ensure to set proper values for
 &lt;code>requests&lt;/code>.
 For memory based scaling ensure there are no memory leaks.
-If using custom metrics then fine-tune how app scales accordingly to it.&lt;/p></description></item><item><title>Kube Job Completion</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubejobcompletion/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubejobcompletion/</guid><description>&lt;h1 id="kubejobcompletion">
+If using custom metrics then fine-tune how app scales accordingly to it.&lt;/p></description></item><item><title>Kube Job Completion</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubejobcompletion/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubejobcompletion/</guid><description>&lt;h1 id="kubejobcompletion">
  KubeJobCompletion
  
  &lt;a class="anchor" href="#kubejobcompletion">#&lt;/a>
@@ -1065,7 +1065,7 @@ If using custom metrics then fine-tune how app scales accordingly to it.&lt;/p><
 &lt;ul>
 &lt;li>Give it more resources so it finishes faster, if applicable.&lt;/li>
 &lt;li>See &lt;a href="https://kubernetes.io/docs/tasks/job/">Job patterns&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Kube Job Failed</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubejobfailed/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubejobfailed/</guid><description>&lt;h1 id="kubejobfailed">
+&lt;/ul></description></item><item><title>Kube Job Failed</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubejobfailed/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubejobfailed/</guid><description>&lt;h1 id="kubejobfailed">
  KubeJobFailed
  
  &lt;a class="anchor" href="#kubejobfailed">#&lt;/a>
@@ -1107,7 +1107,7 @@ If using custom metrics then fine-tune how app scales accordingly to it.&lt;/p><
 &lt;li>See &lt;a href="https://kubernetes.io/docs/tasks/job/">Job patterns&lt;/a>&lt;/li>
 &lt;li>redesign job so that it is idempotent (can be re-run many times which will
 always produce the same output even if input differs)&lt;/li>
-&lt;/ul></description></item><item><title>Kube Memory Overcommit</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubememoryovercommit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubememoryovercommit/</guid><description>&lt;h1 id="kubememoryovercommit">
+&lt;/ul></description></item><item><title>Kube Memory Overcommit</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubememoryovercommit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubememoryovercommit/</guid><description>&lt;h1 id="kubememoryovercommit">
  KubeMemoryOvercommit
  
  &lt;a class="anchor" href="#kubememoryovercommit">#&lt;/a>
@@ -1154,7 +1154,7 @@ some Pods will be in &lt;code>Pending&lt;/code> state.&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>Add more nodes to the cluster - usually it is better to have more smaller
-nodes, than few bigger.&lt;/p></description></item><item><title>Kube Memory Quota Overcommit</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubememoryquotaovercommit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubememoryquotaovercommit/</guid><description>&lt;h1 id="kubememoryquotaovercommit">
+nodes, than few bigger.&lt;/p></description></item><item><title>Kube Memory Quota Overcommit</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubememoryquotaovercommit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubememoryquotaovercommit/</guid><description>&lt;h1 id="kubememoryquotaovercommit">
  KubeMemoryQuotaOvercommit
  
  &lt;a class="anchor" href="#kubememoryquotaovercommit">#&lt;/a>
@@ -1194,7 +1194,7 @@ nodes, than few bigger.&lt;/p></description></item><item><title>Kube Memory Quot
 &lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>Review existing quota for given namespace and adjust it accordingly.&lt;/p></description></item><item><title>Kube Node Not Ready</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodenotready/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodenotready/</guid><description>&lt;h1 id="kubenodenotready">
+&lt;p>Review existing quota for given namespace and adjust it accordingly.&lt;/p></description></item><item><title>Kube Node Not Ready</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubenodenotready/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubenodenotready/</guid><description>&lt;h1 id="kubenodenotready">
  KubeNodeNotReady
  
  &lt;a class="anchor" href="#kubenodenotready">#&lt;/a>
@@ -1223,7 +1223,7 @@ workload and the type of the node.&lt;/p>
  &lt;a class="anchor" href="#diagnosis">#&lt;/a>
  
 &lt;/h2>
-&lt;p>The notification details should list the node that&amp;rsquo;s not ready. For Example:&lt;/p></description></item><item><title>Kube Node Readiness Flapping</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodereadinessflapping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodereadinessflapping/</guid><description>&lt;h1 id="kubenodereadinessflapping">
+&lt;p>The notification details should list the node that&amp;rsquo;s not ready. For Example:&lt;/p></description></item><item><title>Kube Node Readiness Flapping</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubenodereadinessflapping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubenodereadinessflapping/</guid><description>&lt;h1 id="kubenodereadinessflapping">
  KubeNodeReadinessFlapping
  
  &lt;a class="anchor" href="#kubenodereadinessflapping">#&lt;/a>
@@ -1255,7 +1255,7 @@ workload and the type of the node.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - node = node1.example.com
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Login to the cluster. Check the status of that node:&lt;/p></description></item><item><title>Kube Node Unreachable</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodeunreachable/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubenodeunreachable/</guid><description>&lt;h1 id="kubenodeunreachable">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Login to the cluster. Check the status of that node:&lt;/p></description></item><item><title>Kube Node Unreachable</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubenodeunreachable/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubenodeunreachable/</guid><description>&lt;h1 id="kubenodeunreachable">
  KubeNodeUnreachable
  
  &lt;a class="anchor" href="#kubenodeunreachable">#&lt;/a>
@@ -1287,7 +1287,7 @@ workload and the type of the node.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - node = node1.example.com
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Login to the cluster. Check the status of that node:&lt;/p></description></item><item><title>Kube Persistent Volume Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepersistentvolumeerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepersistentvolumeerrors/</guid><description>&lt;h1 id="kubepersistentvolumeerrors">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Login to the cluster. Check the status of that node:&lt;/p></description></item><item><title>Kube Persistent Volume Errors</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubepersistentvolumeerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubepersistentvolumeerrors/</guid><description>&lt;h1 id="kubepersistentvolumeerrors">
  KubePersistentVolumeErrors
  
  &lt;a class="anchor" href="#kubepersistentvolumeerrors">#&lt;/a>
@@ -1326,7 +1326,7 @@ workload and the type of the node.&lt;/p>
  
 &lt;/h2>
 &lt;p>In happy scenario storage is just not provisioned as fast as expected.
-In worst scenario there is data corruption or data loss. Restore from backup.&lt;/p></description></item><item><title>Kube Persistent Volume Filling Up</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepersistentvolumefillingup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepersistentvolumefillingup/</guid><description>&lt;h1 id="kubepersistentvolumefillingup">
+In worst scenario there is data corruption or data loss. Restore from backup.&lt;/p></description></item><item><title>Kube Persistent Volume Filling Up</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubepersistentvolumefillingup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubepersistentvolumefillingup/</guid><description>&lt;h1 id="kubepersistentvolumefillingup">
  KubePersistentVolumeFillingUp
  
  &lt;a class="anchor" href="#kubepersistentvolumefillingup">#&lt;/a>
@@ -1356,7 +1356,7 @@ for volumes that are legitimately filling.&lt;/p>
  
 &lt;/h2>
 &lt;p>Check app usage in time.
-Check if there are any configurations such as snapshotting, automatic data retention.&lt;/p></description></item><item><title>Kube Pod Crash Looping</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepodcrashlooping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepodcrashlooping/</guid><description>&lt;h1 id="kubepodcrashlooping">
+Check if there are any configurations such as snapshotting, automatic data retention.&lt;/p></description></item><item><title>Kube Pod Crash Looping</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubepodcrashlooping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubepodcrashlooping/</guid><description>&lt;h1 id="kubepodcrashlooping">
  KubePodCrashLooping
  
  &lt;a class="anchor" href="#kubepodcrashlooping">#&lt;/a>
@@ -1399,7 +1399,7 @@ check is failing too fast due to short timeout for response&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;p>Other things to check:&lt;/p></description></item><item><title>Kube Pod Not Ready</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepodnotready/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubepodnotready/</guid><description>&lt;h1 id="kubepodnotready">
+&lt;p>Other things to check:&lt;/p></description></item><item><title>Kube Pod Not Ready</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubepodnotready/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubepodnotready/</guid><description>&lt;h1 id="kubepodnotready">
  KubePodNotReady
  
  &lt;a class="anchor" href="#kubepodnotready">#&lt;/a>
@@ -1426,7 +1426,7 @@ See &lt;a href="https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle
  
 &lt;/h2>
 &lt;p>Service degradation or unavailability.
-Pod not attached to service, thus not getting any traffic.&lt;/p></description></item><item><title>Kube Quota Almost Full</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotaalmostfull/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotaalmostfull/</guid><description>&lt;h1 id="kubequotaalmostfull">
+Pod not attached to service, thus not getting any traffic.&lt;/p></description></item><item><title>Kube Quota Almost Full</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubequotaalmostfull/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubequotaalmostfull/</guid><description>&lt;h1 id="kubequotaalmostfull">
  KubeQuotaAlmostFull
  
  &lt;a class="anchor" href="#kubequotaalmostfull">#&lt;/a>
@@ -1466,7 +1466,7 @@ Pod not attached to service, thus not getting any traffic.&lt;/p></description><
 &lt;li>Review resources used by the quota and fine tune them.&lt;/li>
 &lt;li>Continue with standard capacity planning procedures.&lt;/li>
 &lt;li>See &lt;a href="https://kubernetes.io/docs/concepts/policy/resource-quotas/">Quotas&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Kube Quota Exceeded</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotaexceeded/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotaexceeded/</guid><description>&lt;h1 id="kubequotaexceeded">
+&lt;/ul></description></item><item><title>Kube Quota Exceeded</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubequotaexceeded/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubequotaexceeded/</guid><description>&lt;h1 id="kubequotaexceeded">
  KubeQuotaExceeded
  
  &lt;a class="anchor" href="#kubequotaexceeded">#&lt;/a>
@@ -1506,7 +1506,7 @@ Pod not attached to service, thus not getting any traffic.&lt;/p></description><
 &lt;li>Review resources used by the quota and fine tune them.&lt;/li>
 &lt;li>Continue with standard capacity planning procedures.&lt;/li>
 &lt;li>See &lt;a href="https://kubernetes.io/docs/concepts/policy/resource-quotas/">Quotas&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Kube Quota Fully Used</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotafullyused/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubequotafullyused/</guid><description>&lt;h1 id="kubequotafullyused">
+&lt;/ul></description></item><item><title>Kube Quota Fully Used</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubequotafullyused/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubequotafullyused/</guid><description>&lt;h1 id="kubequotafullyused">
  KubeQuotaFullyUsed
  
  &lt;a class="anchor" href="#kubequotafullyused">#&lt;/a>
@@ -1546,7 +1546,7 @@ Pod not attached to service, thus not getting any traffic.&lt;/p></description><
 &lt;li>Review resources used by the quota and fine tune them.&lt;/li>
 &lt;li>Continue with standard capacity planning procedures.&lt;/li>
 &lt;li>See &lt;a href="https://kubernetes.io/docs/concepts/policy/resource-quotas/">Quotas&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Kube Scheduler Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeschedulerdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeschedulerdown/</guid><description>&lt;h1 id="kubeschedulerdown">
+&lt;/ul></description></item><item><title>Kube Scheduler Down</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeschedulerdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeschedulerdown/</guid><description>&lt;h1 id="kubeschedulerdown">
  KubeSchedulerDown
  
  &lt;a class="anchor" href="#kubeschedulerdown">#&lt;/a>
@@ -1579,7 +1579,7 @@ Pod not attached to service, thus not getting any traffic.&lt;/p></description><
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>See old CoreOS docs in &lt;a href="http://web.archive.org/web/20201026205154/https://coreos.com/tectonic/docs/latest/troubleshooting/controller-recovery.html">Web Archive&lt;/a>&lt;/p></description></item><item><title>Kube State Metric sWatch Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricswatcherrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricswatcherrors/</guid><description>&lt;h1 id="kubestatemetricswatcherrors">
+&lt;p>See old CoreOS docs in &lt;a href="http://web.archive.org/web/20201026205154/https://coreos.com/tectonic/docs/latest/troubleshooting/controller-recovery.html">Web Archive&lt;/a>&lt;/p></description></item><item><title>Kube State Metric sWatch Errors</title><link>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricswatcherrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricswatcherrors/</guid><description>&lt;h1 id="kubestatemetricswatcherrors">
  KubeStateMetricsWatchErrors
  
  &lt;a class="anchor" href="#kubestatemetricswatcherrors">#&lt;/a>
@@ -1614,7 +1614,7 @@ Check networking rules and network policies.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Kube State Metrics List Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricslisterrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricslisterrors/</guid><description>&lt;h1 id="kubestatemetricslisterrors">
+&lt;p>TODO&lt;/p></description></item><item><title>Kube State Metrics List Errors</title><link>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricslisterrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricslisterrors/</guid><description>&lt;h1 id="kubestatemetricslisterrors">
  KubeStateMetricsListErrors
  
  &lt;a class="anchor" href="#kubestatemetricslisterrors">#&lt;/a>
@@ -1649,7 +1649,7 @@ Check networking rules and network policies.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Kube State Metrics Sharding Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricsshardingmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricsshardingmismatch/</guid><description>&lt;h1 id="kubestatemetricsshardingmismatch">
+&lt;p>TODO&lt;/p></description></item><item><title>Kube State Metrics Sharding Mismatch</title><link>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricsshardingmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricsshardingmismatch/</guid><description>&lt;h1 id="kubestatemetricsshardingmismatch">
  KubeStateMetricsShardingMismatch
  
  &lt;a class="anchor" href="#kubestatemetricsshardingmismatch">#&lt;/a>
@@ -1685,7 +1685,7 @@ Check networking rules and network policies.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Kube State Metrics Shards Missing</title><link>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricsshardsmissing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kube-state-metrics/kubestatemetricsshardsmissing/</guid><description>&lt;h1 id="kubestatemetricsshardsmissing">
+&lt;p>TODO&lt;/p></description></item><item><title>Kube State Metrics Shards Missing</title><link>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricsshardsmissing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kube-state-metrics/kubestatemetricsshardsmissing/</guid><description>&lt;h1 id="kubestatemetricsshardsmissing">
  KubeStateMetricsShardsMissing
  
  &lt;a class="anchor" href="#kubestatemetricsshardsmissing">#&lt;/a>
@@ -1722,7 +1722,7 @@ Check networking rules and network policies.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Kube StatefulSet Generation Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetgenerationmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetgenerationmismatch/</guid><description>&lt;h1 id="kubestatefulsetgenerationmismatch">
+&lt;p>TODO&lt;/p></description></item><item><title>Kube StatefulSet Generation Mismatch</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubestatefulsetgenerationmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubestatefulsetgenerationmismatch/</guid><description>&lt;h1 id="kubestatefulsetgenerationmismatch">
  KubeStatefulSetGenerationMismatch
  
  &lt;a class="anchor" href="#kubestatefulsetgenerationmismatch">#&lt;/a>
@@ -1781,7 +1781,7 @@ cluster-autoscaler status configmap.&lt;/li>
  
 &lt;/h2>
 &lt;p>Statefulsets are quite specific, and usually have special scripts on pod termination.
-See if there are special commands executed such as data migration, which may significantly slow down the progress.&lt;/p></description></item><item><title>Kube StatefulSet Replicas Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetreplicasmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetreplicasmismatch/</guid><description>&lt;h1 id="kubestatefulsetreplicasmismatch">
+See if there are special commands executed such as data migration, which may significantly slow down the progress.&lt;/p></description></item><item><title>Kube StatefulSet Replicas Mismatch</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubestatefulsetreplicasmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubestatefulsetreplicasmismatch/</guid><description>&lt;h1 id="kubestatefulsetreplicasmismatch">
  KubeStatefulSetReplicasMismatch
  
  &lt;a class="anchor" href="#kubestatefulsetreplicasmismatch">#&lt;/a>
@@ -1801,7 +1801,7 @@ declared to be in operation.
 For example statefulset is expected to have 3 replicas, but it has less than
 that for a noticeable period of time.&lt;/p>
 &lt;p>In rare occasions there may be more replicas than it should and system did not
-clean it up.&lt;/p></description></item><item><title>Kube StatefulSet Update Not RolledOut</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetupdatenotrolledout/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubestatefulsetupdatenotrolledout/</guid><description>&lt;h1 id="kubestatefulsetupdatenotrolledout">
+clean it up.&lt;/p></description></item><item><title>Kube StatefulSet Update Not RolledOut</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubestatefulsetupdatenotrolledout/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubestatefulsetupdatenotrolledout/</guid><description>&lt;h1 id="kubestatefulsetupdatenotrolledout">
  KubeStatefulSetUpdateNotRolledOut
  
  &lt;a class="anchor" href="#kubestatefulsetupdatenotrolledout">#&lt;/a>
@@ -1857,7 +1857,7 @@ cluster-autoscaler status configmap.&lt;/li>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Kube Version Mismatch</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeversionmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeversionmismatch/</guid><description>&lt;h1 id="kubeversionmismatch">
+&lt;p>TODO&lt;/p></description></item><item><title>Kube Version Mismatch</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeversionmismatch/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeversionmismatch/</guid><description>&lt;h1 id="kubeversionmismatch">
  KubeVersionMismatch
  
  &lt;a class="anchor" href="#kubeversionmismatch">#&lt;/a>
@@ -1885,7 +1885,7 @@ major version.&lt;/p>
 &lt;/h2>
 &lt;p>Incompatible API versions between kubernetes components may have very
 broad range of issues, influencing single containers, through app stability,
-ending at whole cluster stability.&lt;/p></description></item><item><title>Kubelet Client Certificate Expiration</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletclientcertificateexpiration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletclientcertificateexpiration/</guid><description>&lt;h1 id="kubeletclientcertificateexpiration">
+ending at whole cluster stability.&lt;/p></description></item><item><title>Kubelet Client Certificate Expiration</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletclientcertificateexpiration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletclientcertificateexpiration/</guid><description>&lt;h1 id="kubeletclientcertificateexpiration">
  KubeletClientCertificateExpiration
  
  &lt;a class="anchor" href="#kubeletclientcertificateexpiration">#&lt;/a>
@@ -1920,7 +1920,7 @@ ending at whole cluster stability.&lt;/p></description></item><item><title>Kubel
 &lt;/h2>
 &lt;p>Update certificates in the cluster control nodes and the worker nodes.
 Refer to the documentation of the tool used to create cluster.&lt;/p>
-&lt;p>Another option is to delete node if it affects only one,&lt;/p></description></item><item><title>Kubelet Client Certificate Renewal Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletclientcertificaterenewalerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletclientcertificaterenewalerrors/</guid><description>&lt;h1 id="kubeletclientcertificaterenewalerrors">
+&lt;p>Another option is to delete node if it affects only one,&lt;/p></description></item><item><title>Kubelet Client Certificate Renewal Errors</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletclientcertificaterenewalerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletclientcertificaterenewalerrors/</guid><description>&lt;h1 id="kubeletclientcertificaterenewalerrors">
  KubeletClientCertificateRenewalErrors
  
  &lt;a class="anchor" href="#kubeletclientcertificaterenewalerrors">#&lt;/a>
@@ -1955,7 +1955,7 @@ Refer to the documentation of the tool used to create cluster.&lt;/p>
  
 &lt;/h2>
 &lt;p>Update certificates in the cluster control nodes and the worker nodes.
-Refer to the documentation of the tool used to create cluster.&lt;/p></description></item><item><title>Kubelet Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletdown/</guid><description>&lt;h1 id="kubeletdown">
+Refer to the documentation of the tool used to create cluster.&lt;/p></description></item><item><title>Kubelet Down</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletdown/</guid><description>&lt;h1 id="kubeletdown">
  KubeletDown
  
  &lt;a class="anchor" href="#kubeletdown">#&lt;/a>
@@ -1979,7 +1979,7 @@ any of the cluster&amp;rsquo;s Kubelets for more than 15 minutes.&lt;/p>
 the possibility of a network issue preventing the monitoring system from
 scraping Kubelet metrics, multiple nodes in the cluster are likely unable to
 respond to configuration changes for pods and other resources, and some
-debugging tools are likely not functional, e.g. &lt;code>kubectl exec&lt;/code> and &lt;code>kubectl logs&lt;/code>.&lt;/p></description></item><item><title>Kubelet Pod Lifecycle Event Generator Duration High</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletplegdurationhigh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletplegdurationhigh/</guid><description>&lt;h1 id="kubeletplegdurationhigh">
+debugging tools are likely not functional, e.g. &lt;code>kubectl exec&lt;/code> and &lt;code>kubectl logs&lt;/code>.&lt;/p></description></item><item><title>Kubelet Pod Lifecycle Event Generator Duration High</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletplegdurationhigh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletplegdurationhigh/</guid><description>&lt;h1 id="kubeletplegdurationhigh">
  KubeletPlegDurationHigh
  
  &lt;a class="anchor" href="#kubeletplegdurationhigh">#&lt;/a>
@@ -2013,7 +2013,7 @@ XX seconds on node.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Kubelet Pod Start Up Latency High</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletpodstartuplatencyhigh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletpodstartuplatencyhigh/</guid><description>&lt;h1 id="kubeletpodstartuplatencyhigh">
+&lt;p>TODO&lt;/p></description></item><item><title>Kubelet Pod Start Up Latency High</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletpodstartuplatencyhigh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletpodstartuplatencyhigh/</guid><description>&lt;h1 id="kubeletpodstartuplatencyhigh">
  KubeletPodStartUpLatencyHigh
  
  &lt;a class="anchor" href="#kubeletpodstartuplatencyhigh">#&lt;/a>
@@ -2047,7 +2047,7 @@ XX seconds on node.&lt;/p>
  
 &lt;/h2>
 &lt;p>&lt;a href="https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/">Cordon and drain node&lt;/a> and delete it.
-If issue persists look into the node logs.&lt;/p></description></item><item><title>Kubelet Server Certificate Expiration</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletservercertificateexpiration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletservercertificateexpiration/</guid><description>&lt;h1 id="kubeletservercertificateexpiration">
+If issue persists look into the node logs.&lt;/p></description></item><item><title>Kubelet Server Certificate Expiration</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletservercertificateexpiration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletservercertificateexpiration/</guid><description>&lt;h1 id="kubeletservercertificateexpiration">
  KubeletServerCertificateExpiration
  
  &lt;a class="anchor" href="#kubeletservercertificateexpiration">#&lt;/a>
@@ -2082,7 +2082,7 @@ If issue persists look into the node logs.&lt;/p></description></item><item><tit
 &lt;/h2>
 &lt;p>Update certificates in the cluster control nodes and the worker nodes.
 Refer to the documentation of the tool used to create cluster.&lt;/p>
-&lt;p>Another option is to delete node if it affects only one,&lt;/p></description></item><item><title>Kubelet Server Certificate Renewal Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletservercertificaterenewalerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletservercertificaterenewalerrors/</guid><description>&lt;h1 id="kubeletservercertificaterenewalerrors">
+&lt;p>Another option is to delete node if it affects only one,&lt;/p></description></item><item><title>Kubelet Server Certificate Renewal Errors</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletservercertificaterenewalerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeletservercertificaterenewalerrors/</guid><description>&lt;h1 id="kubeletservercertificaterenewalerrors">
  KubeletServerCertificateRenewalErrors
  
  &lt;a class="anchor" href="#kubeletservercertificaterenewalerrors">#&lt;/a>
@@ -2117,7 +2117,7 @@ Refer to the documentation of the tool used to create cluster.&lt;/p>
  
 &lt;/h2>
 &lt;p>Update certificates in the cluster control nodes and the worker nodes.
-Refer to the documentation of the tool used to create cluster.&lt;/p></description></item><item><title>Kubelet Too Many Pods</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubelettoomanypods/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubelettoomanypods/</guid><description>&lt;h1 id="kubelettoomanypods">
+Refer to the documentation of the tool used to create cluster.&lt;/p></description></item><item><title>Kubelet Too Many Pods</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubelettoomanypods/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubelettoomanypods/</guid><description>&lt;h1 id="kubelettoomanypods">
  KubeletTooManyPods
  
  &lt;a class="anchor" href="#kubelettoomanypods">#&lt;/a>
@@ -2147,7 +2147,7 @@ The default value of this is 110 Pods per Kubelet, but it is configurable
 &lt;p>Running many pods (more than 110) on a single node places a strain on the
 Container Runtime Interface (CRI), Container Network Interface (CNI),
 and the operating system itself. Approaching that limit may affect performance
-and availability of that node.&lt;/p></description></item><item><title>KubeProxy Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeproxydown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeproxydown/</guid><description>&lt;h1 id="kubeproxydown">
+and availability of that node.&lt;/p></description></item><item><title>KubeProxy Down</title><link>https://hoanggvuong.github.io/runbooks/kubernetes/kubeproxydown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/kubernetes/kubeproxydown/</guid><description>&lt;h1 id="kubeproxydown">
  KubeProxyDown
  
  &lt;a class="anchor" href="#kubeproxydown">#&lt;/a>
@@ -2171,7 +2171,7 @@ been reachable by the monitoring system for more than 15 minutes.&lt;/p>
 implementing part of the Kubernetes Service concept.&lt;/p>
 &lt;p>kube-proxy maintains network rules on nodes.
 These network rules allow network communication to your Pods
-from network sessions inside or outside of your cluster.&lt;/p></description></item><item><title>Node Clock Not Synchronising</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodeclocknotsynchronising/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodeclocknotsynchronising/</guid><description>&lt;h1 id="nodeclocknotsynchronising">
+from network sessions inside or outside of your cluster.&lt;/p></description></item><item><title>Node Clock Not Synchronising</title><link>https://hoanggvuong.github.io/runbooks/node/nodeclocknotsynchronising/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodeclocknotsynchronising/</guid><description>&lt;h1 id="nodeclocknotsynchronising">
  NodeClockNotSynchronising
  
  &lt;a class="anchor" href="#nodeclocknotsynchronising">#&lt;/a>
@@ -2204,7 +2204,7 @@ from network sessions inside or outside of your cluster.&lt;/p></description></i
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>See &lt;a href="https://runbooks.prometheus-operator.dev/runbooks/node/nodeclockskewdetected/">Node Clok Skew Detected&lt;/a> for mitigation steps.&lt;/p></description></item><item><title>Node Clock Skew Detected</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodeclockskewdetected/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodeclockskewdetected/</guid><description>&lt;h1 id="nodeclockskewdetected">
+&lt;p>See &lt;a href="https://hoanggvuong.github.io/runbooks/node/nodeclockskewdetected/">Node Clok Skew Detected&lt;/a> for mitigation steps.&lt;/p></description></item><item><title>Node Clock Skew Detected</title><link>https://hoanggvuong.github.io/runbooks/node/nodeclockskewdetected/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodeclockskewdetected/</guid><description>&lt;h1 id="nodeclockskewdetected">
  NodeClockSkewDetected
  
  &lt;a class="anchor" href="#nodeclockskewdetected">#&lt;/a>
@@ -2242,7 +2242,7 @@ Set proper time servers.
 Esure to sync time on server start, especially when using
 low power mode or hibernation.&lt;/p>
 &lt;p>Some resource consuming process can cause issues on given hardware,
-so move it to different servers.&lt;/p></description></item><item><title>Node File Descriptor Limit</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodefiledescriptorlimit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodefiledescriptorlimit/</guid><description>&lt;h1 id="nodefiledescriptorlimit">
+so move it to different servers.&lt;/p></description></item><item><title>Node File Descriptor Limit</title><link>https://hoanggvuong.github.io/runbooks/node/nodefiledescriptorlimit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodefiledescriptorlimit/</guid><description>&lt;h1 id="nodefiledescriptorlimit">
  NodeFileDescriptorLimit
  
  &lt;a class="anchor" href="#nodefiledescriptorlimit">#&lt;/a>
@@ -2265,7 +2265,7 @@ and a &lt;code>critical&lt;/code> level alert at greater than 90% usage.&lt;/p>
 &lt;/h2>
 &lt;p>Applications on the node may no longer be able to open and operate on
 files. This is likely to have severe consequences for anything scheduled on this
-node.&lt;/p></description></item><item><title>Node Filesystem Almost Out Of Files</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutoffiles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutoffiles/</guid><description>&lt;h1 id="nodefilesystemalmostoutoffiles">
+node.&lt;/p></description></item><item><title>Node Filesystem Almost Out Of Files</title><link>https://hoanggvuong.github.io/runbooks/node/nodefilesystemalmostoutoffiles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodefilesystemalmostoutoffiles/</guid><description>&lt;h1 id="nodefilesystemalmostoutoffiles">
  NodeFilesystemAlmostOutOfFiles
  
  &lt;a class="anchor" href="#nodefilesystemalmostoutoffiles">#&lt;/a>
@@ -2292,7 +2292,7 @@ with 3% of available inodes left.&lt;/p>
 cause any or all of the applications scheduled to that node to experience
 anything from performance degradation to full inoperability. Depending on the
 node and filesystem involved, this could pose a critical threat to the stability
-of the cluster.&lt;/p></description></item><item><title>Node Filesystem Almost Out Of Space</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutofspace/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemalmostoutofspace/</guid><description>&lt;h1 id="nodefilesystemalmostoutofspace">
+of the cluster.&lt;/p></description></item><item><title>Node Filesystem Almost Out Of Space</title><link>https://hoanggvuong.github.io/runbooks/node/nodefilesystemalmostoutofspace/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodefilesystemalmostoutofspace/</guid><description>&lt;h1 id="nodefilesystemalmostoutofspace">
  NodeFilesystemAlmostOutOfSpace
  
  &lt;a class="anchor" href="#nodefilesystemalmostoutofspace">#&lt;/a>
@@ -2318,7 +2318,7 @@ amount of time, it uses simple static thresholds. The alert will fire as at a
 cause any or all of the applications scheduled to that node to experience
 anything from performance degradation to full inoperability. Depending on the
 node and filesystem involved, this could pose a critical threat to the stability
-of the cluster.&lt;/p></description></item><item><title>Node Filesystem Files Filling Up</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemfilesfillingup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemfilesfillingup/</guid><description>&lt;h1 id="nodefilesystemfilesfillingup">
+of the cluster.&lt;/p></description></item><item><title>Node Filesystem Files Filling Up</title><link>https://hoanggvuong.github.io/runbooks/node/nodefilesystemfilesfillingup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodefilesystemfilesfillingup/</guid><description>&lt;h1 id="nodefilesystemfilesfillingup">
  NodeFilesystemFilesFillingUp
  
  &lt;a class="anchor" href="#nodefilesystemfilesfillingup">#&lt;/a>
@@ -2344,7 +2344,7 @@ run out of available inodes within four hours.&lt;/p>
 cause any or all of the applications scheduled to that node to experience
 anything from performance degradation to full inoperability. Depending on the
 node and filesystem involved, this could pose a critical threat to the stability
-of the cluster.&lt;/p></description></item><item><title>Node Filesystem Space Filling Up</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemspacefillingup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodefilesystemspacefillingup/</guid><description>&lt;h1 id="nodefilesystemspacefillingup">
+of the cluster.&lt;/p></description></item><item><title>Node Filesystem Space Filling Up</title><link>https://hoanggvuong.github.io/runbooks/node/nodefilesystemspacefillingup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodefilesystemspacefillingup/</guid><description>&lt;h1 id="nodefilesystemspacefillingup">
  NodeFilesystemSpaceFillingUp
  
  &lt;a class="anchor" href="#nodefilesystemspacefillingup">#&lt;/a>
@@ -2368,7 +2368,7 @@ time is less than 4h.&lt;/p>
 Since Kubelet automatically handles [cleaning up old logs][2] and
 [deleting unused images][3], container ephemeral storage is a common cause of
 this alert. Although this alert may be triggered before Kubelet&amp;rsquo;s garbage
-collection kicks in.&lt;/p></description></item><item><title>Node High Number Conntrack Entries Used</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodehighnumberconntrackentriesused/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodehighnumberconntrackentriesused/</guid><description>&lt;h1 id="nodehighnumberconntrackentriesused">
+collection kicks in.&lt;/p></description></item><item><title>Node High Number Conntrack Entries Used</title><link>https://hoanggvuong.github.io/runbooks/node/nodehighnumberconntrackentriesused/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodehighnumberconntrackentriesused/</guid><description>&lt;h1 id="nodehighnumberconntrackentriesused">
  NodeHighNumberConntrackEntriesUsed
  
  &lt;a class="anchor" href="#nodehighnumberconntrackentriesused">#&lt;/a>
@@ -2403,7 +2403,7 @@ Check which apps are generating a lot of connections.&lt;/p>
  
 &lt;/h2>
 &lt;p>Migrate some pods to another nodes.
-Bump conntrack limit directly on the node, remembering to make it persistent across node reboots.&lt;/p></description></item><item><title>Node Network Interface Flapping</title><link>https://runbooks.prometheus-operator.dev/runbooks/general/nodenetworkinterfaceflapping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/general/nodenetworkinterfaceflapping/</guid><description>&lt;h1 id="nodenetworkinterfaceflapping">
+Bump conntrack limit directly on the node, remembering to make it persistent across node reboots.&lt;/p></description></item><item><title>Node Network Interface Flapping</title><link>https://hoanggvuong.github.io/runbooks/general/nodenetworkinterfaceflapping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/general/nodenetworkinterfaceflapping/</guid><description>&lt;h1 id="nodenetworkinterfaceflapping">
  NodeNetworkInterfaceFlapping
  
  &lt;a class="anchor" href="#nodenetworkinterfaceflapping">#&lt;/a>
@@ -2438,7 +2438,7 @@ Check physical cables, check networking firewall rules and so on.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Cordon and drain node to migrate apps from it.&lt;/p></description></item><item><title>Node Network Receive Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodenetworkreceiveerrs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodenetworkreceiveerrs/</guid><description>&lt;h1 id="nodenetworkreceiveerrs">
+&lt;p>Cordon and drain node to migrate apps from it.&lt;/p></description></item><item><title>Node Network Receive Errors</title><link>https://hoanggvuong.github.io/runbooks/node/nodenetworkreceiveerrs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodenetworkreceiveerrs/</guid><description>&lt;h1 id="nodenetworkreceiveerrs">
  NodeNetworkReceiveErrs
  
  &lt;a class="anchor" href="#nodenetworkreceiveerrs">#&lt;/a>
@@ -2473,7 +2473,7 @@ Check physical cables, check networking firewall rules and so on.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>In general mitigation landscape is quite vast, some suggestions:&lt;/p></description></item><item><title>Node Network Transmit Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodenetworktransmiterrs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodenetworktransmiterrs/</guid><description>&lt;h1 id="nodenetworktransmiterrs">
+&lt;p>In general mitigation landscape is quite vast, some suggestions:&lt;/p></description></item><item><title>Node Network Transmit Errors</title><link>https://hoanggvuong.github.io/runbooks/node/nodenetworktransmiterrs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodenetworktransmiterrs/</guid><description>&lt;h1 id="nodenetworktransmiterrs">
  NodeNetworkTransmitErrs
  
  &lt;a class="anchor" href="#nodenetworktransmiterrs">#&lt;/a>
@@ -2503,7 +2503,7 @@ Network attached storage performance issues or even data loss.&lt;/p>
 &lt;p>Investigate networking issues on the node and to connected hardware.
 Check network interface saturation.
 Check CPU usage saturation.
-Check physical cables, check networking firewall rules and so on.&lt;/p></description></item><item><title>Node RAID Degraded</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/noderaiddegraded/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/noderaiddegraded/</guid><description>&lt;h1 id="noderaiddegraded">
+Check physical cables, check networking firewall rules and so on.&lt;/p></description></item><item><title>Node RAID Degraded</title><link>https://hoanggvuong.github.io/runbooks/node/noderaiddegraded/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/noderaiddegraded/</guid><description>&lt;h1 id="noderaiddegraded">
  NodeRAIDDegraded
  
  &lt;a class="anchor" href="#noderaiddegraded">#&lt;/a>
@@ -2535,13 +2535,13 @@ due to further issues with disks.&lt;/p>
 &lt;/h2>
 &lt;p>You can open a shell on the node and use the standard Linux utilities to
 diagnose the issue, but you may need to install additional software in the debug
-container:&lt;/p></description></item><item><title>Node RAID Disk Failure</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/noderaiddiskfailure/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/noderaiddiskfailure/</guid><description>&lt;h1 id="noderaiddiskfailure">
+container:&lt;/p></description></item><item><title>Node RAID Disk Failure</title><link>https://hoanggvuong.github.io/runbooks/node/noderaiddiskfailure/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/noderaiddiskfailure/</guid><description>&lt;h1 id="noderaiddiskfailure">
  NodeRAIDDiskFailure
  
  &lt;a class="anchor" href="#noderaiddiskfailure">#&lt;/a>
  
 &lt;/h1>
-&lt;p>See &lt;a href="https://runbooks.prometheus-operator.dev/runbooks/node/noderaiddegraded/">Node RAID Degraded&lt;/a>&lt;/p></description></item><item><title>Node Text File Collector Scrape Error</title><link>https://runbooks.prometheus-operator.dev/runbooks/node/nodetextfilecollectorscrapeerror/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/node/nodetextfilecollectorscrapeerror/</guid><description>&lt;h1 id="nodetextfilecollectorscrapeerror">
+&lt;p>See &lt;a href="https://hoanggvuong.github.io/runbooks/node/noderaiddegraded/">Node RAID Degraded&lt;/a>&lt;/p></description></item><item><title>Node Text File Collector Scrape Error</title><link>https://hoanggvuong.github.io/runbooks/node/nodetextfilecollectorscrapeerror/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/node/nodetextfilecollectorscrapeerror/</guid><description>&lt;h1 id="nodetextfilecollectorscrapeerror">
  NodeTextFileCollectorScrapeError
  
  &lt;a class="anchor" href="#nodetextfilecollectorscrapeerror">#&lt;/a>
@@ -2577,7 +2577,7 @@ container:&lt;/p></description></item><item><title>Node RAID Disk Failure</title
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Check if provided configuration is valid, if files were not renamed during upgrades.&lt;/p></description></item><item><title>Prometheus Bad Config</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusbadconfig/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusbadconfig/</guid><description>&lt;h1 id="prometheusbadconfig">
+&lt;p>Check if provided configuration is valid, if files were not renamed during upgrades.&lt;/p></description></item><item><title>Prometheus Bad Config</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheusbadconfig/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheusbadconfig/</guid><description>&lt;h1 id="prometheusbadconfig">
  PrometheusBadConfig
  
  &lt;a class="anchor" href="#prometheusbadconfig">#&lt;/a>
@@ -2608,7 +2608,7 @@ or ServiceMonitor objects may not be picked up by prometheus server.&lt;/p>
  
 &lt;/h2>
 &lt;p>Check prometheus container logs for an explanation of which part of the
-configuration is problematic.&lt;/p></description></item><item><title>Prometheus Duplicate Timestamps</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusduplicatetimestamps/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusduplicatetimestamps/</guid><description>&lt;h1 id="prometheusduplicatetimestamps">
+configuration is problematic.&lt;/p></description></item><item><title>Prometheus Duplicate Timestamps</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheusduplicatetimestamps/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheusduplicatetimestamps/</guid><description>&lt;h1 id="prometheusduplicatetimestamps">
  PrometheusDuplicateTimestamps
  
  &lt;a class="anchor" href="#prometheusduplicatetimestamps">#&lt;/a>
@@ -2621,7 +2621,7 @@ configuration is problematic.&lt;/p></description></item><item><title>Prometheus
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Look at the logs of each of them, there should be a log line such as:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ kubectl -n &amp;lt;namespace&amp;gt; logs prometheus-k8s-0
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>level&lt;span style="color:#f92672">=&lt;/span>warn ts&lt;span style="color:#f92672">=&lt;/span>2021-01-04T15:08:55.613Z caller&lt;span style="color:#f92672">=&lt;/span>scrape.go:1372 component&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;scrape manager&amp;#34;&lt;/span> scrape_pool&lt;span style="color:#f92672">=&lt;/span>default/main-ingress-nginx-controller/0 target&lt;span style="color:#f92672">=&lt;/span>http://10.0.7.3:10254/metrics msg&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Error on ingesting samples with different value but same timestamp&amp;#34;&lt;/span> num_dropped&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">16&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now there is a judgement call to make, this could be the result of:&lt;/p></description></item><item><title>Prometheus Error Sending Alerts To Any Alertmanager</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheuserrorsendingalertstoanyalertmanager/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheuserrorsendingalertstoanyalertmanager/</guid><description>&lt;h1 id="prometheuserrorsendingalertstoanyalertmanager">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now there is a judgement call to make, this could be the result of:&lt;/p></description></item><item><title>Prometheus Error Sending Alerts To Any Alertmanager</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheuserrorsendingalertstoanyalertmanager/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheuserrorsendingalertstoanyalertmanager/</guid><description>&lt;h1 id="prometheuserrorsendingalertstoanyalertmanager">
  PrometheusErrorSendingAlertsToAnyAlertmanager
  
  &lt;a class="anchor" href="#prometheuserrorsendingalertstoanyalertmanager">#&lt;/a>
@@ -2656,7 +2656,7 @@ Check if AlertManager is not overloaded or has not enough resources.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Set multiple AlertManager instances, spread them across nodes.&lt;/p></description></item><item><title>Prometheus Error Sending Alerts To Some Alertmanagers</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheuserrorsendingalertstosomealertmanagers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheuserrorsendingalertstosomealertmanagers/</guid><description>&lt;h1 id="prometheuserrorsendingalertstosomealertmanagers">
+&lt;p>Set multiple AlertManager instances, spread them across nodes.&lt;/p></description></item><item><title>Prometheus Error Sending Alerts To Some Alertmanagers</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheuserrorsendingalertstosomealertmanagers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheuserrorsendingalertstosomealertmanagers/</guid><description>&lt;h1 id="prometheuserrorsendingalertstosomealertmanagers">
  PrometheusErrorSendingAlertsToSomeAlertmanagers
  
  &lt;a class="anchor" href="#prometheuserrorsendingalertstosomealertmanagers">#&lt;/a>
@@ -2691,7 +2691,7 @@ Check if AlertManager is not overloaded or has not enough resources.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Set multiple AlertManager instances, spread them across nodes.&lt;/p></description></item><item><title>Prometheus Federation - Detailed Implementation Guide</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusfederation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusfederation/</guid><description>&lt;h1 id="prometheus-federation---detailed-implementation-guide">
+&lt;p>Set multiple AlertManager instances, spread them across nodes.&lt;/p></description></item><item><title>Prometheus Federation - Detailed Implementation Guide</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheusfederation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheusfederation/</guid><description>&lt;h1 id="prometheus-federation---detailed-implementation-guide">
  Prometheus Federation - Detailed Implementation Guide
  
  &lt;a class="anchor" href="#prometheus-federation---detailed-implementation-guide">#&lt;/a>
@@ -2722,7 +2722,7 @@ Check if AlertManager is not overloaded or has not enough resources.&lt;/p>
  &lt;a class="anchor" href="#2-architecture-overview">#&lt;/a>
  
 &lt;/h2>
-&lt;figure>&lt;img src="https://runbooks.prometheus-operator.dev/promfederation.png" width="500" height="800">&lt;figcaption>
+&lt;figure>&lt;img src="https://hoanggvuong.github.io/promfederation.png" width="500" height="800">&lt;figcaption>
  &lt;h4>Architecture Overview&lt;/h4>
  &lt;/figcaption>
 &lt;/figure>
@@ -2765,7 +2765,7 @@ Check if AlertManager is not overloaded or has not enough resources.&lt;/p>
 &lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>&lt;strong>Multi-Cluster Kubernetes Monitoring&lt;/strong>&lt;/p></description></item><item><title>Prometheus Label LimitHit</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheuslabellimithit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheuslabellimithit/</guid><description>&lt;h1 id="prometheuslabellimithit">
+&lt;p>&lt;strong>Multi-Cluster Kubernetes Monitoring&lt;/strong>&lt;/p></description></item><item><title>Prometheus Label LimitHit</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheuslabellimithit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheuslabellimithit/</guid><description>&lt;h1 id="prometheuslabellimithit">
  PrometheusLabelLimitHit
  
  &lt;a class="anchor" href="#prometheuslabellimithit">#&lt;/a>
@@ -2798,7 +2798,7 @@ Check if AlertManager is not overloaded or has not enough resources.&lt;/p>
  
 &lt;/h2>
 &lt;p>Start thinking about sharding prometheus.
-Increase scrape times to perform it less frequently.&lt;/p></description></item><item><title>Prometheus Missing Rule Evaluations</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusmissingruleevaluations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusmissingruleevaluations/</guid><description>&lt;h1 id="prometheusmissingruleevaluations">
+Increase scrape times to perform it less frequently.&lt;/p></description></item><item><title>Prometheus Missing Rule Evaluations</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheusmissingruleevaluations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheusmissingruleevaluations/</guid><description>&lt;h1 id="prometheusmissingruleevaluations">
  PrometheusMissingRuleEvaluations
  
  &lt;a class="anchor" href="#prometheusmissingruleevaluations">#&lt;/a>
@@ -2831,7 +2831,7 @@ Increase scrape times to perform it less frequently.&lt;/p></description></item>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Sometimes giving more CPU is the only way to fix it.&lt;/p></description></item><item><title>Prometheus Not Connected To Alertmanagers</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusnotconnectedtoalertmanagers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusnotconnectedtoalertmanagers/</guid><description>&lt;h1 id="prometheusnotconnectedtoalertmanagers">
+&lt;p>Sometimes giving more CPU is the only way to fix it.&lt;/p></description></item><item><title>Prometheus Not Connected To Alertmanagers</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheusnotconnectedtoalertmanagers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheusnotconnectedtoalertmanagers/</guid><description>&lt;h1 id="prometheusnotconnectedtoalertmanagers">
  PrometheusNotConnectedToAlertmanagers
  
  &lt;a class="anchor" href="#prometheusnotconnectedtoalertmanagers">#&lt;/a>
@@ -2866,7 +2866,7 @@ Check if AlertManager is not overloaded or has not enough resources.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Set multiple AlertManager instances, spread them across nodes.&lt;/p></description></item><item><title>Prometheus Not Ingesting Samples</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusnotingestingsamples/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusnotingestingsamples/</guid><description>&lt;h1 id="prometheusnotingestingsamples">
+&lt;p>Set multiple AlertManager instances, spread them across nodes.&lt;/p></description></item><item><title>Prometheus Not Ingesting Samples</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheusnotingestingsamples/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheusnotingestingsamples/</guid><description>&lt;h1 id="prometheusnotingestingsamples">
  PrometheusNotIngestingSamples
  
  &lt;a class="anchor" href="#prometheusnotingestingsamples">#&lt;/a>
@@ -2899,7 +2899,7 @@ Check if AlertManager is not overloaded or has not enough resources.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Prometheus Notification Queue Running Full</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusnotificationqueuerunningfull/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusnotificationqueuerunningfull/</guid><description>&lt;h1 id="prometheusnotificationqueuerunningfull">
+&lt;p>TODO&lt;/p></description></item><item><title>Prometheus Notification Queue Running Full</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheusnotificationqueuerunningfull/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheusnotificationqueuerunningfull/</guid><description>&lt;h1 id="prometheusnotificationqueuerunningfull">
  PrometheusNotificationQueueRunningFull
  
  &lt;a class="anchor" href="#prometheusnotificationqueuerunningfull">#&lt;/a>
@@ -2935,7 +2935,7 @@ configuration is problematic.&lt;/p>
 &lt;/h2>
 &lt;p>Remove conflicting configuration option.&lt;/p>
 &lt;p>Check if there is an option to decrease number of alerts firing,
-for example by sharding prometheus.&lt;/p></description></item><item><title>Prometheus Operator List Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorlisterrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorlisterrors/</guid><description>&lt;h1 id="prometheusoperatorlisterrors">
+for example by sharding prometheus.&lt;/p></description></item><item><title>Prometheus Operator List Errors</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorlisterrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorlisterrors/</guid><description>&lt;h1 id="prometheusoperatorlisterrors">
  PrometheusOperatorListErrors
  
  &lt;a class="anchor" href="#prometheusoperatorlisterrors">#&lt;/a>
@@ -2971,7 +2971,7 @@ for example by sharding prometheus.&lt;/p></description></item><item><title>Prom
  
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
-&lt;/h2></description></item><item><title>Prometheus Operator Node Lookup Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/</guid><description>&lt;h1 id="prometheusoperatornodelookuperrors">
+&lt;/h2></description></item><item><title>Prometheus Operator Node Lookup Errors</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatornodelookuperrors/</guid><description>&lt;h1 id="prometheusoperatornodelookuperrors">
  PrometheusOperatorNodeLookupErrors
  
  &lt;a class="anchor" href="#prometheusoperatornodelookuperrors">#&lt;/a>
@@ -3006,7 +3006,7 @@ for example by sharding prometheus.&lt;/p></description></item><item><title>Prom
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Mitigation&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TODO
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Prometheus Operator NotReady</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatornotready/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatornotready/</guid><description>&lt;h1 id="prometheusoperatornotready">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Prometheus Operator NotReady</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatornotready/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatornotready/</guid><description>&lt;h1 id="prometheusoperatornotready">
  PrometheusOperatorNotReady
  
  &lt;a class="anchor" href="#prometheusoperatornotready">#&lt;/a>
@@ -3043,7 +3043,7 @@ for example by sharding prometheus.&lt;/p></description></item><item><title>Prom
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Prometheus Operator Reconcile Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/</guid><description>&lt;h1 id="prometheusoperatorreconcileerrors">
+&lt;p>TODO&lt;/p></description></item><item><title>Prometheus Operator Reconcile Errors</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorreconcileerrors/</guid><description>&lt;h1 id="prometheusoperatorreconcileerrors">
  PrometheusOperatorReconcileErrors
  
  &lt;a class="anchor" href="#prometheusoperatorreconcileerrors">#&lt;/a>
@@ -3076,7 +3076,7 @@ Check service account tokens.&lt;/p>
  
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
-&lt;/h2></description></item><item><title>Prometheus Operator Rejected Resources</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorrejectedresources/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorrejectedresources/</guid><description>&lt;h1 id="prometheusoperatorrejectedresources">
+&lt;/h2></description></item><item><title>Prometheus Operator Rejected Resources</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorrejectedresources/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorrejectedresources/</guid><description>&lt;h1 id="prometheusoperatorrejectedresources">
  PrometheusOperatorRejectedResources
  
  &lt;a class="anchor" href="#prometheusoperatorrejectedresources">#&lt;/a>
@@ -3112,7 +3112,7 @@ Check service account tokens.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Fix newly created Custom Resource to conform to the schema defined in a CRD and reapply it to the cluster.&lt;/p></description></item><item><title>Prometheus Operator Sync Failed</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorsyncfailed/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorsyncfailed/</guid><description>&lt;h1 id="prometheusoperatorsyncfailed">
+&lt;p>Fix newly created Custom Resource to conform to the schema defined in a CRD and reapply it to the cluster.&lt;/p></description></item><item><title>Prometheus Operator Sync Failed</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorsyncfailed/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorsyncfailed/</guid><description>&lt;h1 id="prometheusoperatorsyncfailed">
  PrometheusOperatorSyncFailed
  
  &lt;a class="anchor" href="#prometheusoperatorsyncfailed">#&lt;/a>
@@ -3145,7 +3145,7 @@ Check service account tokens.&lt;/p>
  
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
-&lt;/h2></description></item><item><title>Prometheus Operator Watch Errors</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorwatcherrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus-operator/prometheusoperatorwatcherrors/</guid><description>&lt;h1 id="prometheusoperatorwatcherrors">
+&lt;/h2></description></item><item><title>Prometheus Operator Watch Errors</title><link>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorwatcherrors/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus-operator/prometheusoperatorwatcherrors/</guid><description>&lt;h1 id="prometheusoperatorwatcherrors">
  PrometheusOperatorWatchErrors
  
  &lt;a class="anchor" href="#prometheusoperatorwatcherrors">#&lt;/a>
@@ -3178,13 +3178,13 @@ Check service account tokens.&lt;/p>
  
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
-&lt;/h2></description></item><item><title>Prometheus Out Of Order Timestamps</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusoutofordertimestamps/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusoutofordertimestamps/</guid><description>&lt;h1 id="prometheusoutofordertimestamps">
+&lt;/h2></description></item><item><title>Prometheus Out Of Order Timestamps</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheusoutofordertimestamps/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheusoutofordertimestamps/</guid><description>&lt;h1 id="prometheusoutofordertimestamps">
  PrometheusOutOfOrderTimestamps
  
  &lt;a class="anchor" href="#prometheusoutofordertimestamps">#&lt;/a>
  
 &lt;/h1>
-&lt;p>More information in &lt;a href="https://www.robustperception.io/debugging-out-of-order-samples">blog&lt;/a>&lt;/p></description></item><item><title>Prometheus Remote Storage Failures</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusremotestoragefailures/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusremotestoragefailures/</guid><description>&lt;h1 id="prometheusremotestoragefailures">
+&lt;p>More information in &lt;a href="https://www.robustperception.io/debugging-out-of-order-samples">blog&lt;/a>&lt;/p></description></item><item><title>Prometheus Remote Storage Failures</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheusremotestoragefailures/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheusremotestoragefailures/</guid><description>&lt;h1 id="prometheusremotestoragefailures">
  PrometheusRemoteStorageFailures
  
  &lt;a class="anchor" href="#prometheusremotestoragefailures">#&lt;/a>
@@ -3219,7 +3219,7 @@ Check configs and credentials.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Prometheus Remote Write Behind</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusremotewritebehind/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusremotewritebehind/</guid><description>&lt;h1 id="prometheusremotestoragefailures">
+&lt;p>TODO&lt;/p></description></item><item><title>Prometheus Remote Write Behind</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheusremotewritebehind/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheusremotewritebehind/</guid><description>&lt;h1 id="prometheusremotestoragefailures">
  PrometheusRemoteStorageFailures
  
  &lt;a class="anchor" href="#prometheusremotestoragefailures">#&lt;/a>
@@ -3257,7 +3257,7 @@ Check configs and credentials.&lt;/p>
 &lt;/h2>
 &lt;p>Probbaly amout of data sent to remote system is too high
 for given network connectivity speed.
-You may need to limit which metrics to send to minimize transfers.&lt;/p></description></item><item><title>Prometheus Rule Failures</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusrulefailures/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusrulefailures/</guid><description>&lt;h1 id="prometheusrulefailures">
+You may need to limit which metrics to send to minimize transfers.&lt;/p></description></item><item><title>Prometheus Rule Failures</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheusrulefailures/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheusrulefailures/</guid><description>&lt;h1 id="prometheusrulefailures">
  PrometheusRuleFailures
  
  &lt;a class="anchor" href="#prometheusrulefailures">#&lt;/a>
@@ -3287,7 +3287,7 @@ Prometheus rules are incorrect or failed to calculate.&lt;/p>
 &lt;p>Your best starting point is the rules page of the Prometheus UI (:9090/rules).
 It will show the error.&lt;/p>
 &lt;p>You can also evaluate the rule expression yourself, using the UI, or maybe
-using PromLens to help debug expression issues.&lt;/p></description></item><item><title>Prometheus Target Limit Hit</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustargetlimithit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustargetlimithit/</guid><description>&lt;h1 id="prometheustargetlimithit">
+using PromLens to help debug expression issues.&lt;/p></description></item><item><title>Prometheus Target Limit Hit</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheustargetlimithit/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheustargetlimithit/</guid><description>&lt;h1 id="prometheustargetlimithit">
  PrometheusTargetLimitHit
  
  &lt;a class="anchor" href="#prometheustargetlimithit">#&lt;/a>
@@ -3320,7 +3320,7 @@ using PromLens to help debug expression issues.&lt;/p></description></item><item
  
 &lt;/h2>
 &lt;p>Start thinking about sharding prometheus.
-Increase scrape times to perform it less frequently.&lt;/p></description></item><item><title>Prometheus Target Sync Failure</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustargetsyncfailure/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustargetsyncfailure/</guid><description>&lt;h1 id="prometheustargetsyncfailure">
+Increase scrape times to perform it less frequently.&lt;/p></description></item><item><title>Prometheus Target Sync Failure</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheustargetsyncfailure/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheustargetsyncfailure/</guid><description>&lt;h1 id="prometheustargetsyncfailure">
  PrometheusTargetSyncFailure
  
  &lt;a class="anchor" href="#prometheustargetsyncfailure">#&lt;/a>
@@ -3362,7 +3362,7 @@ inspecting the alert&amp;rsquo;s &lt;code>namespace&lt;/code> label.&lt;/p>
 &lt;/h2>
 &lt;p>If the logs indicate a syntax or other configuration error, correct the
 corresponding &lt;code>ServiceMonitor&lt;/code>, &lt;code>PodMonitor&lt;/code>, or other configuration
-resource. In most all cases, the operator should prevent this from happening.&lt;/p></description></item><item><title>Prometheus TSDB Compactions Failing</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustsdbcompactionsfailing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustsdbcompactionsfailing/</guid><description>&lt;h1 id="prometheustsdbcompactionsfailing">
+resource. In most all cases, the operator should prevent this from happening.&lt;/p></description></item><item><title>Prometheus TSDB Compactions Failing</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheustsdbcompactionsfailing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheustsdbcompactionsfailing/</guid><description>&lt;h1 id="prometheustsdbcompactionsfailing">
  PrometheusTSDBCompactionsFailing
  
  &lt;a class="anchor" href="#prometheustsdbcompactionsfailing">#&lt;/a>
@@ -3400,7 +3400,7 @@ prometheus did not manage to compact data.&lt;/p>
 &lt;p>At first just wait, it may fix itself after some time.&lt;/p>
 &lt;p>Increase Prometheus pod memory so that it caches more from disk.
 Try expanding volumes if they are too small or too slow.
-Change PVC storageClass to a more performant one.&lt;/p></description></item><item><title>Prometheus TSDB Reloads Failing</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustsdbreloadsfailing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheustsdbreloadsfailing/</guid><description>&lt;h1 id="prometheustsdbreloadsfailing">
+Change PVC storageClass to a more performant one.&lt;/p></description></item><item><title>Prometheus TSDB Reloads Failing</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheustsdbreloadsfailing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheustsdbreloadsfailing/</guid><description>&lt;h1 id="prometheustsdbreloadsfailing">
  PrometheusTSDBReloadsFailing
  
  &lt;a class="anchor" href="#prometheustsdbreloadsfailing">#&lt;/a>
@@ -3435,7 +3435,7 @@ Change PVC storageClass to a more performant one.&lt;/p></description></item><it
 &lt;/h2>
 &lt;p>Increase Prometheus pod memory so that it caches more from disk.
 Try expanding volumes if they are too small or too slow.
-Change PVC storageClass to a more performant one.&lt;/p></description></item><item><title>PrometheusRemoteWriteDesiredShards</title><link>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusremotewritedesiredshards/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/prometheus/prometheusremotewritedesiredshards/</guid><description>&lt;h1 id="prometheusremotewritedesiredshards">
+Change PVC storageClass to a more performant one.&lt;/p></description></item><item><title>PrometheusRemoteWriteDesiredShards</title><link>https://hoanggvuong.github.io/runbooks/prometheus/prometheusremotewritedesiredshards/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/prometheus/prometheusremotewritedesiredshards/</guid><description>&lt;h1 id="prometheusremotewritedesiredshards">
  PrometheusRemoteWriteDesiredShards
  
  &lt;a class="anchor" href="#prometheusremotewritedesiredshards">#&lt;/a>
@@ -3474,7 +3474,7 @@ Check configs and credentials.&lt;/p>
 &lt;/h2>
 &lt;p>Probbaly amout of data sent to remote system is too high
 for given network connectivity speed.
-You may need to limit which metrics to send to minimize transfers.&lt;/p></description></item><item><title>Watchdog</title><link>https://runbooks.prometheus-operator.dev/runbooks/general/watchdog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/general/watchdog/</guid><description>&lt;h1 id="watchdog">
+You may need to limit which metrics to send to minimize transfers.&lt;/p></description></item><item><title>Watchdog</title><link>https://hoanggvuong.github.io/runbooks/general/watchdog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/general/watchdog/</guid><description>&lt;h1 id="watchdog">
  Watchdog
  
  &lt;a class="anchor" href="#watchdog">#&lt;/a>
@@ -3504,25 +3504,25 @@ is no longer working.&lt;/p>
  
 &lt;/h2>
 &lt;p>Misconfigured alertmanager, bad credentials, bad endpoint, firewalls..
-Check alertmanager logs.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/docs/runbooks/devops/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/docs/runbooks/devops/</guid><description>&lt;h1 id="devops-runbooks">
+Check alertmanager logs.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/docs/runbooks/devops/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/docs/runbooks/devops/</guid><description>&lt;h1 id="devops-runbooks">
  DevOps Runbooks
  
  &lt;a class="anchor" href="#devops-runbooks">#&lt;/a>
  
 &lt;/h1>
-&lt;p>Practical guides and automation for CI/CD, monitoring, and cloud operations.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/docs/runbooks/gitops/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/docs/runbooks/gitops/</guid><description>&lt;h1 id="gitops-runbooks">
+&lt;p>Practical guides and automation for CI/CD, monitoring, and cloud operations.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/docs/runbooks/gitops/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/docs/runbooks/gitops/</guid><description>&lt;h1 id="gitops-runbooks">
  GitOps Runbooks
  
  &lt;a class="anchor" href="#gitops-runbooks">#&lt;/a>
  
 &lt;/h1>
-&lt;p>Workflows and best practices for infrastructure as code and declarative deployments.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/docs/runbooks/systemadmin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/docs/runbooks/systemadmin/</guid><description>&lt;h1 id="system-admin-runbooks">
+&lt;p>Workflows and best practices for infrastructure as code and declarative deployments.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/docs/runbooks/systemadmin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/docs/runbooks/systemadmin/</guid><description>&lt;h1 id="system-admin-runbooks">
  System Admin Runbooks
  
  &lt;a class="anchor" href="#system-admin-runbooks">#&lt;/a>
  
 &lt;/h1>
-&lt;p>Procedures for server management, backups, user administration, and troubleshooting.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/devops/ansible_playbook_handbook_vn/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/devops/ansible_playbook_handbook_vn/</guid><description>&lt;h1 id="ansible-playbook-handbook-vn">
+&lt;p>Procedures for server management, backups, user administration, and troubleshooting.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/devops/ansible_playbook_handbook_vn/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/devops/ansible_playbook_handbook_vn/</guid><description>&lt;h1 id="ansible-playbook-handbook-vn">
  Ansible Playbook Handbook (VN)
  
  &lt;a class="anchor" href="#ansible-playbook-handbook-vn">#&lt;/a>
@@ -3591,7 +3591,7 @@ Check alertmanager logs.&lt;/p></description></item><item><title/><link>https://
 ├─ requirements.yml (galaxy)
 ├─ ansible.cfg
 └─ README.md
-&lt;/code>&lt;/pre>&lt;p>&lt;strong>ansible.cfg (mẫu):&lt;/strong>&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/devops/ci-cd-failure-resolution/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/devops/ci-cd-failure-resolution/</guid><description>&lt;h3 id="objective">
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>ansible.cfg (mẫu):&lt;/strong>&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/devops/ci-cd-failure-resolution/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/devops/ci-cd-failure-resolution/</guid><description>&lt;h3 id="objective">
  Objective
  
  &lt;a class="anchor" href="#objective">#&lt;/a>
@@ -3617,7 +3617,7 @@ Check alertmanager logs.&lt;/p></description></item><item><title/><link>https://
 &lt;/h3>
 &lt;ol>
 &lt;li>
-&lt;p>&lt;strong>Identify the Failure Point:&lt;/strong>&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/devops/trivy-offline-scan-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/devops/trivy-offline-scan-guide/</guid><description>&lt;h1 id="-trivy-offline-scan-guide">
+&lt;p>&lt;strong>Identify the Failure Point:&lt;/strong>&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/devops/trivy-offline-scan-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/devops/trivy-offline-scan-guide/</guid><description>&lt;h1 id="-trivy-offline-scan-guide">
  🔒 Trivy Offline Scan Guide
  
  &lt;a class="anchor" href="#-trivy-offline-scan-guide">#&lt;/a>
@@ -3646,7 +3646,7 @@ Check alertmanager logs.&lt;/p></description></item><item><title/><link>https://
  &lt;a class="anchor" href="#-config-scan-iac-dockerfile-k8s-manifests">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Scan Infrastructure-as-Code configs in a project folder:&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdbackendquotalowspace/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdbackendquotalowspace/</guid><description>&lt;h1 id="etcdbackendquotalowspace">
+&lt;p>Scan Infrastructure-as-Code configs in a project folder:&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdbackendquotalowspace/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdbackendquotalowspace/</guid><description>&lt;h1 id="etcdbackendquotalowspace">
  etcdBackendQuotaLowSpace
  
  &lt;a class="anchor" href="#etcdbackendquotalowspace">#&lt;/a>
@@ -3670,7 +3670,7 @@ DB quota. The consumed space is in Prometheus represented by the metric
 &lt;/h2>
 &lt;p>In case the DB size exceeds the DB quota, no writes can be performed anymore on
 the etcd cluster. This further prevents any updates in the cluster, such as the
-creation of pods.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdgrpcrequestsslow/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdgrpcrequestsslow/</guid><description>&lt;h1 id="etcdgrpcrequestsslow">
+creation of pods.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdgrpcrequestsslow/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdgrpcrequestsslow/</guid><description>&lt;h1 id="etcdgrpcrequestsslow">
  etcdGRPCRequestsSlow
  
  &lt;a class="anchor" href="#etcdgrpcrequestsslow">#&lt;/a>
@@ -3705,7 +3705,7 @@ election failure, slow reads and writes.&lt;/p>
  
 &lt;/h3>
 &lt;p>One of the most common reasons for slow gRPC requests is disk. Checking disk
-related metrics and dashboards should provide a more clear picture.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdhighfsyncdurations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdhighfsyncdurations/</guid><description>&lt;h1 id="etcdhighfsyncdurations">
+related metrics and dashboards should provide a more clear picture.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdhighfsyncdurations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdhighfsyncdurations/</guid><description>&lt;h1 id="etcdhighfsyncdurations">
  etcdHighFsyncDurations
  
  &lt;a class="anchor" href="#etcdhighfsyncdurations">#&lt;/a>
@@ -3721,7 +3721,7 @@ related metrics and dashboards should provide a more clear picture.&lt;/p></desc
 high for 10 minutes.&lt;/p>
 &lt;details>
 &lt;summary>Full context&lt;/summary>
-&lt;p>Every write request sent to etcd has to be [fsync&amp;rsquo;d][fsync] to disk by the leader node, transmitted to its peers, and fsync&amp;rsquo;d to those disks as well before etcd can tell the client that the write request succeeded (as part of the [Raft consensus algorithm][raft]). As a result of all those fsync&amp;rsquo;s, etcd cares a LOT about disk latency, which this alert picks up on.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/</guid><description>&lt;h1 id="etcdhighnumberoffailedgrpcrequests">
+&lt;p>Every write request sent to etcd has to be [fsync&amp;rsquo;d][fsync] to disk by the leader node, transmitted to its peers, and fsync&amp;rsquo;d to those disks as well before etcd can tell the client that the write request succeeded (as part of the [Raft consensus algorithm][raft]). As a result of all those fsync&amp;rsquo;s, etcd cares a LOT about disk latency, which this alert picks up on.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdhighnumberoffailedgrpcrequests/</guid><description>&lt;h1 id="etcdhighnumberoffailedgrpcrequests">
  etcdHighNumberOfFailedGRPCRequests
  
  &lt;a class="anchor" href="#etcdhighnumberoffailedgrpcrequests">#&lt;/a>
@@ -3758,7 +3758,7 @@ instance that has failing requests:&lt;/p>
 &lt;p>All the gRPC errors should also be logged in each respective etcd instance logs.
 You can get the instance name from the alert that is firing or by running the
 query detailed above. Those etcd instance logs should serve as further insight
-into what is wrong.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdinsufficientmembers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdinsufficientmembers/</guid><description>&lt;h1 id="etcdinsufficientmembers">
+into what is wrong.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdinsufficientmembers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdinsufficientmembers/</guid><description>&lt;h1 id="etcdinsufficientmembers">
  etcdInsufficientMembers
  
  &lt;a class="anchor" href="#etcdinsufficientmembers">#&lt;/a>
@@ -3781,7 +3781,7 @@ This means that etcd cluster has not enough members in the cluster to create quo
 &lt;/h2>
 &lt;p>When etcd does not have a majority of instances available the Kubernetes and
 OpenShift APIs will reject read and write requests and operations that preserve
-the health of workloads cannot be performed.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdmembersdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdmembersdown/</guid><description>&lt;h1 id="etcdmembersdown">
+the health of workloads cannot be performed.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdmembersdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdmembersdown/</guid><description>&lt;h1 id="etcdmembersdown">
  etcdMembersDown
  
  &lt;a class="anchor" href="#etcdmembersdown">#&lt;/a>
@@ -3808,7 +3808,7 @@ upgrade proposals. With this approach, a split-brain inconsistency can be
 avoided. In the case that only one member is down in a 3-member cluster, it
 still can make forward progress. Due to the fact that the quorum is 2 and 2
 members are still alive. However, when more members are down, the cluster
-becomes unrecoverable.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdnoleader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/etcd/etcdnoleader/</guid><description>&lt;h1 id="etcdnoleader">
+becomes unrecoverable.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/etcd/etcdnoleader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/etcd/etcdnoleader/</guid><description>&lt;h1 id="etcdnoleader">
  etcdNoLeader
  
  &lt;a class="anchor" href="#etcdnoleader">#&lt;/a>
@@ -3834,7 +3834,7 @@ for example due to network partition.&lt;/p>
 &lt;p>When there is no leader, Kubernetes API will not be able to work
 as expected and cluster cannot process any writes or reads, and any write
 requests are queued for processing until a new leader is elected. Operations
-that preserve the health of the workloads cannot be performed.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/general/targetdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/general/targetdown/</guid><description>&lt;h1 id="targetdown">
+that preserve the health of the workloads cannot be performed.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/general/targetdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/general/targetdown/</guid><description>&lt;h1 id="targetdown">
  TargetDown
  
  &lt;a class="anchor" href="#targetdown">#&lt;/a>
@@ -3849,7 +3849,7 @@ that preserve the health of the workloads cannot be performed.&lt;/p></descripti
 &lt;p>The alert means that one or more prometheus scrape targets are down. It fires when at least 10% of scrape targets in a Service are unreachable.&lt;/p>
 &lt;details>
 &lt;summary>Full context&lt;/summary>
-&lt;p>Prometheus works by sending an HTTP GET request to all of its &amp;ldquo;targets&amp;rdquo; every few seconds. So TargetDown really means that Prometheus just can&amp;rsquo;t access your service, which may or may not mean it&amp;rsquo;s actually down. If your service appears to be running fine, a common cause could be a misconfigured ServiceMonitor (maybe the port or path is incorrect), a misconfigured NetworkPolicy, or Service with incorrect labelSelectors that isn&amp;rsquo;t selecting any Pods.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/gitops/argocd-application-bootstrap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/gitops/argocd-application-bootstrap/</guid><description>&lt;h3 id="objective">
+&lt;p>Prometheus works by sending an HTTP GET request to all of its &amp;ldquo;targets&amp;rdquo; every few seconds. So TargetDown really means that Prometheus just can&amp;rsquo;t access your service, which may or may not mean it&amp;rsquo;s actually down. If your service appears to be running fine, a common cause could be a misconfigured ServiceMonitor (maybe the port or path is incorrect), a misconfigured NetworkPolicy, or Service with incorrect labelSelectors that isn&amp;rsquo;t selecting any Pods.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/gitops/argocd-application-bootstrap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/gitops/argocd-application-bootstrap/</guid><description>&lt;h3 id="objective">
  Objective
  
  &lt;a class="anchor" href="#objective">#&lt;/a>
@@ -3881,7 +3881,7 @@ that preserve the health of the workloads cannot be performed.&lt;/p></descripti
 &lt;/h3>
 &lt;ol>
 &lt;li>
-&lt;p>&lt;strong>Prepare Application Manifests:&lt;/strong>&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/linux/server-hardening/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/linux/server-hardening/</guid><description>&lt;h3 id="objective">
+&lt;p>&lt;strong>Prepare Application Manifests:&lt;/strong>&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/linux/server-hardening/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/linux/server-hardening/</guid><description>&lt;h3 id="objective">
  Objective
  
  &lt;a class="anchor" href="#objective">#&lt;/a>

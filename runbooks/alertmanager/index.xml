@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>alertmanager on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/</link><description>Recent content in alertmanager on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/alertmanager/index.xml" rel="self" type="application/rss+xml"/><item><title>Alertmanager Cluster Crashlooping</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerclustercrashlooping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerclustercrashlooping/</guid><description>&lt;h1 id="alertmanagerclustercrashlooping">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>alertmanager on kube-prometheus runbooks</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/</link><description>Recent content in alertmanager on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://hoanggvuong.github.io/runbooks/alertmanager/index.xml" rel="self" type="application/rss+xml"/><item><title>Alertmanager Cluster Crashlooping</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerclustercrashlooping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerclustercrashlooping/</guid><description>&lt;h1 id="alertmanagerclustercrashlooping">
  AlertmanagerClusterCrashlooping
  
  &lt;a class="anchor" href="#alertmanagerclustercrashlooping">#&lt;/a>
@@ -30,7 +30,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default alertmanager-main-0 1/2 CrashLoopBackOff &lt;span style="color:#ae81ff">37107&lt;/span> 2d
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default alertmanager-main-1 2/2 Running &lt;span style="color:#ae81ff">0&lt;/span> 43d
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default alertmanager-main-2 2/2 Running &lt;span style="color:#ae81ff">0&lt;/span> 43d 
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Find the root cause by looking to events for a given pod/deployement&lt;/p></description></item><item><title>Alertmanager Cluster Down</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerclusterdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerclusterdown/</guid><description>&lt;h1 id="alertmanagerclusterdown">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Find the root cause by looking to events for a given pod/deployement&lt;/p></description></item><item><title>Alertmanager Cluster Down</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerclusterdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerclusterdown/</guid><description>&lt;h1 id="alertmanagerclusterdown">
  AlertmanagerClusterDown
  
  &lt;a class="anchor" href="#alertmanagerclusterdown">#&lt;/a>
@@ -66,7 +66,7 @@ You can get a big picture with &lt;code>events&lt;/code>.&lt;/p>
  
 &lt;/h2>
 &lt;p>There are no cheap options to mitigate this risk.
-Verifying any new changes in preprod before production environment should improve stability.&lt;/p></description></item><item><title>Alertmanager Cluster Failed To Send Alerts</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerclusterfailedtosendalerts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerclusterfailedtosendalerts/</guid><description>&lt;h1 id="alertmanagerclusterfailedtosendalerts">
+Verifying any new changes in preprod before production environment should improve stability.&lt;/p></description></item><item><title>Alertmanager Cluster Failed To Send Alerts</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerclusterfailedtosendalerts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerclusterfailedtosendalerts/</guid><description>&lt;h1 id="alertmanagerclusterfailedtosendalerts">
  AlertmanagerClusterFailedToSendAlerts
  
  &lt;a class="anchor" href="#alertmanagerclusterfailedtosendalerts">#&lt;/a>
@@ -99,7 +99,7 @@ Verifying any new changes in preprod before production environment should improv
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Depending on the integration, correct the integration with the faulty instance (network, authorization token, firewall&amp;hellip;)&lt;/p></description></item><item><title>Alertmanager ConfigInconsistent</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerconfiginconsistent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerconfiginconsistent/</guid><description>&lt;h1 id="alertmanagerconfiginconsistent">
+&lt;p>Depending on the integration, correct the integration with the faulty instance (network, authorization token, firewall&amp;hellip;)&lt;/p></description></item><item><title>Alertmanager ConfigInconsistent</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerconfiginconsistent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerconfiginconsistent/</guid><description>&lt;h1 id="alertmanagerconfiginconsistent">
  AlertmanagerConfigInconsistent
  
  &lt;a class="anchor" href="#alertmanagerconfiginconsistent">#&lt;/a>
@@ -127,7 +127,7 @@ Nevertheless, in most cases the alert might be lost or routed to the incorrect i
  
 &lt;/h2>
 &lt;p>Run a &lt;code>diff&lt;/code> tool between all &lt;code>alertmanager.yml&lt;/code> that are deployed to find what is wrong.
-You could run a job within your CI to avoid this issue in the future.&lt;/p></description></item><item><title>Alertmanager Failed Reload</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerfailedreload/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerfailedreload/</guid><description>&lt;h1 id="alertmanagerfailedreload">
+You could run a job within your CI to avoid this issue in the future.&lt;/p></description></item><item><title>Alertmanager Failed Reload</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerfailedreload/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerfailedreload/</guid><description>&lt;h1 id="alertmanagerfailedreload">
  AlertmanagerFailedReload
  
  &lt;a class="anchor" href="#alertmanagerfailedreload">#&lt;/a>
@@ -158,7 +158,7 @@ instances, so avoid deleting existing pods.&lt;/p>
  
 &lt;/h2>
 &lt;p>Verify if there is an error in &lt;code>config-reloader&lt;/code> container logs.
-Here an example with network issues.&lt;/p></description></item><item><title>Alertmanager Failed To Send Alerts</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerfailedtosendalerts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagerfailedtosendalerts/</guid><description>&lt;h1 id="alertmanagerfailedtosendalerts">
+Here an example with network issues.&lt;/p></description></item><item><title>Alertmanager Failed To Send Alerts</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerfailedtosendalerts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagerfailedtosendalerts/</guid><description>&lt;h1 id="alertmanagerfailedtosendalerts">
  AlertmanagerFailedToSendAlerts
  
  &lt;a class="anchor" href="#alertmanagerfailedtosendalerts">#&lt;/a>
@@ -190,7 +190,7 @@ a specific integration.&lt;/p>
 &lt;p>You can look metrics exposed in prometheus console using promQL.
 For exemple the following query will display the number of failed
 notifications per instance for pager duty integration.
-We have 3 instances involved in the example bellow.&lt;/p></description></item><item><title>Alertmanager Members Inconsistent</title><link>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagermembersinconsistent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/alertmanager/alertmanagermembersinconsistent/</guid><description>&lt;h1 id="alertmanagermembersinconsistent">
+We have 3 instances involved in the example bellow.&lt;/p></description></item><item><title>Alertmanager Members Inconsistent</title><link>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagermembersinconsistent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/alertmanager/alertmanagermembersinconsistent/</guid><description>&lt;h1 id="alertmanagermembersinconsistent">
  AlertmanagerMembersInconsistent
  
  &lt;a class="anchor" href="#alertmanagermembersinconsistent">#&lt;/a>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>general on kube-prometheus runbooks</title><link>https://runbooks.prometheus-operator.dev/runbooks/general/</link><description>Recent content in general on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://runbooks.prometheus-operator.dev/runbooks/general/index.xml" rel="self" type="application/rss+xml"/><item><title>Info Inhibitor</title><link>https://runbooks.prometheus-operator.dev/runbooks/general/infoinhibitor/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/general/infoinhibitor/</guid><description>&lt;h1 id="infoinhibitor">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>general on kube-prometheus runbooks</title><link>https://hoanggvuong.github.io/runbooks/general/</link><description>Recent content in general on kube-prometheus runbooks</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://hoanggvuong.github.io/runbooks/general/index.xml" rel="self" type="application/rss+xml"/><item><title>Info Inhibitor</title><link>https://hoanggvuong.github.io/runbooks/general/infoinhibitor/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/general/infoinhibitor/</guid><description>&lt;h1 id="infoinhibitor">
  InfoInhibitor
  
  &lt;a class="anchor" href="#infoinhibitor">#&lt;/a>
@@ -23,7 +23,7 @@ but they are relevant when combined with other alerts.&lt;/p>
  &lt;a class="anchor" href="#impact">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Alert does not have any impact and it is used only as a workaround to a missing feature in alertmanager.&lt;/p></description></item><item><title>Node Network Interface Flapping</title><link>https://runbooks.prometheus-operator.dev/runbooks/general/nodenetworkinterfaceflapping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/general/nodenetworkinterfaceflapping/</guid><description>&lt;h1 id="nodenetworkinterfaceflapping">
+&lt;p>Alert does not have any impact and it is used only as a workaround to a missing feature in alertmanager.&lt;/p></description></item><item><title>Node Network Interface Flapping</title><link>https://hoanggvuong.github.io/runbooks/general/nodenetworkinterfaceflapping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/general/nodenetworkinterfaceflapping/</guid><description>&lt;h1 id="nodenetworkinterfaceflapping">
  NodeNetworkInterfaceFlapping
  
  &lt;a class="anchor" href="#nodenetworkinterfaceflapping">#&lt;/a>
@@ -58,7 +58,7 @@ Check physical cables, check networking firewall rules and so on.&lt;/p>
  &lt;a class="anchor" href="#mitigation">#&lt;/a>
  
 &lt;/h2>
-&lt;p>Cordon and drain node to migrate apps from it.&lt;/p></description></item><item><title>Watchdog</title><link>https://runbooks.prometheus-operator.dev/runbooks/general/watchdog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/general/watchdog/</guid><description>&lt;h1 id="watchdog">
+&lt;p>Cordon and drain node to migrate apps from it.&lt;/p></description></item><item><title>Watchdog</title><link>https://hoanggvuong.github.io/runbooks/general/watchdog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/general/watchdog/</guid><description>&lt;h1 id="watchdog">
  Watchdog
  
  &lt;a class="anchor" href="#watchdog">#&lt;/a>
@@ -88,7 +88,7 @@ is no longer working.&lt;/p>
  
 &lt;/h2>
 &lt;p>Misconfigured alertmanager, bad credentials, bad endpoint, firewalls..
-Check alertmanager logs.&lt;/p></description></item><item><title/><link>https://runbooks.prometheus-operator.dev/runbooks/general/targetdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://runbooks.prometheus-operator.dev/runbooks/general/targetdown/</guid><description>&lt;h1 id="targetdown">
+Check alertmanager logs.&lt;/p></description></item><item><title/><link>https://hoanggvuong.github.io/runbooks/general/targetdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hoanggvuong.github.io/runbooks/general/targetdown/</guid><description>&lt;h1 id="targetdown">
  TargetDown
  
  &lt;a class="anchor" href="#targetdown">#&lt;/a>
